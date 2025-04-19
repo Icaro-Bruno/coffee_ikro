@@ -12,7 +12,7 @@ public class ItemDoPedidoModel {
     private Long id;
 
     private ProdutoModel produto;
-    private int quantidade;
+    private Integer quantidade;
     private BigDecimal precoUnitario; //valor do item no ato da compra
     private BigDecimal subtotal;
 
