@@ -1,5 +1,6 @@
 package com.restaurante.restaurante.dto;
 
+import com.restaurante.restaurante.model.UnidadeMedidaProduto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,4 +19,6 @@ public class ProdutoResponse {
     private BigDecimal preco;
     private String imgUrl;
     private String categoria;
+    private String descricao;
+    private UnidadeMedidaProduto vendaPor;
 }

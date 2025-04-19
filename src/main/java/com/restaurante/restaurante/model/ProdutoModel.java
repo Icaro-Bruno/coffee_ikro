@@ -12,12 +12,10 @@ public class ProdutoModel {
     private Long id;
 
     private String nome;
-
     private BigDecimal preco;
-
     private String categoria;
-
     private String imgUrl;
-
-
+    @Enumerated(EnumType.STRING)
+    private UnidadeMedidaProduto vendaPor;
+    private String descricao;
 }
