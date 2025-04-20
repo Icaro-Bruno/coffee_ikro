@@ -8,6 +8,6 @@ import java.util.List;
 
 @Repository
 public interface ClienteRepository extends JpaRepository<ClienteModel, Long> {
-    List<ClienteModel> findByClienteTelefone(String telefone);
+    List<ClienteModel> findByTelefone(String telefone);
     List<ClienteModel> findByEnderecoContainingIgnoreCase(String endereco);
 }

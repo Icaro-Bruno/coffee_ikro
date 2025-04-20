@@ -11,7 +11,14 @@ public class ItemDoPedidoModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ManyToOne
+    @JoinColumn(name = "produto_id")
     private ProdutoModel produto;
+
+    @ManyToOne
+    @JoinColumn(name = "pedido_id")
+    private PedidoModel pedido;
+
     private Integer quantidade;
     private BigDecimal precoUnitario; //valor do item no ato da compra
     private BigDecimal subtotal;
