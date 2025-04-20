@@ -13,8 +13,8 @@ import java.math.BigDecimal;
 public class ProdutoRequest {//entrada do adimn
     private String nome;
     private BigDecimal preco;
-    private String categoria;
     private String imgUrl;
+    private String categoria;
     private String descricao;
     private UnidadeMedidaProduto vendaPor;
 }

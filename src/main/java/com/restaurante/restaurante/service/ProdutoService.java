@@ -29,7 +29,8 @@ public class ProdutoService {
         ProdutoModel produto = new ProdutoModel(); //instanciando obj e pegando dds do dto
         produto.setNome(produtoRequest.getNome());
         produto.setPreco(produtoRequest.getPreco());
-        produto.setDescricao(produtoRequest.getCategoria());
+        produto.setDescricao(produtoRequest.getDescricao());
+        produto.setCategoria(produtoRequest.getCategoria());
         produto.setImgUrl(produtoRequest.getImgUrl());
         produto.setVendaPor(produtoRequest.getVendaPor());
 
@@ -43,7 +44,8 @@ public class ProdutoService {
 
         produto.setNome(produtoRequest.getNome());
         produto.setPreco(produtoRequest.getPreco());
-        produto.setDescricao(produtoRequest.getCategoria());
+        produto.setDescricao(produtoRequest.getDescricao());
+        produto.setCategoria(produtoRequest.getCategoria());
         produto.setImgUrl(produtoRequest.getImgUrl());
         produto.setVendaPor(produtoRequest.getVendaPor());
 
