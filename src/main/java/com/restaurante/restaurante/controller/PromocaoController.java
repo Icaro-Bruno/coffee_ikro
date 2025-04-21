@@ -17,7 +17,7 @@ public class PromocaoController {
     private PromocaoService service;
 
     @PostMapping("/promocao")
-    public PromocaoResponse criarPromo(PromocaoRequest request){
+    public PromocaoResponse criarPromo(@RequestBody PromocaoRequest request){
         return service.criarPromocao(request);
     }
 
@@ -48,7 +48,7 @@ public class PromocaoController {
     }
 
     @DeleteMapping("/{id}")
-    public void deletarPromo(Long id){
+    public void deletarPromo(@PathVariable Long id){
         service.deletarPromocao(id);
     }
 

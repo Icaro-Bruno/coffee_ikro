@@ -15,9 +15,19 @@ public class ClienteController {
     @Autowired
     private ClienteService service;
 
-    @GetMapping
+    @GetMapping("/todos")
     public List<ClienteResponse> mostrarTodos(){
         return service.listarTodos();
+    }
+
+    @GetMapping("/telefone")
+    public List<ClienteResponse> buscarPorTel(@RequestParam String telefone){
+        return service.buscarPortelefone(telefone);
+    }
+
+    @GetMapping("/endereco")
+    public List<ClienteResponse> buscarPorEndereco(@RequestParam String endereco){
+        return service.buscarPorEndereco(endereco);
     }
 
     @PostMapping("/login")

@@ -54,7 +54,7 @@ public class ClienteService {
     }
 
     public List<ClienteResponse> buscarPortelefone(String telefone) {
-        return repository.findByTelefone(telefone)
+        return repository.findByTelefoneContaining(telefone)
                 .stream()
                 .map(this::converterToResponse)
                 .collect(Collectors.toList());
