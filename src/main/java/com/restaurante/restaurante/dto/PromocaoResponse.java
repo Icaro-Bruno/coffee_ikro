@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
+
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -14,4 +16,7 @@ public class PromocaoResponse { //SAIDA
     private String titulo;
     private String imgUrl;
     private boolean ativo;
+    private LocalDate dataInicio;
+    private LocalDate dataFim;
+
 }

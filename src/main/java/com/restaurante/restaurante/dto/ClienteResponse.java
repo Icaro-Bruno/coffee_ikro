@@ -1,5 +1,6 @@
 package com.restaurante.restaurante.dto;
 
+import com.restaurante.restaurante.model.ClienteModel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,4 +15,7 @@ public class ClienteResponse { //saida
     private String nome;
     private String telefone;
     private String endereco;
+
+    public ClienteResponse(ClienteModel cliente) {
+    }
 }

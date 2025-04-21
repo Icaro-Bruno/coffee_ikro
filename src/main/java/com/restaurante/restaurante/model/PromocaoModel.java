@@ -1,11 +1,17 @@
 package com.restaurante.restaurante.model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "promocao_model")
+@Getter
+@Setter
+@NoArgsConstructor
 public class PromocaoModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,4 +25,7 @@ public class PromocaoModel {
     private LocalDate dataInicio;
     private LocalDate dataFim;
 
+    public boolean getAtivo() {
+        return ativo;
+    }
 }
