@@ -28,6 +28,8 @@ public class PedidoModel {
     @ManyToOne
     @JoinColumn(name = "cliente_id")
     private ClienteModel cliente;
+
+    @Enumerated(EnumType.STRING)
     private StatusPedido status;
     private LocalDateTime dataHora;
 

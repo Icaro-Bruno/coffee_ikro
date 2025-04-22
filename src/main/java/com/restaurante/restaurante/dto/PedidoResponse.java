@@ -1,5 +1,6 @@
 package com.restaurante.restaurante.dto;
 
+import com.restaurante.restaurante.model.PedidoModel;
 import com.restaurante.restaurante.model.StatusPedido;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,6 +10,7 @@ import lombok.Setter;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -21,4 +23,14 @@ public class PedidoResponse { //SAIDA
     private ClienteResponse cliente;
     private StatusPedido status;
     private LocalDateTime dataHora;
+
+    public PedidoResponse(PedidoModel pedido) {
+        this.id = pedido.getId();
+        this.itens = pedido.getItens().stream()
+                .map(ItemDoPedidoResponse::new).collect(Collectors.toList());
+        this.total = pedido.getTotal();
+        this.cliente = new ClienteResponse(pedido.getCliente());
+        this.status = pedido.getStatus();
+        this.dataHora = pedido.getDataHora();
+    }
 }

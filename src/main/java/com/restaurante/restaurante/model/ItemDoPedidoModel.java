@@ -1,11 +1,19 @@
 package com.restaurante.restaurante.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 
 @Entity
 @Table(name = "itemdopedido_model")
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class ItemDoPedidoModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
