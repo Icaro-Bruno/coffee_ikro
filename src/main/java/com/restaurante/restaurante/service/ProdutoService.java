@@ -67,7 +67,7 @@ public class ProdutoService {
                 .collect(Collectors.toList());
     }
 
-    private ProdutoResponse converterToResponse(ProdutoModel produto){
+    public ProdutoResponse converterToResponse(ProdutoModel produto){
         return new ProdutoResponse(
                 produto.getId(),
                 produto.getNome(),

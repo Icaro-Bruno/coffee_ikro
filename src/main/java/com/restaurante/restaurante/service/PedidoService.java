@@ -1,12 +1,10 @@
 package com.restaurante.restaurante.service;
 
-import com.restaurante.restaurante.dto.AtualizarPedidoRequest;
-import com.restaurante.restaurante.dto.ItemDoPedidoResponse;
-import com.restaurante.restaurante.dto.PedidoRequest;
-import com.restaurante.restaurante.dto.PedidoResponse;
+import com.restaurante.restaurante.dto.*;
 import com.restaurante.restaurante.model.*;
 import com.restaurante.restaurante.repository.ClienteRepository;
 import com.restaurante.restaurante.repository.PedidoRepository;
+import com.restaurante.restaurante.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,19 +25,27 @@ public class PedidoService {
     @Autowired
     private ItemDoPedidoService itemDoPedidoService;
 
+    @Autowired
+    private ProdutoService produtoService;
+
     public List<PedidoResponse> listarAntigos(){
         return repository.findAllByOrderByDataHoraAsc()
-                .stream().map(this::converterToResponse).collect(Collectors.toList());
+                .stream().map(this::converterPraResponse).collect(Collectors.toList());
     }
 
-    private PedidoResponse converterToResponse(PedidoModel pedidoModel){
+    private PedidoResponse converterPraResponse(PedidoModel pedidoModel) {
         return new PedidoResponse(
                 pedidoModel.getId(),
                 pedidoModel.getItens()
-                                .stream().map(item -> new ItemDoPedidoResponse(
-                                        item.getId(),item.getProduto(),item.getPedido(),item.getQuantidade(),item.getSubtotal(),item.getPrecoUnitario()
+                        .stream()
+                        .map(item -> new ItemDoPedidoResponse(
+                                item.getId(),
+                                produtoService.converterToResponse(item.getProduto()), // aqui está o pulo do gato!
+                                item.getQuantidade(),
+                                item.getSubtotal(),
+                                item.getPrecoUnitario()
                         ))
-                                .collect(Collectors.toList()),
+                        .collect(Collectors.toList()),
                 pedidoModel.getTotal(),
                 pedidoModel.getCliente(),
                 pedidoModel.getStatus(),
@@ -47,14 +53,21 @@ public class PedidoService {
         );
     }
 
+
     public List<PedidoResponse> listarRecentes(){
         return repository.findAllByOrderByDataHoraDesc()
-                .stream().map(this::converterToResponse).collect(Collectors.toList());
+                .stream().map(this::converterPraResponse).collect(Collectors.toList());
     }
 
     public PedidoResponse criarPedido(PedidoRequest request){
         ClienteModel cliente = clienteRepository.findById(request.getClienteId())
                 .orElseThrow(()-> new RuntimeException("Cliente não encontrado"));
+
+        ClienteResponse clienteResponse = new ClienteResponse();
+        clienteResponse.setId(cliente.getId());
+        clienteResponse.setNome(cliente.getNome());
+        clienteResponse.setTelefone(cliente.getTelefone());
+        clienteResponse.setEndereco(cliente.getEndereco());
 
         PedidoModel pedido = new PedidoModel();
         pedido.setCliente(cliente);
@@ -71,7 +84,7 @@ public class PedidoService {
         pedido.setTotal(total);
 
         repository.save(pedido);
-        return converterToResponse(pedido);
+        return converterPraResponse(pedido);
     }
 
     public PedidoResponse atualizarPedido(Long id, AtualizarPedidoRequest request){
@@ -92,7 +105,7 @@ public class PedidoService {
         pedido.setStatus(request.getNovoStatus());
 
         pedido = repository.save(pedido);
-        return converterToResponse(pedido);
+        return converterPraResponse(pedido);
     }
 
     public void excluirPedido(Long id){

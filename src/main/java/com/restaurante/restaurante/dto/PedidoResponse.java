@@ -1,5 +1,6 @@
 package com.restaurante.restaurante.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.restaurante.restaurante.model.ClienteModel;
 import com.restaurante.restaurante.model.ItemDoPedidoModel;
 import com.restaurante.restaurante.model.PedidoModel;
@@ -24,6 +25,7 @@ public class PedidoResponse { //SAIDA
     private BigDecimal total;
     private ClienteResponse cliente;
     private StatusPedido status;
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
     private LocalDateTime dataHora;
 
     public PedidoResponse(PedidoModel pedido) {

@@ -15,8 +15,7 @@ import java.math.BigDecimal;
 @Setter
 
 public class ItemDoPedidoResponse {
-
-    private PedidoResponse pedido;
+    //private PedidoResponse pedido;
     private Long id;
     private ProdutoResponse produto;
     private Integer quantidade;
@@ -32,14 +31,19 @@ public class ItemDoPedidoResponse {
         //this.pedido = new PedidoResponse(itemDoPedido.getPedido());
     }
 
-
-    public ItemDoPedidoResponse(Long id, ProdutoModel produto, PedidoModel pedido, Integer quantidade, BigDecimal subtotal, BigDecimal precoUnitario) {
+    public ItemDoPedidoResponse(Long id, ProdutoResponse produtoResponse, Integer quantidade, BigDecimal subtotal, BigDecimal precoUnitario) {
         this.id = id;
-        this.produto = new ProdutoResponse(produto); // Se tiver um DTO específico para Produto
-        this.pedido = new PedidoResponse(pedido);   // Se houver um DTO para Pedido
+        this.produto = produtoResponse;
         this.quantidade = quantidade;
         this.subtotal = subtotal;
         this.precoUnitario = precoUnitario;
     }
 
+    public ItemDoPedidoResponse(Long id, ProdutoModel produto, Integer quantidade, BigDecimal subtotal, BigDecimal precoUnitario) {
+        this.id = id;
+        this.produto = new ProdutoResponse(produto); // conversão do model para DTO
+        this.quantidade = quantidade;
+        this.subtotal = subtotal;
+        this.precoUnitario = precoUnitario;
+    }
 }

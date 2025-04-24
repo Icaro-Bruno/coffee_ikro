@@ -6,10 +6,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+
+@Setter
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@Setter
 public class ClienteResponse { //saida
     private Long id;
     private String nome;
@@ -17,5 +18,10 @@ public class ClienteResponse { //saida
     private String endereco;
 
     public ClienteResponse(ClienteModel cliente) {
+        this.id = cliente.getId();
+        this.nome = cliente.getNome();
+        this.telefone = cliente.getTelefone();
+        this.endereco = cliente.getEndereco();
     }
+
 }

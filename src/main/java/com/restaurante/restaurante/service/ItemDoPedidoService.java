@@ -97,7 +97,6 @@ public class ItemDoPedidoService {
        return new ItemDoPedidoResponse(
                 itemDoPedidoModel.getId(),
                 itemDoPedidoModel.getProduto(),
-                itemDoPedidoModel.getPedido(),
                 itemDoPedidoModel.getQuantidade(),
                 itemDoPedidoModel.getSubtotal(),
                 itemDoPedidoModel.getPrecoUnitario()
