@@ -21,10 +21,7 @@ public class ItemDoPedidoControlleer {
         return service.listarItensPed();
     }
 
-    @PostMapping("/criar")
-    public ItemDoPedidoResponse addItem(@RequestBody ItemDoPedidoRequest request){
-        return service.criarItem(request);
-    }
+    //retirei o criarpedido,pois não deve ser criado aqui
 
     @PutMapping("/{id}")
     public List<ItemDoPedidoResponse> atualizarQuant(@PathVariable Long id,@RequestBody AtualizarItemDoPedRequest request){

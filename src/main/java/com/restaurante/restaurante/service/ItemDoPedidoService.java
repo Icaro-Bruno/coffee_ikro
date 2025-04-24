@@ -28,28 +28,27 @@ public class ItemDoPedidoService {
     @Autowired
     private PedidoRepository pedidoRepository;
 
-    public ItemDoPedidoResponse criarItem(ItemDoPedidoRequest itemDoPedidoRequest){
-        //ACHAR PEDIDO
-        PedidoModel pedido = pedidoRepository.findById(itemDoPedidoRequest.getPedidoId())
-                .orElseThrow(()-> new RuntimeException("Pedido não encontrado"));
+    public ItemDoPedidoModel criarItem(ItemDoPedidoRequest itemRequest, PedidoModel pedido) {
+        // ACHAR PRODUTO
+        ProdutoModel produto = produtoRepository.findById(itemRequest.getProdutoId())
+                .orElseThrow(() -> new RuntimeException("Produto não encontrado"));
 
-        //ACHAR PRODUTO
-        ProdutoModel produto = produtoRepository.findById(itemDoPedidoRequest.getProdutoId())
-                .orElseThrow(()-> new RuntimeException("Produto não encontrado"));
+        // CALCULAR SUBTOTAL
+        BigDecimal precoUnitario = produto.getPreco();
+        BigDecimal subtotal = precoUnitario.multiply(BigDecimal.valueOf(itemRequest.getQuantidade()));
 
-        //CALCULAR SUBTOTAL
-        BigDecimal subtotal = produto.getPreco().multiply(BigDecimal.valueOf(itemDoPedidoRequest.getQuantidade()));
-
-        //CRIAR ITEM
-        ItemDoPedidoModel item= new ItemDoPedidoModel();
-        item.setPedido(pedido);
+        // CRIAR ITEM
+        ItemDoPedidoModel item = new ItemDoPedidoModel();
+        item.setPedido(pedido); // já está em memória, sem precisar buscar
         item.setProduto(produto);
-        item.setQuantidade(itemDoPedidoRequest.getQuantidade());
+        item.setQuantidade(itemRequest.getQuantidade());
+        item.setPrecoUnitario(produto.getPreco());
         item.setSubtotal(subtotal);
 
-        item = repository.save(item);
-        return converterToResponse(item);
+        // NÃO SALVA INDIVIDUALMENTE
+        return item;
     }
+
 
     public List<ItemDoPedidoResponse> atualizarQuant(Long itemId, AtualizarItemDoPedRequest request){
         ItemDoPedidoModel item = repository.findById(itemId)
@@ -70,6 +69,24 @@ public class ItemDoPedidoService {
     public void excluirItemDoPedido(Long id){
         repository.deleteById(id);
     }
+
+    public ItemDoPedidoModel criarItemAtualizado(AtualizarItemDoPedRequest itemRequest, PedidoModel pedido) {
+        ProdutoModel produto = produtoRepository.findById(itemRequest.getItemId())
+                .orElseThrow(() -> new RuntimeException("Produto não encontrado"));
+
+        BigDecimal precoUnitario = produto.getPreco();
+        BigDecimal subtotal = precoUnitario.multiply(BigDecimal.valueOf(itemRequest.getNovaQuant()));
+
+        ItemDoPedidoModel item = new ItemDoPedidoModel();
+        item.setPedido(pedido);
+        item.setProduto(produto);
+        item.setQuantidade(itemRequest.getNovaQuant());
+        item.setPrecoUnitario(produto.getPreco());
+        item.setSubtotal(subtotal);
+
+        return item;
+    }
+
 
     public List<ItemDoPedidoResponse> listarItensPed(){
         return repository.findAll()

@@ -1,5 +1,6 @@
 package com.restaurante.restaurante.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.restaurante.restaurante.model.ItemDoPedidoModel;
 import com.restaurante.restaurante.model.PedidoModel;
 import com.restaurante.restaurante.model.ProdutoModel;
@@ -14,6 +15,7 @@ import java.math.BigDecimal;
 @Setter
 
 public class ItemDoPedidoResponse {
+
     private PedidoResponse pedido;
     private Long id;
     private ProdutoResponse produto;
@@ -27,6 +29,7 @@ public class ItemDoPedidoResponse {
         this.quantidade = itemDoPedido.getQuantidade();
         this.subtotal = itemDoPedido.getSubtotal();
         this.precoUnitario = itemDoPedido.getPrecoUnitario();
+        //this.pedido = new PedidoResponse(itemDoPedido.getPedido());
     }
 
 
@@ -38,4 +41,5 @@ public class ItemDoPedidoResponse {
         this.subtotal = subtotal;
         this.precoUnitario = precoUnitario;
     }
+
 }

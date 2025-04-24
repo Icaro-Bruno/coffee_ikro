@@ -1,5 +1,7 @@
 package com.restaurante.restaurante.dto;
 
+import com.restaurante.restaurante.model.ClienteModel;
+import com.restaurante.restaurante.model.ItemDoPedidoModel;
 import com.restaurante.restaurante.model.PedidoModel;
 import com.restaurante.restaurante.model.StatusPedido;
 import lombok.AllArgsConstructor;
@@ -32,5 +34,14 @@ public class PedidoResponse { //SAIDA
         this.cliente = new ClienteResponse(pedido.getCliente());
         this.status = pedido.getStatus();
         this.dataHora = pedido.getDataHora();
+    }
+
+    public PedidoResponse(Long id, List<ItemDoPedidoResponse> itens, BigDecimal total, ClienteModel cliente, StatusPedido status, LocalDateTime dataHora) {
+        this.id = id;
+        this.itens = itens;
+        this.total = total;
+        this.cliente = new ClienteResponse(cliente);
+        this.status = status;
+        this.dataHora = dataHora;
     }
 }

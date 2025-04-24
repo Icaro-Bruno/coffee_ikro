@@ -11,7 +11,6 @@ import java.math.BigDecimal;
 @Entity
 @Table(name = "itemdopedido_model")
 @NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
 public class ItemDoPedidoModel {
@@ -30,5 +29,12 @@ public class ItemDoPedidoModel {
     private Integer quantidade;
     private BigDecimal precoUnitario; //valor do item no ato da compra
     private BigDecimal subtotal;
+
+    public ItemDoPedidoModel(ProdutoModel produto, PedidoModel pedido, Integer quantidade) {
+        this.produto = produto;
+        this.pedido = pedido;
+        this.quantidade = quantidade;
+
+    }
 
 }

@@ -8,6 +8,7 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 public class PedidoRequest { //ENTRADA
-    private List<ItemDoPedidoRequest> itens; //talvez um itemId;
     private Long clienteId;
+    private List<ItemDoPedidoRequest> itens; //talvez um itemId;
+
 }

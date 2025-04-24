@@ -1,8 +1,7 @@
 package com.restaurante.restaurante.model;
 
 public enum StatusPedido {
-    AGUARDANDO_PAGAMENTO,
-    PAGO,
+    PENDENTE,
     A_CAMINHO,
     ENTREGUE,
     CANCELADO
