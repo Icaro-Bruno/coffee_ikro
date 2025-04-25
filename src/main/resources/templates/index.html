@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Promoções</title>
+    <link rel="stylesheet" href="/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Merienda:wght@300..900&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<header class="header">
+    <img src="/img/logo.png" alt="Logo da empresa" class="logo">
+    <a href="https://github.com/ikrobr" target="_blank">
+        <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub" class="icon">
+    </a>
+</header>
+
+
+<div class="container">
+    <div class="promocao" th:each="promo : ${promocoes}">
+        <h2 th:text="${promo.titulo}">Promoção</h2>
+        <img th:src="${promo.imgUrl}" alt="Promoção" class="banner">
+        <a href="/cardapio" class="button">Ver Cardápio</a>
+    </div>
+</div>
+
+</body>
+</html>
