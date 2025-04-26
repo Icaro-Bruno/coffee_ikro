@@ -1,11 +1,10 @@
 package com.restaurante.restaurante.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
+import org.springframework.format.annotation.NumberFormat;
 import java.math.BigDecimal;
 
 @Entity
@@ -19,6 +18,8 @@ public class ProdutoModel {
     private Long id;
 
     private String nome;
+
+    @NumberFormat(style = NumberFormat.Style.NUMBER,pattern = "#,##0.00")
     private BigDecimal preco;
     private String categoria;
     private String imgUrl;
@@ -39,4 +40,5 @@ public class ProdutoModel {
     public ProdutoModel(Long produtoId) {
         this.id = produtoId;
     }
+
 }

@@ -1,0 +1,83 @@
+/* Fundo geral */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #FFF8F0;
+    color: #333;
+}
+
+/* Título da página */
+h1 {
+    text-align: center;
+    margin-top: 20px;
+    color: #FF5722;
+    font-size: 2em;
+}
+
+/* Container dos itens */
+.cardapio-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Item do cardápio */
+.item {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 650px;
+    margin: 15px 0;
+    padding: 20px;
+    transition: transform 0.2s ease;
+}
+
+/* Ajuste das imagens dos produtos */
+.item img {
+    width: 100%;
+    height: 250px; /* Altura menor para a imagem */
+    object-fit: cover; /* Corta sem deformar a imagem */
+    border-radius: 8px; /* Deixa a imagem com cantos levemente arredondados */
+    margin-bottom: 10px; /* Espaçamento entre a imagem e o texto */
+}
+
+
+.item:hover {
+    transform: scale(1.02);
+}
+
+/* Nome do produto */
+.item h2 {
+    margin: 0 0 10px 0;
+    color: #FF5722;
+}
+
+/* Preço */
+.item p {
+    margin: 0;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #444;
+}
+
+/* Botão (caso queira comprar ou adicionar) */
+.botao {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: #FF5722;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.botao:hover {
+    background-color: #e64a19;
+}

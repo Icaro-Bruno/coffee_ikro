@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.text.NumberFormat;
+import java.util.Locale;
 
 @Getter
 @Setter
@@ -28,4 +30,10 @@ public class ProdutoResponse {
         this.nome = produto.getNome();
         this.preco = produto.getPreco();
     }
+
+    public String getPrecoFormatado() {
+        NumberFormat formatador = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+        return formatador.format(preco);
+    }
+
 }
