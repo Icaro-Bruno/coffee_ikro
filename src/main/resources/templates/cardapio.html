@@ -6,6 +6,8 @@
     <link rel="stylesheet" th:href="@{/cardapio.css}">
 </head>
 
+<body> 
+
 <header>
     <button id="menu-toggle">☰</button>
 
@@ -21,7 +23,6 @@
     </div>
 </header>
 
-<body>
 <h1>Nosso Cardápio</h1>
 
 <div class="categorias-filtros">
@@ -30,12 +31,7 @@
     <button class="categoria-botao" data-categoria="sobremesas">Sobremesas</button>
 </div>
 
-<div class="cardapio-container">
-    <!-- Aqui ficam os produtos, depois vamos filtrar -->
-</div>
-
-
-
+<!-- Só uma div de cardapio-container -->
 <div class="cardapio-container">
     <div class="item" th:each="produto : ${produtos}">
         <h2 th:text="${produto.nome}">Nome do Produto</h2>
@@ -44,7 +40,6 @@
         <p>[[${produto.precoFormatado}]]</p>
         <a href="#" class="botao">Adicionar</a>
     </div>
-</div>
 </div>
 
 <script>
@@ -56,16 +51,22 @@
     });
 </script>
 
-<script>let count = 0;
-const carrinhoCount = document.getElementById('carrinho-count');
-const botoesAdicionar = document.querySelectorAll('.botao');
+<script>
+    let count = 0;
+    const carrinhoCount = document.getElementById('carrinho-count');
 
-botoesAdicionar.forEach(botao => {
-    botao.addEventListener('click', () => {
-        count++;
-        carrinhoCount.textContent = count;
+    // Como os botões "Adicionar" são criados dinamicamente, espere o DOM carregar
+    document.addEventListener('DOMContentLoaded', () => {
+        const botoesAdicionar = document.querySelectorAll('.botao');
+
+        botoesAdicionar.forEach(botao => {
+            botao.addEventListener('click', () => {
+                count++;
+                carrinhoCount.textContent = count;
+            });
+        });
     });
-});
 </script>
+
 </body>
 </html>
