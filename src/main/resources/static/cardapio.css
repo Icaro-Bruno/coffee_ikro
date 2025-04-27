@@ -38,8 +38,9 @@ body {
 h1 {
     text-align: center;
     margin-top: 20px;
-    color: #FF5722;
+    color: #333;
     font-size: 2em;
+    font-family: 'Poppins', sans-serif;
 }
 
 .categorias-filtros {
