@@ -1,13 +1,12 @@
 header {
     width: 100%;
     background-color: #fff8f0;
-    padding: 25px 20px;
+    padding: 60px 27px;
     border-bottom: 1px solid #eee;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.09);
     top: 0;
     z-index: 10;
     box-sizing: border-box;
-
     display: flex;
     align-items: center; /* Centraliza verticalmente */
     justify-content: space-between; /* Espaça o menu e o carrinho */
@@ -90,7 +89,7 @@ h1 {
 
 .item img {
     width: 90%; /* Ajusta a imagem à largura do item */
-    height: 200px; /* Define uma altura fixa */
+    height: 240px; /* Define uma altura fixa */
     object-fit: cover; /* Garante que a imagem fique proporcional sem deformar */
     border-radius: 8px; /* Deixa as bordas arredondadas */
     margin-bottom: 10px;
@@ -111,6 +110,7 @@ h1 {
     margin: 10px;
     padding:10px;
     color: #000000;
+    width: 90%;
 }
 
 
