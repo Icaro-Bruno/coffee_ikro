@@ -1,5 +1,4 @@
 body {
-    font-family: Merienda, cursive;
     margin: 0;
     padding: 0;
     background: #fff8f0;
@@ -47,8 +46,8 @@ h1 {
     margin-bottom: 16px;
     font-size: 1.5rem;
     text-align: center;
-    color: #333;
-    font-family: 'Poppins', sans-serif;
+    color: #000000;
+    font-family: 'Merienda', cursive;
 }
 
 

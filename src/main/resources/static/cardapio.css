@@ -38,18 +38,19 @@ body {
 h1 {
     text-align: center;
     margin-top: 20px;
-    color: #333;
+    padding:40px;
+    color: #000000;
     font-size: 2em;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Merienda', cursive;
 }
 
 .categorias-filtros {
     display: flex;
-    justify-content: space-around; /* DISTRIBUI melhor */
+    justify-content: space-evenly; /* DISTRIBUI melhor */
     align-items: center;
-    flex-wrap: wrap; /* Se precisar quebrar linha */
+    flex-wrap: wrap;
     padding: 0 20px;
-    margin: 20px 0;
+    margin: 30px 0;
 }
 
 .categoria-botao {
@@ -66,8 +67,6 @@ h1 {
 .categoria-botao:hover {
     background-color: #e64a19;
 }
-
-
 
 /* Container dos itens */
 .cardapio-container {
@@ -106,7 +105,7 @@ h1 {
 /* Nome do produto */
 .item h2 {
     margin: 0 0 10px 0;
-    color: #FF5722;
+    color: #000000;
 }
 
 /* Preço */
