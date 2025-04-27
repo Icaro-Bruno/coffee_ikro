@@ -1,4 +1,19 @@
-/* Fundo geral */
+header {
+    width: 100%;
+    background-color: #fff8f0;
+    padding: 25px 20px;
+    border-bottom: 1px solid #eee;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.09);
+    top: 0;
+    z-index: 10;
+    box-sizing: border-box;
+
+    display: flex;
+    align-items: center; /* Centraliza verticalmente */
+    justify-content: space-between; /* Espaça o menu e o carrinho */
+}
+
+
 body {
     margin: 0;
     padding: 0;
@@ -7,13 +22,51 @@ body {
     color: #333;
 }
 
-/* Título da página */
+#carrinho {
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+#menu-toggle {
+    font-size: 2em;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+
 h1 {
     text-align: center;
     margin-top: 20px;
     color: #FF5722;
     font-size: 2em;
 }
+
+.categorias-filtros {
+    display: flex;
+    justify-content: space-around; /* DISTRIBUI melhor */
+    align-items: center;
+    flex-wrap: wrap; /* Se precisar quebrar linha */
+    padding: 0 20px;
+    margin: 20px 0;
+}
+
+.categoria-botao {
+    background-color: #FF5722;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.categoria-botao:hover {
+    background-color: #e64a19;
+}
+
+
 
 /* Container dos itens */
 .cardapio-container {
@@ -81,3 +134,29 @@ h1 {
 .botao:hover {
     background-color: #e64a19;
 }
+
+#menu {
+    background: #fff;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 200px;
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+    padding: 20px;
+    display: none;
+}
+
+#menu ul {
+    list-style: none;
+    padding: 0;
+}
+
+#menu ul li {
+    margin-bottom: 10px;
+}
+
+/* Para mostrar o menu */
+#menu.show {
+    display: block;
+}
+
