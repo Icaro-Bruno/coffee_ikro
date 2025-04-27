@@ -57,9 +57,9 @@ h1 {
     background-color: #FF5722;
     color: white;
     border: none;
-    padding: 10px 20px;
+    padding: 12px 24px;
     border-radius: 20px;
-    font-size: 1em;
+    font-size: 1.2em;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
@@ -68,33 +68,36 @@ h1 {
     background-color: #e64a19;
 }
 
-/* Container dos itens */
 .cardapio-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
+    display: flex; /* Alinha os itens horizontalmente */
+    justify-content: space-between; /* Cria espaçamento entre os itens */
+    align-items: flex-start; /* Alinha os itens ao topo */
+    flex-wrap: wrap; /* Permite quebrar para linhas adicionais se necessário */
+    gap: 20px; /* Espaçamento uniforme entre os itens */
+    padding: 10px; /* Espaçamento interno no contêiner */
 }
 
-/* Item do cardápio */
 .item {
-    background-color: #ffffff;
+    width: 350px; /* Define uma largura fixa para os itens */
+    background-color: #fffbf8;
     border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    width: 100%;
-    max-width: 650px;
-    margin: 15px 0;
-    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 10px auto; /* Evita que os itens fiquem muito grudados */
+    padding: 15px;
+    text-align: center; /* Centraliza o conteúdo dentro do item */
     transition: transform 0.2s ease;
 }
 
-/* Ajuste das imagens dos produtos */
 .item img {
-    width: 100%;
-    height: 250px; /* Altura menor para a imagem */
-    object-fit: cover; /* Corta sem deformar a imagem */
-    border-radius: 8px; /* Deixa a imagem com cantos levemente arredondados */
-    margin-bottom: 10px; /* Espaçamento entre a imagem e o texto */
+    width: 90%; /* Ajusta a imagem à largura do item */
+    height: 200px; /* Define uma altura fixa */
+    object-fit: cover; /* Garante que a imagem fique proporcional sem deformar */
+    border-radius: 8px; /* Deixa as bordas arredondadas */
+    margin-bottom: 10px;
+}
+
+.item:hover {
+    transform: scale(1.02);
 }
 
 
@@ -103,17 +106,40 @@ h1 {
 }
 
 /* Nome do produto */
-.item h2 {
-    margin: 0 0 10px 0;
+.item h3 {
+    text-align: left;
+    margin: 10px;
+    padding:10px;
     color: #000000;
 }
 
-/* Preço */
-.item p {
+
+/*.item p {
     margin: 0;
     font-size: 1.2em;
     font-weight: bold;
     color: #444;
+}*/
+
+@keyframes pulse {
+    0% {
+        transform: scale(1); /* Tamanho normal */
+    }
+    50% {
+        transform: scale(1.1); /* Aumenta levemente */
+    }
+    100% {
+        transform: scale(1); /* Volta ao tamanho normal */
+    }
+}
+
+#preco {
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #000000;
+    animation: pulse 2s infinite;
+    margin: 5px;
 }
 
 /* Botão (caso queira comprar ou adicionar) */

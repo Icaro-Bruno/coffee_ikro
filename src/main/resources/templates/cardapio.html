@@ -35,10 +35,10 @@
 <!-- Só uma div de cardapio-container -->
 <div class="cardapio-container">
     <div class="item" th:each="produto : ${produtos}">
-        <h2 th:text="${produto.nome}">Nome do Produto</h2>
+        <h3 th:text="${produto.nome}">Nome do Produto</h3>
         <img th:src="${produto.imgUrl}" alt="Imagem do Produto" class="banner">
-        <p th:text="${produto.descricao}">Descrição</p>
-        <p>[[${produto.precoFormatado}]]</p>
+        <!--<p th:text="${produto.descricao}">Descrição</p>-->
+        <p id="preco">[[${produto.precoFormatado}]]</p>
         <a href="#" class="botao">Adicionar</a>
     </div>
 </div>

@@ -2,6 +2,7 @@ body {
     margin: 0;
     padding: 0;
     background: #fff8f0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .header {
@@ -41,7 +42,7 @@ body {
 
 
 /* Ajusta o espaçamento do título abaixo do header */
-h1 {
+h2 {
     margin-top: 24px;
     margin-bottom: 16px;
     font-size: 1.5rem;
