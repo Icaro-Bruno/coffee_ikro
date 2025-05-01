@@ -34,7 +34,7 @@
 
 <!-- Só uma div de cardapio-container -->
 <div class="cardapio-container">
-    <div class="item" th:each="produto : ${produtos}">
+    <div class="item" th:each="produto : ${produtos}" th:attr="data-categoria=${produto.categoria}">
         <h3 th:text="${produto.nome}">Nome do Produto</h3>
         <img th:src="${produto.imgUrl}" alt="Imagem do Produto" class="banner">
         <!--<p th:text="${produto.descricao}">Descrição</p>-->
@@ -43,6 +43,7 @@
     </div>
 </div>
 
+<!--MENU-->
 <script>
     const toggle = document.getElementById('menu-toggle');
     const menu = document.getElementById('menu');
@@ -52,6 +53,7 @@
     });
 </script>
 
+<!--CARRINHO-->
 <script>
     let count = 0;
     const carrinhoCount = document.getElementById('carrinho-count');
@@ -64,6 +66,27 @@
             botao.addEventListener('click', () => {
                 count++;
                 carrinhoCount.textContent = count;
+            });
+        });
+    });
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const botoesCategoria = document.querySelectorAll('.categoria-botao');
+        const itens = document.querySelectorAll('.item');
+
+        botoesCategoria.forEach(botao => {
+            botao.addEventListener('click', () => {
+                const categoria = botao.getAttribute('data-categoria');
+
+                itens.forEach(item => {
+                    if (item.getAttribute('data-categoria') === categoria || categoria === 'todos') {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
             });
         });
     });

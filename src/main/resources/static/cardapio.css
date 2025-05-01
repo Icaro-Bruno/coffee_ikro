@@ -22,12 +22,12 @@ body {
 }
 
 #carrinho {
-    font-size: 1.5em;
+    font-size: 3em;
     cursor: pointer;
 }
 
 #menu-toggle {
-    font-size: 2em;
+    font-size: 3em;
     background: none;
     border: none;
     cursor: pointer;
@@ -107,6 +107,7 @@ h1 {
     padding:10px;
     color: #000000;
     width: 90%;
+    font-size: 1.7rem;
 }
 /*.item p {
     margin: 0;
@@ -129,7 +130,7 @@ h1 {
 
 #preco {
     text-align: center;
-    font-size: 1.2em;
+    font-size: 1.7rem;
     font-weight: bold;
     color: #000000;
     animation: pulse 2s infinite;
