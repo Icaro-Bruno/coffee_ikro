@@ -20,7 +20,7 @@ public class ExibirPag {
     @Autowired
     private ProdutoService produtoService;
 
-    @GetMapping("/home")
+    @GetMapping("/")
     public String home(Model model){
         List<PromocaoResponse> promocoes = promocaoService.listarTodas();
         model.addAttribute("promocoes", promocoes);
