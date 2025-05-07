@@ -39,8 +39,7 @@ h1 {
     margin-top: 20px;
     padding:40px;
     color: #000000;
-    font-size: 3.3rem;
-
+    font-size: 3.5rem;
     font-family: 'Merienda', cursive;
 }
 
@@ -69,31 +68,81 @@ h1 {
 }
 
 .cardapio-container {
-    display: flex; /* Alinha os itens horizontalmente */
-    justify-content: space-between; /* Cria espaçamento entre os itens */
-    align-items: flex-start; /* Alinha os itens ao topo */
-    flex-wrap: wrap; /* Permite quebrar para linhas adicionais se necessário */
-    gap: 20px; /* Espaçamento uniforme entre os itens */
-    padding: 10px; /* Espaçamento interno no contêiner */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly; /* Centraliza os itens sem espaçamento exagerado */
+    align-items: flex-start;
+    gap: 12px; /* Menor espaçamento entre os cards */
+    padding: 10px;
 }
 
+
 .item {
-    width: 350px; /* Define uma largura fixa para os itens */
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100%;
+    max-width: 320px;
+    min-height: 340px;
     background-color: #fffbf8;
     border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin: 10px auto; /* Evita que os itens fiquem muito grudados */
-    padding: 15px;
-    text-align: center; /* Centraliza o conteúdo dentro do item */
-    transition: transform 0.2s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    padding: 15px 15px 0 15px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.botao {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 16px 0;
+    font-size: 1.2rem;
+    background-color: #FF5722;
+    color: white;
+    border: none;
+    border-radius: 0 0 12px 12px; /* apenas cantos inferiores */
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.botao:hover {
+    background-color: #e64a19;
+}
+
+.item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.item-header h3 {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #000;
+    margin: 0;
+}
+
+#preco {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #000;
+    margin: 0;
+    /*animation: pulse 3s ease-in-out infinite;*/
 }
 
 .item img {
-    width: 90%; /* Ajusta a imagem à largura do item */
-    height: 240px; /* Define uma altura fixa */
-    object-fit: cover; /* Garante que a imagem fique proporcional sem deformar */
-    border-radius: 8px; /* Deixa as bordas arredondadas */
-    margin-bottom: 10px;
+    width: 100%;
+    height: 160px; /* AUMENTA levemente a altura da imagem */
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 5px; /* REDUZ o espaço abaixo da imagem */
 }
 
 .item:hover {
@@ -102,13 +151,15 @@ h1 {
 
 /* Nome do produto */
 .item h3 {
+    margin: 10px 0 5px;
+    padding: 0;
+    color: #000;
+    font-size: 1.5rem;
+    font-weight: 600;
+    width: 100%;
     text-align: left;
-    margin: 10px;
-    padding:10px;
-    color: #000000;
-    width: 90%;
-    font-size: 1.7rem;
 }
+
 /*.item p {
     margin: 0;
     font-size: 1.2em;
@@ -118,43 +169,14 @@ h1 {
 
 @keyframes pulse {
     0% {
-        transform: scale(1); /* Tamanho normal */
+        transform: scale(1);
     }
     50% {
-        transform: scale(1.1); /* Aumenta levemente */
+        transform: scale(1.05);
     }
     100% {
-        transform: scale(1); /* Volta ao tamanho normal */
+        transform: scale(1);
     }
-}
-
-#preco {
-    text-align: center;
-    font-size: 1.7rem;
-    font-weight: bold;
-    color: #000000;
-    animation: pulse 2s infinite;
-    margin: 5px;
-}
-
-/* Botão (caso queira comprar ou adicionar) */
-.botao {
-    display: inline-block;
-    margin-top: 15px;
-    padding: 15px 30px;
-    font-size: 1.3em;
-    background-color: #FF5722;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    text-decoration: none;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
-}
-
-.botao:hover {
-    background-color: #e64a19;
 }
 
 #menu {
