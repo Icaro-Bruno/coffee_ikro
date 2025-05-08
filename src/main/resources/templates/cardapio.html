@@ -27,14 +27,18 @@
 <h1>Nosso Cardápio</h1>
 
 <div class="categorias-filtros">
+    <button class="categoria-botao" data-categoria="todos">Todos</button>
     <button class="categoria-botao" data-categoria="comidas">Comidas</button>
     <button class="categoria-botao" data-categoria="bebidas">Bebidas</button>
     <button class="categoria-botao" data-categoria="sobremesas">Sobremesas</button>
 </div>
 
+
 <!-- Só uma div de cardapio-container -->
 <div class="cardapio-container">
-    <div class="item" th:each="produto : ${produtos}" th:attr="data-categoria=${produto.categoria}">
+    <div class="item"
+         th:each="produto : ${produtos}"
+         th:attr="data-categoria=${#strings.toLowerCase(produto.categoria)}">
         <div class="item-header">
             <h3 th:text="${produto.nome}">Nome do Produto</h3>
             <p id="preco">[[${produto.precoFormatado}]]</p>
