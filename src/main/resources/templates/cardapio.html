@@ -12,17 +12,19 @@
 <header>
     <button id="menu-toggle">☰</button>
 
-    <nav id="menu" class="hidden">
+    <div id="carrinho">
+        &#x1F6D2; <span id="carrinho-count">0</span>
+    </div>
+</header>
+
+<nav id="menu" class="hidden">
+    <div class="menu-content">
         <ul>
             <li><a href="#">Pedir Via Whatsapp</a></li>
             <li><a href="#">Promoções</a></li>
         </ul>
-    </nav>
-
-    <div id="carrinho">
-        🛒 <span id="carrinho-count">0</span>
     </div>
-</header>
+</nav>
 
 <h1>Nosso Cardápio</h1>
 
@@ -54,10 +56,18 @@
     const toggle = document.getElementById('menu-toggle');
     const menu = document.getElementById('menu');
 
-    toggle.addEventListener('click', () => {
+    toggle.addEventListener('click', (event) => {
+        event.stopPropagation();
         menu.classList.toggle('show');
     });
+
+    document.addEventListener('click', (event) => {
+        if (!menu.contains(event.target) && !toggle.contains(event.target)) {
+            menu.classList.remove('show');
+        }
+    });
 </script>
+
 
 <!--CARRINHO-->
 <script>
