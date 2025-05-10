@@ -47,7 +47,7 @@
         </div>
         <img th:src="${produto.imgUrl}" alt="Imagem do Produto" class="banner">
         <!--<p th:text="${produto.descricao}">Descrição</p>-->
-        <a href="#" class="botao">Adicionar</a>
+        <a th:href="@{'/produto/'+${produto.id}}" class="botao">Ver Mais</a>
     </div>
 </div>
 
