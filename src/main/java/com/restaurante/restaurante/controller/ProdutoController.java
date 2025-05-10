@@ -1,7 +1,9 @@
 package com.restaurante.restaurante.controller;
 
+import com.restaurante.restaurante.dto.PedidoRequest;
 import com.restaurante.restaurante.dto.ProdutoRequest;
 import com.restaurante.restaurante.dto.ProdutoResponse;
+import com.restaurante.restaurante.dto.PromocaoResponse;
 import com.restaurante.restaurante.service.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

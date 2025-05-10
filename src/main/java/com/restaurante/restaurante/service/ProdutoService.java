@@ -60,6 +60,12 @@ public class ProdutoService {
                 .collect(Collectors.toList());
     }
 
+    public ProdutoResponse buscarPorId(Long id){
+        ProdutoModel produto = repository.findById(id)
+                .orElseThrow(()-> new RuntimeException("Produto não encontrado com id"+id));
+        return converterToResponse(produto);
+    }
+
     public List<ProdutoResponse> buscarCategoria(String categoria){
         return repository.findByCategoriaIgnoreCase(categoria)
                 .stream()

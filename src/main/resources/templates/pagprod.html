@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Página Do Produto</title>
+    <link rel="stylesheet" th:href="@{/pagprod.css}">
+    <link href="https://fonts.googleapis.com/css2?family=Merienda:wght@300..900&display=swap" rel="stylesheet">
+</head>
+<body>
+<div>
+    <h2 th:text="${pagProduto.nome}">Nome do Produto</h2>
+    <img th:src="${pagProduto.imgUrl}" alt="Imagem">
+</div>
+
+</body>
+</html>
