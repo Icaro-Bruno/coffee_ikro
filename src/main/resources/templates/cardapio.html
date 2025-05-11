@@ -46,8 +46,10 @@
             <p id="preco">[[${produto.precoFormatado}]]</p>
         </div>
         <img th:src="${produto.imgUrl}" alt="Imagem do Produto" class="banner">
-        <!--<p th:text="${produto.descricao}">Descrição</p>-->
-        <a th:href="@{'/produto/'+${produto.id}}" class="botao">Ver Mais</a>
+        <!--DESNECESSARIO <p th:text="${produto.descricao}">Descrição</p>-->
+
+        <a th:href="@{'/produto/'+${produto.id}}" class="botao">Comprar</a>
+        <!--@{} é a referente a rota, porém o ${} busca a var/dados do back-->
     </div>
 </div>
 
