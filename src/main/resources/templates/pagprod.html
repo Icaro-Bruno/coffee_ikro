@@ -11,9 +11,10 @@
 <header class="cabecalho">
     <button id="menu-toggle">☰</button>
 
-    <div id="carrinho">
+    <a id="carrinho" href="/carrinho" style="text-decoration: none; color: inherit;">
         🛒 <span id="carrinho-count">0</span>
-    </div>
+    </a>
+
 </header>
 
 <nav id="menu" class="hidden">
@@ -46,76 +47,76 @@
     </div>
 
     <button id="botao-adicionar" class="botao-adicionar">
-        R$ 0,00 | ADICIONAR
+        R$ 0,00 | Adicionar ao carrinho
     </button>
 </footer>
 
 <script>
-    const menosBtn = document.getElementById('menos');
-    const maisBtn = document.getElementById('mais');
-    const quantidadeInput = document.getElementById('quantidade');
-    const precoUnitarioSpan = document.getElementById('preco-unitario');
-    const botaoAdicionar = document.getElementById('botao-adicionar');
-
-    function atualizarPrecoTotal() {
-        const precoUnitario = parseFloat(precoUnitarioSpan.dataset.preco || 0);
-        const quantidade = parseInt(quantidadeInput.value);
-        const total = (precoUnitario * quantidade).toFixed(2).replace('.', ',');
-        botaoAdicionar.innerText = `R$ ${total} | ADICIONAR`;
-    }
-
-    menosBtn.onclick = () => {
-        let valor = parseInt(quantidadeInput.value);
-        if (valor > 1) {
-            quantidadeInput.value = valor - 1;
-            atualizarPrecoTotal();
-        }
-    };
-
-    maisBtn.onclick = () => {
-        let valor = parseInt(quantidadeInput.value);
-        quantidadeInput.value = valor + 1;
-        atualizarPrecoTotal();
-    };
-
-    // Inicializa com preço certo
-    window.onload = atualizarPrecoTotal;
-</script>
-
-<!--MENU-->
-<script>
-    const toggle = document.getElementById('menu-toggle');
-    const menu = document.getElementById('menu');
-
-    toggle.addEventListener('click', (event) => {
-        event.stopPropagation();
-        menu.classList.toggle('show');
-    });
-
-    document.addEventListener('click', (event) => {
-        if (!menu.contains(event.target) && !toggle.contains(event.target)) {
-            menu.classList.remove('show');
-        }
-    });
-</script>
-
-
-<!--CARRINHO-->
-<script>
-    let count = 0;
-    const carrinhoCount = document.getElementById('carrinho-count');
-
-    // Como os botões "Adicionar" são criados dinamicamente, espere o DOM carregar
     document.addEventListener('DOMContentLoaded', () => {
-        const botoesAdicionar = document.querySelectorAll('.botao');
+        const menosBtn = document.getElementById('menos');
+        const maisBtn = document.getElementById('mais');
+        const quantidadeInput = document.getElementById('quantidade');
+        const precoUnitarioSpan = document.getElementById('preco-unitario');
+        const botaoAdicionar = document.getElementById('botao-adicionar');
+        const carrinhoCount = document.getElementById('carrinho-count');
 
-        botoesAdicionar.forEach(botao => {
-            botao.addEventListener('click', () => {
-                count++;
-                carrinhoCount.textContent = count;
-            });
+        function atualizarPrecoTotal() {
+            const precoUnitario = parseFloat(precoUnitarioSpan.dataset.preco || 0);
+            const quantidade = parseInt(quantidadeInput.value);
+            const total = (precoUnitario * quantidade).toFixed(2).replace('.', ',');
+            botaoAdicionar.innerText = `R$ ${total} | Adicionar ao carrinho`;
+        }
+
+        function modificarQuantidade(modificador) {
+            let valor = parseInt(quantidadeInput.value);
+            if (valor + modificador >= 1) {
+                quantidadeInput.value = valor + modificador;
+                atualizarPrecoTotal();
+            }
+        }
+
+        menosBtn.addEventListener('click', () => modificarQuantidade(-1));
+        maisBtn.addEventListener('click', () => modificarQuantidade(1));
+
+        function obterCarrinho() {
+            return JSON.parse(localStorage.getItem('carrinho')) || [];
+        }
+
+        function salvarCarrinho(carrinho) {
+            localStorage.setItem('carrinho', JSON.stringify(carrinho));
+        }
+
+        function atualizarContadorCarrinho() {
+            const carrinho = obterCarrinho();
+            const total = carrinho.reduce((soma, item) => soma + item.quantidade, 0);
+            carrinhoCount.textContent = total;
+        }
+
+        botaoAdicionar.addEventListener('click', () => {
+            const nome = document.querySelector('.produto-nome').innerText;
+            const preco = parseFloat(precoUnitarioSpan.dataset.preco);
+            const img = document.querySelector('.produto-img').getAttribute('src');
+            const quantidade = parseInt(quantidadeInput.value);
+
+            if (!nome || !preco || !img || !quantidade) {
+                alert("Erro ao adicionar item. Verifique os dados.");
+                return;
+            }
+
+            let carrinho = obterCarrinho();
+            const produtoExistente = carrinho.find(item => item.nome === nome);
+
+            produtoExistente ? produtoExistente.quantidade += quantidade : carrinho.push({ nome, preco, img, quantidade });
+
+            salvarCarrinho(carrinho);
+            atualizarContadorCarrinho();
+            alert("Produto adicionado ao carrinho!");
         });
+
+        atualizarPrecoTotal();
+        atualizarContadorCarrinho();
     });
 </script>
+
 </body>
 </html>
