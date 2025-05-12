@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Meu Carrinho</title>
+  <link rel="stylesheet" href="/pagprod.css">
+  <style>
+    main {
+        padding: 20px;
+        max-width: 800px;
+        margin: auto;
+    }
+
+    h1 {
+        text-align: center;
+        font-family: 'Merienda', cursive;
+        font-size: 3rem;
+        margin-bottom: 20px;
+    }
+
+    .item-carrinho {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+        background: #fff8f0;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        padding: 16px;
+        gap: 20px;
+    }
+
+    .item-carrinho img {
+        width: 90px;
+        height: 90px;
+        object-fit: cover;
+        border-radius: 10px;
+    }
+
+    .item-info {
+        flex-grow: 1;
+    }
+
+    .item-info h2 {
+        font-size: 1.6rem;
+        margin: 0 0 8px;
+    }
+
+    .item-info p {
+        margin: 4px 0;
+        font-size: 1.4rem;
+    }
+
+    .total {
+        font-size: 2rem;
+        font-weight: bold;
+        text-align: center;
+        margin-top: 30px;
+    }
+
+    .botao-limpar {
+        display: block;
+        margin: 30px auto 0;
+        padding: 12px 24px;
+        font-size: 1.6rem;
+        background-color: #FF5722;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Seu Carrinho</h1>
+
+  <div id="lista-carrinho">
+    <!-- Itens do carrinho serão injetados aqui -->
+  </div>
+
+  <p class="total" id="total-geral">Total: R$ 0,00</p>
+  <button class="botao-limpar" onclick="limparCarrinho()">Limpar Carrinho</button>
+</main>
+
+<script>
+  function formatarReal(valor) {
+      return `R$ ${valor.toFixed(2).replace('.', ',')}`;
+  }
+
+  function carregarCarrinho() {
+      const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+      const lista = document.getElementById('lista-carrinho');
+      const totalGeral = document.getElementById('total-geral');
+
+      lista.innerHTML = ''; // limpa a lista
+      let total = 0;
+
+      carrinho.forEach(item => {
+          const subtotal = item.preco * item.quantidade;
+          total += subtotal;
+
+          const div = document.createElement('div');
+          div.classList.add('item-carrinho');
+
+          div.innerHTML = `
+              <img src="${item.img}" alt="${item.nome}">
+              <div class="item-info">
+                  <h2>${item.nome}</h2>
+                  <p>Preço: ${formatarReal(item.preco)}</p>
+                  <p>Quantidade: ${item.quantidade}</p>
+                  <p>Subtotal: ${formatarReal(subtotal)}</p>
+              </div>
+          `;
+
+          lista.appendChild(div);
+      });
+
+      totalGeral.textContent = `Total: ${formatarReal(total)}`;
+  }
+
+  function limparCarrinho() {
+      localStorage.removeItem('carrinho');
+      carregarCarrinho();
+  }
+
+  document.addEventListener('DOMContentLoaded', carregarCarrinho);
+</script>
+</body>
+</html>
