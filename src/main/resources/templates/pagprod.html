@@ -4,27 +4,12 @@
     <meta charset="UTF-8">
     <title>Página Do Produto</title>
     <link rel="stylesheet" th:href="@{/pagprod.css}">
+    <link rel="stylesheet" th:href="@{/header.css}">
     <link href="https://fonts.googleapis.com/css2?family=Merienda:wght@300..900&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<header class="cabecalho">
-    <button id="menu-toggle">☰</button>
-
-    <a id="carrinho" href="/carrinho" style="text-decoration: none; color: inherit;">
-        🛒 <span id="carrinho-count">0</span>
-    </a>
-
-</header>
-
-<nav id="menu" class="hidden">
-    <div class="menu-content">
-        <ul>
-            <li><a href="#">Pedir Via Whatsapp</a></li>
-            <li><a href="#">Promoções</a></li>
-        </ul>
-    </div>
-</nav>
+<div th:replace="header :: body"></div>
 
 <section class="produto-container">
     <h1 th:text="${pagProduto.nome}" class="produto-nome">Nome do Produto</h1>
@@ -58,7 +43,6 @@
         const quantidadeInput = document.getElementById('quantidade');
         const precoUnitarioSpan = document.getElementById('preco-unitario');
         const botaoAdicionar = document.getElementById('botao-adicionar');
-        const carrinhoCount = document.getElementById('carrinho-count');
 
         function atualizarPrecoTotal() {
             const precoUnitario = parseFloat(precoUnitarioSpan.dataset.preco || 0);
@@ -78,20 +62,6 @@
         menosBtn.addEventListener('click', () => modificarQuantidade(-1));
         maisBtn.addEventListener('click', () => modificarQuantidade(1));
 
-        function obterCarrinho() {
-            return JSON.parse(localStorage.getItem('carrinho')) || [];
-        }
-
-        function salvarCarrinho(carrinho) {
-            localStorage.setItem('carrinho', JSON.stringify(carrinho));
-        }
-
-        function atualizarContadorCarrinho() {
-            const carrinho = obterCarrinho();
-            const total = carrinho.reduce((soma, item) => soma + item.quantidade, 0);
-            carrinhoCount.textContent = total;
-        }
-
         botaoAdicionar.addEventListener('click', () => {
             const nome = document.querySelector('.produto-nome').innerText;
             const preco = parseFloat(precoUnitarioSpan.dataset.preco);
@@ -103,20 +73,23 @@
                 return;
             }
 
-            let carrinho = obterCarrinho();
+            let carrinho = window.obterCarrinho();
             const produtoExistente = carrinho.find(item => item.nome === nome);
 
             produtoExistente ? produtoExistente.quantidade += quantidade : carrinho.push({ nome, preco, img, quantidade });
 
-            salvarCarrinho(carrinho);
-            atualizarContadorCarrinho();
+            window.salvarCarrinho(carrinho);
+            window.atualizarContadorCarrinho();
             alert("Produto adicionado ao carrinho!");
         });
 
         atualizarPrecoTotal();
-        atualizarContadorCarrinho();
+        window.atualizarContadorCarrinho();
     });
 </script>
+
+
+<script th:src="@{/js/header.js}"></script>
 
 </body>
 </html>

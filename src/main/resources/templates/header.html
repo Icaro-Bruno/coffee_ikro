@@ -1,0 +1,18 @@
+<div th:fragment="body" xmlns:th="http://www.thymeleaf.org">
+    <header class="cabecalho">
+        <button id="menu-toggle">☰</button>
+
+        <a id="carrinho" href="/carrinho" style="text-decoration: none; color: inherit;">
+            🛒 <span id="carrinho-count">0</span>
+        </a>
+    </header>
+
+    <nav id="menu" class="hidden">
+        <div class="menu-content">
+            <ul>
+                <li><a href="#">Pedir Via Whatsapp</a></li>
+                <li><a href="#">Promoções</a></li>
+            </ul>
+        </div>
+    </nav>
+</div>

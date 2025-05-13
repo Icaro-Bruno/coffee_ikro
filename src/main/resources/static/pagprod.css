@@ -8,96 +8,10 @@ body {
     box-sizing: border-box;
 }
 
-header {
-    position: relative;
-    width: 100%;
-    background-color: #fff8f0;
-    padding: 60px 27px;
-    border-bottom: 1px solid #eee;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.09);
-    top: 0;
-    z-index: 10;
-    box-sizing: border-box;
-    display: flex;
-    align-items: center; /* Centraliza verticalmente */
-    justify-content: space-between; /* Espaça o menu e o carrinho */
-}
-
-#carrinho {
-    font-size: 3em;
-    cursor: pointer;
-    margin-left:auto;
-}
-
-#menu-toggle {
-    font-size: 3em;
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: #333;
-    position: relative;
-}
-
-/* Menu lateral */
-#menu {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 350px;
-    height: 100%;
-    background: linear-gradient(180deg, #FF5722 0%, #FF8A65 100%);
-    box-shadow: 4px 0 15px rgba(0, 0, 0, 0.2);
-    padding: 40px 20px;
-    transform: translateX(-100%);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    z-index: 999;
-    overflow-y: auto;
-    color: white;
-}
-
-#menu.show {
-    transform: translateX(0);
-}
-
-#menu ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-#menu ul li {
-    margin-bottom: 25px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-    padding-bottom: 10px;
-}
-
-#menu ul li a {
-    text-decoration: none;
-    color: white;
-    font-size: 1.6rem;
-    font-weight: 600;
-    font-family: 'Merienda', cursive;
-    display: block;
-    transition: color 0.3s ease, transform 0.2s;
-}
-
-#menu ul li a:hover {
-    color: #fffde7;
-    transform: translateX(5px);
-}
-
-.menu-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
-    padding-top: 60px; /* espaçamento no topo */
-}
-
 .produto-container {
     display: flex;
-    flex-direction: row;
-    align-items: flex-start; /* alinha no topo */
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
     flex-wrap: wrap; /* permite adaptação em telas pequenas */
     gap: 24px;

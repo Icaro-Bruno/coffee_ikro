@@ -4,27 +4,13 @@
     <meta charset="UTF-8">
     <title>Cardápio</title>
     <link rel="stylesheet" th:href="@{/cardapio.css}">
+    <link rel="stylesheet" th:href="@{/header.css}">
     <link href="https://fonts.googleapis.com/css2?family=Merienda:wght@300..900&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-<header>
-    <button id="menu-toggle">☰</button>
-
-    <div id="carrinho">
-        &#x1F6D2; <span id="carrinho-count">0</span>
-    </div>
-</header>
-
-<nav id="menu" class="hidden">
-    <div class="menu-content">
-        <ul>
-            <li><a href="#">Pedir Via Whatsapp</a></li>
-            <li><a href="#">Promoções</a></li>
-        </ul>
-    </div>
-</nav>
+<div th:replace="header :: body"></div>
 
 <h1>Nosso Cardápio</h1>
 
@@ -52,24 +38,6 @@
         <!--@{} é a referente a rota, porém o ${} busca a var/dados do back-->
     </div>
 </div>
-
-<!--MENU-->
-<script>
-    const toggle = document.getElementById('menu-toggle');
-    const menu = document.getElementById('menu');
-
-    toggle.addEventListener('click', (event) => {
-        event.stopPropagation();
-        menu.classList.toggle('show');
-    });
-
-    document.addEventListener('click', (event) => {
-        if (!menu.contains(event.target) && !toggle.contains(event.target)) {
-            menu.classList.remove('show');
-        }
-    });
-</script>
-
 
 <!--CARRINHO-->
 <!--<script>
@@ -109,6 +77,8 @@
         });
     });
 </script>
+
+<script th:src="@{/js/header.js}"></script>
 
 </body>
 </html>
