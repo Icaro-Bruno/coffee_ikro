@@ -8,7 +8,7 @@ body {
 .header {
      width: 100%;
      background-color: #fff8f0;
-     padding: 12px 16px;
+     padding: 10px 16px;
      display: flex;
      justify-content: space-between;
      align-items: center;
@@ -21,7 +21,7 @@ body {
  }
 
 .logo {
-    height: 94px; /* aumentei a logo */
+    height: 94px;
     max-height: 25vh;
     object-fit: contain;
 }
@@ -29,7 +29,7 @@ body {
 .icon {
     height: 28px;
     width: 28px;
-    margin-right: 4px; /* evita que encoste na borda */
+    margin-right: 12px;
     opacity: 0.85;
     transition: 0.2s ease;
 }
@@ -39,9 +39,6 @@ body {
     transform: scale(1.1);
 }
 
-
-
-/* Ajusta o espaçamento do título abaixo do header */
 h2 {
     margin-top: 24px;
     margin-bottom: 16px;
@@ -50,7 +47,6 @@ h2 {
     color: #000000;
     font-family: 'Merienda', cursive;
 }
-
 
 .container {
     padding: 16px;
