@@ -22,7 +22,7 @@ header {
     position: relative;
 }
 
-#menu.show ~ #menu-toggle {
+#menu.menu-aberto ~ #menu-toggle {
     display: none;
 }
 
@@ -42,7 +42,7 @@ header {
     color: white;
 }
 
-#menu.show {
+#menu.menu-aberto {
     transform: translateX(0);
 }
 
@@ -86,3 +86,8 @@ header {
     cursor: pointer;
     margin-left: auto;
 }
+
+/*
+.hidden {
+    display: none !important;
+}*/

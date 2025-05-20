@@ -1,7 +1,9 @@
 package com.restaurante.restaurante.ThymealeafController;
 
+import com.restaurante.restaurante.dto.PedidoResponse;
 import com.restaurante.restaurante.dto.ProdutoResponse;
 import com.restaurante.restaurante.dto.PromocaoResponse;
+import com.restaurante.restaurante.service.PedidoService;
 import com.restaurante.restaurante.service.ProdutoService;
 import com.restaurante.restaurante.service.PromocaoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,9 @@ public class ExibirPag {
 
     @Autowired
     private ProdutoService produtoService;
+
+    @Autowired
+    private PedidoService pedidoService;
 
     @GetMapping("/")
     public String home(Model model){
@@ -41,5 +46,10 @@ public class ExibirPag {
         ProdutoResponse paginaProd = produtoService.buscarPorId(id);
         model.addAttribute("pagProduto", paginaProd);
         return "pagprod";
+    }
+
+    @GetMapping("/carrinho")
+    public String verCarrinho() {
+        return "carrinho";
     }
 }

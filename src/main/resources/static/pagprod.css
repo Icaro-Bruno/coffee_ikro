@@ -1,4 +1,3 @@
-/* Base */
 body {
     margin: 0;
     padding: 0;
@@ -13,7 +12,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    flex-wrap: wrap; /* permite adaptação em telas pequenas */
+    flex-wrap: wrap;
     gap: 24px;
     padding: 24px 16px;
     text-align: left;
@@ -25,13 +24,13 @@ body {
     font-weight: bold;
     color: #000;
     padding-top: 30px;
-    padding-bottom:20px;
+    padding-bottom: 20px;
 }
 
 .produto-img {
     width: 100%;
     max-width: 700px;
-    max-height: 600px; /* limite de altura */
+    max-height: 600px;
     aspect-ratio: 1 / 1;
     object-fit: cover;
     border-radius: 18px;
@@ -39,7 +38,6 @@ body {
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
     margin-bottom: 24px;
 }
-
 
 .produto-descricao {
     padding: 0 16px;
@@ -125,4 +123,84 @@ body {
 
 .botao-adicionar:hover {
     background-color: #d84315;
+}
+
+.popup-escond {
+    display: none !important;
+}
+
+#adicionado {
+    background-color: #28a745;
+    color: white;
+    border-radius: 8px;
+    padding: 10px 20px;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+#adicionado.show {
+    opacity: 1;
+}
+
+/* ===== POPUP CORRIGIDO ===== */
+#popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 900;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.3); /* fundo escuro transparente opcional */
+}
+
+#popup-carrinho {
+    background: #fff;
+    padding: 40px 50px;
+    border-radius: 12px;
+    text-align: center;
+    max-width: 600px;
+    width: 95%;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+    z-index: 1000;
+}
+
+#popup-msg {
+    margin-bottom: 30px;
+    font-size: 1.6rem;
+    color: #333;
+}
+
+.popup-botoes {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn-carrinho,
+.btn-continuar {
+    padding: 14px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.btn-carrinho {
+    background-color: #28a745;
+    color: #fff;
+}
+
+.btn-continuar {
+    background-color: #f0f0f0;
+    color: #333;
 }
