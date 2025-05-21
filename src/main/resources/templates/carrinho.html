@@ -1,129 +1,345 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>Meu Carrinho</title>
-  <link rel="stylesheet" href="/pagprod.css">
-  <style>
-    main {
-        padding: 20px;
-        max-width: 800px;
-        margin: auto;
-    }
+    <meta charset="UTF-8">
+    <title>Meu Carrinho</title>
+    <link rel="stylesheet" href="/pagprod.css">
+    <link href="https://fonts.googleapis.com/css2?family=Merienda:wght@300..900&display=swap" rel="stylesheet">
+    <style>
+        body {
+          background-color: #fff7ee;
+          margin: 0;
+          font-family: 'Roboto', sans-serif;
+        }
 
-    h1 {
-        text-align: center;
-        font-family: 'Merienda', cursive;
-        font-size: 3rem;
-        margin-bottom: 20px;
-    }
+        main {
+          padding: 16px 12px;
+          max-width: 480px;
+          margin: auto;
+        }
 
-    .item-carrinho {
-        display: flex;
-        align-items: center;
-        margin-bottom: 20px;
-        background: #fff8f0;
-        border-radius: 12px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        padding: 16px;
-        gap: 20px;
-    }
+        h1 {
+          text-align: center;
+          font-family: 'Merienda', cursive;
+          font-size: 3.5rem;
+          margin-bottom: 20px;
+        }
 
-    .item-carrinho img {
-        width: 90px;
-        height: 90px;
-        object-fit: cover;
-        border-radius: 10px;
-    }
+        .item-carrinho {
+          display: flex;
+          align-items: center;
+          background: #ffffff;
+          border-radius: 12px;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+          padding: 12px;
+          gap: 12px;
+          margin-bottom: 12px;
+        }
 
-    .item-info {
-        flex-grow: 1;
-    }
+        .item-carrinho img {
+          width: 64px;
+          height: 64px;
+          object-fit: cover;
+          border-radius: 8px;
+          border: 1px solid #ddd;
+        }
 
-    .item-info h2 {
-        font-size: 1.6rem;
-        margin: 0 0 8px;
-    }
+        .item-info {
+          flex-grow: 1;
+        }
 
-    .item-info p {
-        margin: 4px 0;
-        font-size: 1.4rem;
-    }
+        .item-info h2 {
+          font-size: 1.1rem;
+          margin-bottom: 4px;
+          color: #333;
+          font-weight: 600;
+        }
 
-    .total {
-        font-size: 2rem;
-        font-weight: bold;
-        text-align: center;
-        margin-top: 30px;
-    }
+        .item-info p {
+          margin: 2px 0;
+          font-size: 0.95rem;
+          color: #666;
+        }
 
-    .botao-limpar {
-        display: block;
-        margin: 30px auto 0;
-        padding: 12px 24px;
-        font-size: 1.6rem;
-        background-color: #FF5722;
-        color: white;
-        border: none;
-        border-radius: 10px;
-        cursor: pointer;
-    }
-  </style>
+        .quantidade-controle {
+          display: flex;
+          gap: 4px;
+          align-items: center;
+          margin-top: 6px;
+        }
+
+        .quantidade-controle button {
+          padding: 4px 8px;
+          font-size: 1rem;
+          border: none;
+          border-radius: 5px;
+          background-color: #ff5722;
+          color: white;
+          cursor: pointer;
+        }
+
+        .quantidade-controle button:disabled {
+          background-color: #ccc;
+          cursor: not-allowed;
+        }
+
+        .total {
+          font-size: 1rem; /* Reduzido */
+          font-weight: 550;
+          text-align: center;
+          margin-top: 18px;
+          color: #000;
+        }
+
+        .botao-finalizar {
+          display: block;
+          margin: 16px auto 0;
+          padding: 10px 18px;
+          font-size: 1rem;
+          background-color: #FF5722;
+          color: white;
+          border: none;
+          border-radius: 6px;
+          cursor: pointer;
+          font-weight: 600;
+        }
+
+        .botao-finalizar:hover {
+          background-color: #d84315;
+        }
+
+        #form-cliente-overlay {
+          display: none;
+          position: fixed;
+          top: 0; left: 0; right: 0; bottom: 0;
+          background: rgba(0, 0, 0, 0.6);
+          overflow-y: auto;
+          z-index: 999;
+          padding: 20px 0;
+        }
+
+        #form-cliente-popup {
+          position: relative;
+          margin: auto;
+          background: white;
+          padding: 16px;
+          border-radius: 10px;
+          width: 92%;
+          max-width: 300px;
+          box-shadow: 0 0 12px rgba(0,0,0,0.2);
+        }
+
+        #form-cliente-popup h2 {
+          margin-top: 0;
+          text-align: center;
+          font-size: 1.1rem;
+        }
+
+        #form-cliente-popup input {
+          width: 100%;
+          margin-bottom: 10px;
+          padding: 6px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          font-size: 0.85rem;
+        }
+
+        #form-cliente-popup button:not(.fechar-popup) {
+          width: 100%;
+          padding: 8px;
+          background-color: #28a745;
+          color: white;
+          border: none;
+          border-radius: 5px;
+          font-size: 0.9rem;
+          cursor: pointer;
+        }
+
+        #form-cliente-popup button:not(.fechar-popup):hover {
+          background-color: #218838;
+        }
+
+        .fechar-popup {
+          position: absolute;
+          top: 6px;
+          right: 8px;
+          font-size: 16px;
+          background: none;
+          border: none;
+          color: #333;
+          cursor: pointer;
+        }
+
+        .fechar-popup:hover {
+          color: #000;
+        }
+    </style>
 </head>
 <body>
 <main>
-  <h1>Seu Carrinho</h1>
+    <h1>Seu Carrinho</h1>
 
-  <div id="lista-carrinho">
-    <!-- Itens do carrinho serão injetados aqui -->
-  </div>
-
-  <p class="total" id="total-geral">Total: R$ 0,00</p>
-  <button class="botao-limpar" onclick="limparCarrinho()">Limpar Carrinho</button>
+    <div id="lista-carrinho"></div>
+    <p class="total" id="total-geral">Total: R$ 0,00</p>
+    <button class="botao-finalizar" onclick="finalizarCompra()">Finalizar Pedido</button>
 </main>
 
-<script>
-  function formatarReal(valor) {
-      return `R$ ${valor.toFixed(2).replace('.', ',')}`;
-  }
+<div id="form-cliente-overlay" onclick="fecharSeClicarFora(event)">
+    <div id="form-cliente-popup">
+        <button class="fechar-popup" onclick="fecharPopup()">×</button>
+        <h2>Dados do Cliente</h2>
+        <input type="text" id="nome-cliente" placeholder="Nome completo">
+        <input type="text" id="telefone-cliente" placeholder="Telefone">
+        <input type="text" id="endereco-cliente" placeholder="Endereço">
+        <button id="btn-enviar" onclick="enviarPedido()">Finalizar Compra</button>
+    </div>
+</div>
 
-  function carregarCarrinho() {
+<script>
+    function formatarReal(valor) {
+      return `R$ ${valor.toFixed(2).replace('.', ',')}`;
+    }
+
+    function carregarCarrinho() {
       const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
       const lista = document.getElementById('lista-carrinho');
       const totalGeral = document.getElementById('total-geral');
 
-      lista.innerHTML = ''; // limpa a lista
+      lista.innerHTML = '';
       let total = 0;
 
-      carrinho.forEach(item => {
-          const subtotal = item.preco * item.quantidade;
-          total += subtotal;
+      if (carrinho.length === 0) {
+        lista.innerHTML = '<p style="text-align:center; font-size:1.3rem;">Seu carrinho está vazio.</p>';
+      }
 
-          const div = document.createElement('div');
-          div.classList.add('item-carrinho');
+      carrinho.forEach((item, index) => {
+        const subtotal = item.preco * item.quantidade;
+        total += subtotal;
 
-          div.innerHTML = `
-              <img src="${item.img}" alt="${item.nome}">
-              <div class="item-info">
-                  <h2>${item.nome}</h2>
-                  <p>Preço: ${formatarReal(item.preco)}</p>
-                  <p>Quantidade: ${item.quantidade}</p>
-                  <p>Subtotal: ${formatarReal(subtotal)}</p>
-              </div>
-          `;
+        const div = document.createElement('div');
+        div.classList.add('item-carrinho');
 
-          lista.appendChild(div);
+        div.innerHTML = `
+          <img src="${item.img}" alt="${item.nome}">
+          <div class="item-info">
+            <h2>${item.nome}</h2>
+            <p>Preço: ${formatarReal(item.preco)}</p>
+            <p>Quantidade: ${item.quantidade}</p>
+            <p>Subtotal: ${formatarReal(subtotal)}</p>
+            <div class="quantidade-controle">
+              <button onclick="alterarQuantidade(${index}, -1)">-</button>
+              <button onclick="alterarQuantidade(${index}, 1)">+</button>
+            </div>
+          </div>
+        `;
+        lista.appendChild(div);
       });
 
       totalGeral.textContent = `Total: ${formatarReal(total)}`;
-  }
+    }
 
-  function limparCarrinho() {
-      localStorage.removeItem('carrinho');
-      carregarCarrinho();
-  }
+    function alterarQuantidade(index, delta) {
+      const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+      if (carrinho[index]) {
+        carrinho[index].quantidade += delta;
+        if (carrinho[index].quantidade <= 0) {
+          carrinho.splice(index, 1);
+        }
+        localStorage.setItem('carrinho', JSON.stringify(carrinho));
+        carregarCarrinho();
+      }
+    }
 
-  document.addEventListener('DOMContentLoaded', carregarCarrinho);
+    function finalizarCompra() {
+      const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+      if (carrinho.length === 0) {
+        alert("Seu carrinho está vazio!");
+        return;
+      }
+
+      const overlay = document.getElementById('form-cliente-overlay');
+      overlay.style.display = 'flex';
+
+      setTimeout(() => {
+        document.getElementById('form-cliente-popup').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 100);
+    }
+
+    function fecharPopup() {
+      document.getElementById('form-cliente-overlay').style.display = 'none';
+    }
+
+    function fecharSeClicarFora(event) {
+      const popup = document.getElementById('form-cliente-popup');
+      if (!popup.contains(event.target)) {
+        fecharPopup();
+      }
+    }
+
+    async function enviarPedido() {
+      const btn = document.getElementById('btn-enviar');
+      btn.disabled = true;
+      btn.textContent = "Enviando...";
+
+      try {
+        const nome = document.getElementById('nome-cliente').value.trim();
+        const telefone = document.getElementById('telefone-cliente').value.trim();
+        const endereco = document.getElementById('endereco-cliente').value.trim();
+
+        if (!nome || !telefone || !endereco) {
+          alert("Preencha todos os dados!");
+          return;
+        }
+
+        if (!/^\d{8,15}$/.test(telefone)) {
+          alert("Telefone inválido.");
+          return;
+        }
+
+        const clienteResponse = await fetch("/api/clientes", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ nome, telefone, endereco })
+        });
+
+        if (!clienteResponse.ok) throw new Error("Erro ao criar cliente.");
+
+        const cliente = await clienteResponse.json();
+        const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+
+        const pedido = {
+          clienteId: cliente.id,
+          itens: carrinho.map(item => ({
+            produtoId: item.id,
+            quantidade: item.quantidade
+          }))
+        };
+
+        const pedidoResponse = await fetch("/api/pedidos/fazer", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(pedido)
+        });
+
+        if (!pedidoResponse.ok) throw new Error("Erro ao fazer o pedido.");
+
+        const resultado = await pedidoResponse.json();
+        alert(`Pedido realizado com sucesso! Nº ${resultado.id}`);
+
+        localStorage.removeItem('carrinho');
+        carregarCarrinho();
+        fecharPopup();
+
+      } catch (error) {
+        console.error(error);
+        alert("Erro ao enviar o pedido. Tente novamente.");
+      } finally {
+        btn.disabled = false;
+        btn.textContent = "Finalizar Pedido";
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', carregarCarrinho);
 </script>
 </body>
 </html>

@@ -112,7 +112,7 @@ body {
     color: white;
     font-family: 'Roboto', sans-serif;
     font-size: 2.2rem;
-    font-weight: 480;
+    font-weight: 500;
     padding: 40px;
     border: none;
     border-radius: 12px;
@@ -163,43 +163,51 @@ body {
 
 #popup-carrinho {
     background: #fff;
-    padding: 40px 50px;
-    border-radius: 12px;
+    padding: 64px 60px;
+    border-radius: 20px;
     text-align: center;
-    max-width: 600px;
-    width: 90%;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
-    z-index: 1000;
+    width: 98%;
+    max-width: 740px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
     box-sizing: border-box;
+    animation: popupFadeIn 0.3s ease;
 }
 
 #popup-msg {
-    margin-bottom: 30px;
-    font-size: 1.6rem;
+    margin-bottom: 36px;
+    font-size: 2.2rem;
     color: #333;
+    line-height: 1.6;
 }
 
 .popup-botoes {
     display: flex;
-    gap: 20px;
-    justify-content: center;
-    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 22px;
 }
 
 .btn-carrinho,
 .btn-continuar {
-    padding: 14px 20px;
+    padding: 29px 28px;
     border: none;
-    border-radius: 6px;
+    border-radius: 12px;
     cursor: pointer;
+    font-weight: 500;
+    font-size: 2.1rem;
+    box-sizing: border-box;
     text-decoration: none;
-    font-weight: bold;
-    font-size: 1.1rem;
+    display: inline-block;
+    width: 100%;
 }
 
 .btn-carrinho {
-    background-color: #28a745;
-    color: #fff;
+    background-color: #FF5722;
+    color: white;
+    box-shadow: 0 4px 12px rgba(255, 87, 34, 0.4);
+}
+
+.btn-carrinho:hover {
+    background-color: #e64a19;
 }
 
 .btn-continuar {
