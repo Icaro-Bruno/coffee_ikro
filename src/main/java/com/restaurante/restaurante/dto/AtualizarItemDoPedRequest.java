@@ -8,5 +8,4 @@ import lombok.Setter;
 public class AtualizarItemDoPedRequest {
     private Long itemId;
     private Integer novaQuant;
-
 }
