@@ -2,6 +2,7 @@
 <html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Cardápio</title>
     <link rel="stylesheet" th:href="@{/cardapio.css}">
     <link rel="stylesheet" th:href="@{/header.css}">
@@ -27,13 +28,14 @@
     <div class="item"
          th:each="produto : ${produtos}"
          th:attr="data-categoria=${#strings.toLowerCase(produto.categoria)}">
-        <div class="item-header">
-            <h3 th:text="${produto.nome}">Nome do Produto</h3>
-            <p id="preco">[[${produto.precoFormatado}]]</p>
-        </div>
-        <img th:src="${produto.imgUrl}" alt="Imagem do Produto" class="banner">
+       <div class="item-conteudo">
+           <div class="item-header">
+               <h3 th:text="${produto.nome}">Nome do Produto</h3>
+               <p id="preco">[[${produto.precoFormatado}]]</p>
+           </div>
+           <img th:src="${produto.imgUrl}" alt="Imagem do Produto" class="banner">
+       </div>
         <!--DESNECESSARIO <p th:text="${produto.descricao}">Descrição</p>-->
-
         <a th:href="@{'/produto/'+${produto.id}}" class="botao">Comprar</a>
         <!--@{} é a referente a rota, porém o ${} busca a var/dados do back-->
     </div>
