@@ -1,17 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:wght@499..500&display=swap');
+
 body {
     width: 100%;
     margin: 0 auto;
     padding: 0;
-    font-family: 'Roboto', sans-serif;
-    background-color: #FFF8F0;
+    font-family: 'Roboto Flex', sans-serif;
+    background-color: #fff8f0;
     box-sizing: border-box;
     overflow-x: hidden;
 }
 
 h1 {
     text-align: center;
-    margin-top: 5px;
-    padding: 15px 10px;
+    padding: 8px 10px;
     color: #000000;
     font-size: 1.7rem;
     font-family: 'Merienda', cursive;
@@ -19,21 +20,31 @@ h1 {
 
 .categorias-filtros {
     display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 7px;
+    gap: 8px;
     padding: 0 10px;
-    margin: 20px 0;
+    margin: 4px 0 10px 0;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    justify-content: center;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+}
+
+.categorias-filtros::-webkit-scrollbar {
+    display: none;
 }
 
 .categoria-botao {
     background-color: #FF5722;
     color: white;
     border: none;
-    padding: 8px 13px;
+    padding: 8px 11px;
     border-radius: 28px;
-    font-size: 1rem;
+    font-size: 0.9rem;
+    font-weight: 510;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
     cursor: pointer;
+    white-space: nowrap;
     transition: background-color 0.3s ease;
 }
 
@@ -48,7 +59,6 @@ h1 {
     padding: 10px;
     width: 100%;
     max-width: 1200px;
-    max-height:300px;
     margin: 0 auto;
     box-sizing: border-box;
 }
@@ -64,17 +74,17 @@ h1 {
     align-items: center;
     box-sizing: border-box;
     width: 100%;
-    min-height: 240px;
+    min-height: 200px;
     overflow: hidden;
     position: relative;
     margin-bottom: 8px;
 }
 
 .item-conteudo {
-    width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 25px;
+    gap: 5px; /* isso cria espaçamentos suaves entre os elementos */
+    width: 100%;
     flex-grow: 1;
 }
 
@@ -83,26 +93,32 @@ h1 {
     height: 130px;
     object-fit: cover;
     border-radius: 8px;
+    margin-bottom: 0;
+    margin: 0;
+    padding: 0;
+    display: block;
 }
 
 .banner {
-    padding-bottom: 0%;
-    margin-bottom: 0%;
+    padding-bottom: 0;
+    margin-bottom: 0;
+    display: block;
 }
 
 .item-header {
     display: flex;
     justify-content: space-between;
     width: 100%;
-    margin-bottom: 0px;
+    margin: 0;
 }
 
 .item-header h3,
 #preco {
     font-size: 0.8rem;
-    font-weight: 549.9;
+    font-weight: 510;
     color: #000;
     margin: 0;
+    padding: 0;
 }
 
 #preco {
@@ -112,13 +128,15 @@ h1 {
 .botao {
     width: calc(100% + 20px);
     margin: auto -10px 0 -10px;
-    height: 45px;
-    font-size: 1rem;
+    height: 43px;
+    font-size: 0.9rem;
     background-color: #FF5722;
     color: white;
     border: none;
     border-radius: 0 0 12px 12px;
-    font-weight: 550;
+    font-weight: 545;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+    letter-spacing: 1px;
     cursor: pointer;
     text-align: center;
     text-decoration: none;
