@@ -2,6 +2,7 @@
 <html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Página Do Produto</title>
     <link rel="stylesheet" th:href="@{/pagprod.css}">
     <link rel="stylesheet" th:href="@{/header.css}">
@@ -11,40 +12,42 @@
 
 <div th:replace="header :: body"></div>
 
-<section class="produto-container">
-    <h1 th:text="${pagProduto.nome}" class="produto-nome">Nome do Produto</h1>
-    <img th:src="${pagProduto.imgUrl}" alt="Imagem do Produto" class="produto-img">
-    <span id="preco-unitario" th:data-preco="${pagProduto.preco}" style="display:none;"></span>
-</section>
+<div id="bodysemfrag">
+    <section class="produto-container">
+        <h1 th:text="${pagProduto.nome}" class="produto-nome">Nome do Produto</h1>
+        <img th:src="${pagProduto.imgUrl}" alt="Imagem do Produto" class="produto-img">
+        <span id="preco-unitario" th:data-preco="${pagProduto.preco}" style="display:none;"></span>
+    </section>
 
-<main class="produto-descricao">
-    <h2>Descrição</h2>
-    <p th:text="${pagProduto.descricao}">Descricao</p>
-</main>
+    <main class="produto-descricao">
+        <h2>Descrição</h2>
+        <p th:text="${pagProduto.descricao}">Descricao</p>
+    </main>
 
-<footer class="produto-footer-fixo">
-    <div class="controle-quantidade">
-        <button id="menos" type="button">-</button>
-        <input type="text" id="quantidade" value="1" readonly>
-        <button id="mais" type="button">+</button>
-    </div>
-    <button id="botao-adicionar"
-            type="button"
-            class="botao-adicionar"
-            th:attr="data-produto-id=${pagProduto.id}">
-        R$ 0,00 | Adicionar ao carrinho
-    </button>
-</footer>
+    <footer class="produto-footer-fixo">
+        <div class="controle-quantidade">
+            <button id="menos" type="button">-</button>
+            <input type="text" id="quantidade" value="1" readonly>
+            <button id="mais" type="button">+</button>
+        </div>
+        <button id="botao-adicionar"
+                type="button"
+                class="botao-adicionar"
+                th:attr="data-produto-id=${pagProduto.id}">
+            R$ 0,00 | Adicionar ao carrinho
+        </button>
+    </footer>
 
-<div id="adicionado" class="add hidden">Produto adicionado ao carrinho!</div>
+    <div id="adicionado" class="add hidden">Produto adicionado ao carrinho!</div>
 
-<div id="popup-overlay" class="popup-escond">
-    <div id="popup-carrinho">
-        <p id="popup-msg"></p>
-        <div class="popup-botoes">
-            <a href="/carrinho" class="btn-carrinho" type="button">Ir para o carrinho</a>
-            <button id="continuar-comprando" type="button" class="btn-continuar">
-                Continuar comprando</button>
+    <div id="popup-overlay" class="popup-escond">
+        <div id="popup-carrinho">
+            <p id="popup-msg"></p>
+            <div class="popup-botoes">
+                <a href="/carrinho" class="btn-carrinho" type="button">Ir para o carrinho</a>
+                <button id="continuar-comprando" type="button" class="btn-continuar">
+                    Continuar comprando</button>
+            </div>
         </div>
     </div>
 </div>
