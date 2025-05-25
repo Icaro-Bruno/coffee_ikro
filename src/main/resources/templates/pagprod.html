@@ -98,7 +98,7 @@
         window.salvarCarrinho(carrinho);
         window.atualizarContadorCarrinho();
 
-        msgPopup.innerText = `✅ ${quantidade}× ${nome} adicionado ao carrinho!`;
+       msgPopup.innerHTML = `<span class="popup-texto">✅ ${quantidade}× ${nome} adicionado ao carrinho!</span>`;
        overlay.classList.remove('popup-escond');
       });
 
