@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Promoções</title>
     <link rel="stylesheet" th:href="@{/style.css}">
     <link href="https://fonts.googleapis.com/css2?family=Merienda:wght@300..900&display=swap" rel="stylesheet">
@@ -18,11 +19,25 @@
 
 <div class="container">
     <div class="promocao" th:each="promo : ${promocoes}">
-        <h2 th:text="${promo.titulo}">Promoção</h2>
+        <h1 th:text="${promo.titulo}">Promoção</h1>
         <img th:src="${promo.imgUrl}" alt="Promoção" class="banner">
         <a href="/cardapio" class="button">Ver Cardápio</a>
     </div>
 </div>
+
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-info">
+            <p>&copy; 2025 - Direitos e normas reservadas.</p>
+            <p>Contato: <a href="mailto:contato@seudominio.com" id="email">ikrobr.dev@gmail.com</a></p>
+        </div>
+        <div class="footer-links">
+            <a href="/sobre">Sobre nós</a>
+            <a href="/privacidade">Política de Privacidade</a>
+            <a href="/termos">Termos de Uso</a>
+        </div>
+    </div>
+</footer>
 
 </body>
 </html>
