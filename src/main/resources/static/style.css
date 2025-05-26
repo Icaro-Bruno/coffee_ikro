@@ -1,14 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:wght@499..500&display=swap');
+
 body {
     margin: 0;
     padding: 0;
     background: #fff8f0;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto Flex', sans-serif;
 }
 
 .header {
      width: 100%;
      background-color: #fff8f0;
-     padding: 10px 16px;
+     padding: 2px 16px;
      display: flex;
      justify-content: space-between;
      align-items: center;
@@ -21,15 +23,15 @@ body {
  }
 
 .logo {
-    height: 94px;
+    height: 80px;
     max-height: 25vh;
     object-fit: contain;
 }
 
 .icon {
-    height: 28px;
-    width: 28px;
-    margin-right: 12px;
+    height: 24px;
+    width: 24px;
+    margin-right: 22px;
     opacity: 0.85;
     transition: 0.2s ease;
 }
@@ -39,17 +41,17 @@ body {
     transform: scale(1.1);
 }
 
-h2 {
+h1 {
     margin-top: 24px;
     margin-bottom: 16px;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     text-align: center;
     color: #000000;
     font-family: 'Merienda', cursive;
 }
 
 .container {
-    padding: 16px;
+    padding: 0 30px;
     max-width: 480px;
     margin: 0 auto;
 }
@@ -62,17 +64,15 @@ h2 {
     margin-bottom: 48px;
 }
 
-
-
 .banner {
     width: 100%;
     max-width: 100%;
     height: auto;
-    max-height: 360px; /* controla o tamanho vertical */
-    object-fit: cover; /* recorta para manter a imagem "cheia" */
+    max-height: 360px;
+    object-fit: cover;
     border-radius: 16px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    margin-bottom: 25px;
+    margin-bottom: 15px;
 }
 
 
@@ -83,7 +83,8 @@ h2 {
     background-color: #ff5722;
     color: white;
     font-size: 1.2rem;
-    font-weight: 450;
+    font-weight: 300;
+    letter-spacing: 1px;
     border: none;
     border-radius: 8px;
     text-align: center;
@@ -93,4 +94,65 @@ h2 {
 
 .button:hover {
     background-color: #e64a19;
+}
+
+.footer {
+    background-color:  #fff8f0;
+    padding: 0px 24px;
+    border-top: 2px solid #ddd;
+    font-size: 10px;
+    color: #333;
+    display: flex;
+    margin-top: -20px;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+#email{
+    color: #e66a48;
+}
+
+.footer-links {
+    display: flex;
+    gap: 12px;
+    color: #e66a48;
+
+}
+
+.footer-links a {
+    text-decoration: none;
+    font-weight: 550;
+    color: #e66a48;
+}
+
+@media (min-width: 390px) and (max-width: 480px) {
+    .logo {
+     height: 94px;
+     max-height: 25vh;
+     }
+
+    .icon {
+     height: 28px;
+     width: 28px;
+     margin-right: 25px;
+     }
+
+    h1 {
+        font-size: 1.4rem;
+    }
+
+    button{
+         padding: 24px 0;
+    }
+
+    .footer {
+        font-size: 13px;
+    }
+
 }
