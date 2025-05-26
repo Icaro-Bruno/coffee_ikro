@@ -13,31 +13,35 @@
 
 <div th:replace="header :: body"></div>
 
-<h1>Nosso Cardápio</h1>
+<div id="bodysemfrag">
+    <section class="topobody">
+        <h1>Nosso Cardápio</h1>
 
-<div class="categorias-filtros">
-    <button class="categoria-botao" data-categoria="todos">Todos</button>
-    <button class="categoria-botao" data-categoria="comidas">Comidas</button>
-    <button class="categoria-botao" data-categoria="bebidas">Bebidas</button>
-    <button class="categoria-botao" data-categoria="sobremesas">Sobremesas</button>
-</div>
+        <div class="categorias-filtros">
+            <button class="categoria-botao" data-categoria="todos">Todos</button>
+            <button class="categoria-botao" data-categoria="comidas">Comidas</button>
+            <button class="categoria-botao" data-categoria="bebidas">Bebidas</button>
+            <button class="categoria-botao" data-categoria="sobremesas">Sobremesas</button>
+        </div>
+    </section>
 
-<div class="cardapio-container">
-    <div class="item"
-         th:each="produto : ${produtos}"
-         th:attr="data-categoria=${#strings.toLowerCase(produto.categoria)}">
+    <div class="cardapio-container">
+        <div class="item"
+             th:each="produto : ${produtos}"
+             th:attr="data-categoria=${#strings.toLowerCase(produto.categoria)}">
 
-        <div class="item-conteudo">
-            <div class="item-header">
-                <h3 th:text="${produto.nome}">Nome do Produto</h3>
-                <p id="preco">[[${produto.precoFormatado}]]</p>
+            <div class="item-conteudo">
+                <div class="item-header">
+                    <h3 th:text="${produto.nome}">Nome do Produto</h3>
+                    <p id="preco">[[${produto.precoFormatado}]]</p>
+                </div>
+
+                <img th:src="${produto.imgUrl}" alt="Imagem do Produto" class="banner">
+
+                <a th:href="@{'/produto/'+${produto.id}}" class="botao">Comprar</a>
             </div>
 
-            <img th:src="${produto.imgUrl}" alt="Imagem do Produto" class="banner">
-
-            <a th:href="@{'/produto/'+${produto.id}}" class="botao">Comprar</a>
         </div>
-
     </div>
 </div>
 

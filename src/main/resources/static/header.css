@@ -95,14 +95,14 @@ header {
     background-color: #FF5722;
     color: white;
     border-radius: 50%;
-    width: 18px;
-    height: 18px;
+    width: 20px;
+    height: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
     position: absolute;
-    top: -5px; /* Eleva o contador levemente */
-    right: -5px; /* Ajusta para ficar no canto superior direito */
+    top: -5px;
+    right: -5px;
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
 }
 
