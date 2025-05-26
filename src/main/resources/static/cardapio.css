@@ -77,7 +77,7 @@ h1 {
     background-color: #fffbf8;
     border-radius: 12px;
     border: 1px solid #f3f3f3;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     padding: 8px 8px 0 8px;
     display: flex;
     flex-direction: column;
@@ -160,6 +160,37 @@ h1 {
 
 .botao:hover {
     background-color: #e64a19;
+}
+
+@media (min-width: 390px) and (max-width: 480px) {
+    .topobody {
+        padding: 0 20px;
+    }
+
+    .cardapio-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+    .categoria-botao {
+        font-size: 0.9rem;
+        padding: 12px 12px;
+    }
+
+    .item-header h3,
+    #preco {
+        font-size: 0.8rem;
+        font-weight:450;
+    }
+
+    .botao {
+        font-size: 0.95rem;
+        height: 46px;
+    }
+
+    h1 {
+        font-size: 1.6rem;
+    }
 }
 
 @media (min-width: 768px) {
