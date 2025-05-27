@@ -62,12 +62,12 @@ html, body {
 .produto-descricao h2 {
     font-size: 1rem;
     font-weight: 550;
-    color: #333;
+    color: #222;
     margin-bottom: 1px;
 }
 
 .produto-descricao p {
-    font-size: 1rem;
+    font-size: 0.9rem;
     color: #333;
     line-height: 1.1;
     hyphens: auto;
@@ -111,7 +111,7 @@ html, body {
 }
 
 #menos {
-    font-size: 1.6rem;
+    font-size: 1.7rem;
 }
 
 #quantidade {
@@ -242,8 +242,16 @@ html, body {
 
 
 @media (max-width: 380px) {
+    .produto-descricao h2 {
+        font-size: 0.97rem;
+    }
+
+    .produto-descricao p {
+        font-size: 1.080rem;
+    }
+
     .botao-adicionar {
-        font-size: 1rem;
+        font-size: 1.050rem;
         padding: 16px;
     }
 
