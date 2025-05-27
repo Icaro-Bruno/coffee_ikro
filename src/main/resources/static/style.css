@@ -23,14 +23,14 @@ body {
  }
 
 .logo {
-    height: 80px;
-    max-height: 25vh;
+    height: 95px;
+    max-height: 28vh;
     object-fit: contain;
 }
 
 .icon {
-    height: 24px;
-    width: 24px;
+    height: 28px;
+    width: 28px;
     margin-right: 22px;
     opacity: 0.85;
     transition: 0.2s ease;
@@ -42,7 +42,7 @@ body {
 }
 
 h1 {
-    font-size: 1.3rem;
+    font-size: 1.35rem;
     margin-top: 3px;
     margin-bottom: 20px;
     font-family: 'Merienda', cursive;
@@ -72,7 +72,7 @@ h1 {
 
 .button {
     width: 85%;
-    max-width: 280px;
+    max-width: 320px;
     padding: 14px 0;
     background-color: #ff5722;
     color: white;
@@ -126,7 +126,7 @@ h1 {
     color: #e66a48;
 }
 
-@media (min-width: 390px) and (max-width: 480px) {
+@media (min-width: 380px) and (max-width: 480px) {
     .logo {
      height: 94px;
      max-height: 25vh;
