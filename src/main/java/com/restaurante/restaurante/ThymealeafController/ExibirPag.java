@@ -33,6 +33,21 @@ public class ExibirPag {
         return "index";
     }
 
+    @GetMapping("/sobre")
+    public String sobreNos(){
+        return "sobrenos";
+    }
+
+    @GetMapping("/politica")
+    public String politicaPriv(){
+        return "politica";
+    }
+
+    @GetMapping("/termos")
+    public String termosUso(){
+        return "termos";
+    }
+
     @GetMapping("/cardapio")
     public String mostrarCardapio(Model model){
         List<ProdutoResponse> produtos = produtoService.listarTodos();
