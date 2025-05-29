@@ -1,0 +1,260 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:wght@499..500&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #fff8f0;
+    font-family: 'Roboto Flex', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff8f0;
+    border-radius: 16px;
+    max-width: 500px;
+    width: 100%;
+    padding: 16px 16px 0 16px;
+}
+
+/* Título */
+h1 {
+    font-family: 'Merienda', cursive;
+    font-size: 1.4rem;
+    text-align: center;
+    margin: 20px 0;
+}
+
+/* Itens do carrinho */
+.item-carrinho {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border-radius: 12px;
+    padding: 14px;
+    gap: 16px;
+    margin-bottom: 18px;
+    width: 100%;
+    border: 1px solid #f3f3f3;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    transition: all 0.3s ease;
+}
+
+.item-carrinho:hover {
+    box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+}
+
+.item-carrinho img {
+    width: 85px;
+    height: 85px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+}
+
+.item-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.item-info h2 {
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.item-info p {
+    font-size: 0.85rem;
+}
+
+/* Controle de quantidade */
+.quantidade-controle {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 6px;
+}
+
+.quantidade-controle button {
+    padding: 5px 10px;
+    font-size: 0.85rem;
+    border: none;
+    border-radius: 6px;
+    background-color: #ff5722;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.quantidade-controle button:hover:not(:disabled) {
+    background-color: #e64a19;
+}
+
+.quantidade-controle button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.barra-finalizar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 17px 19px;
+    gap: 10px;
+    height: auto;
+}
+
+.linha-total-finalizar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.1rem;
+    font-weight: 500;
+    padding: 6px 4px;
+}
+
+.total-finalizar {
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.botao-finalizar {
+    width: 100%;
+    padding: 15px 0;
+    font-size: 1.2rem;
+    font-weight: 550;
+    letter-spacing: 1px;
+    text-shadow: 0.8px 0.8px 2px rgba(0, 0, 0, 0.3);
+    background-color: #ff5722;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.botao-finalizar:hover {
+    background-color: #e64a19;
+}
+
+/* Popup */
+#form-cliente-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 999;
+    padding: 20px;
+}
+
+#form-cliente-popup {
+    position: relative;
+    margin: auto;
+    background: #fbf5ed;
+    padding: 20px;
+    border-radius: 12px;
+    max-width: 360px;
+    box-shadow: 0 0 16px rgba(0,0,0,0.15);
+}
+
+#form-cliente-popup h2 {
+    font-size: 1.2rem;
+    text-align: center;
+    color: #3e2723;
+    margin-bottom: 10px;
+}
+
+#form-cliente-popup input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    margin-bottom: 12px;
+}
+
+#form-cliente-popup button {
+    width: 100%;
+    padding: 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+#form-cliente-popup button:hover {
+    background-color: #218838;
+}
+
+.fechar-popup {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    font-size: 22px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: #444;
+}
+
+.fechar-popup:hover {
+    color: #000;
+}
+
+@media (max-width: 390px) {
+    .item-carrinho {
+        flex-direction: row;
+        align-items: flex-start;
+        padding: 10px;
+        gap: 12px;
+    }
+
+    .item-carrinho img {
+        width: 75px;
+        height: 75px;
+    }
+
+    .item-info h2 {
+        font-size: 0.9rem;
+    }
+
+    .item-info p {
+        font-size: 0.8rem;
+    }
+
+    .quantidade-controle button {
+        padding: 4px 8px;
+        font-size: 0.8rem;
+    }
+
+    .botao-finalizar {
+        font-size: 1rem;
+        padding: 14px 0;
+    }
+
+    #form-cliente-popup {
+        width: 95%;
+    }
+}
