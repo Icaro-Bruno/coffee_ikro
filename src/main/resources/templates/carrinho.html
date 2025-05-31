@@ -62,13 +62,16 @@
           <img src="${item.img}" alt="${item.nome}">
           <div class="item-info">
             <h2>${item.nome}</h2>
-            <p>Preço: ${formatarReal(item.preco)}</p>
-            <p>Quantidade: ${item.quantidade}</p>
-            <p>Subtotal: ${formatarReal(subtotal)}</p>
-            <div class="quantidade-controle">
+            <div class="item-detalhes">
+                <p>Preço: ${formatarReal(item.preco)}</p>
+                <p>Subtotal: ${formatarReal(subtotal)}</p>
+            <div>
+           <div class="quantidade-controle">
               <button onclick="alterarQuantidade(${index}, -1)">-</button>
+              <span class="quantidade-num">${item.quantidade}</span>
               <button onclick="alterarQuantidade(${index}, 1)">+</button>
-            </div>
+           </div>
+
           </div>
         `;
         lista.appendChild(div);
