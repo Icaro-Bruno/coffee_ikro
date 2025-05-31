@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:wght@499..500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merienda&display=swap');
 
 * {
     margin: 0;
@@ -13,7 +14,6 @@ body {
     justify-content: center;
     align-items: flex-start;
     min-height: 100vh;
-    padding: 20px;
 }
 
 main {
@@ -21,91 +21,115 @@ main {
     flex-direction: column;
     align-items: center;
     background-color: #fff8f0;
-    border-radius: 16px;
-    max-width: 500px;
+    max-width: 680px;
     width: 100%;
-    padding: 16px 16px 0 16px;
+    padding: 8px 8px 0 8px;
 }
 
 /* Título */
 h1 {
     font-family: 'Merienda', cursive;
-    font-size: 1.4rem;
+    font-size: 1.8rem;
     text-align: center;
-    margin: 20px 0;
+    margin: 25px 0 40px 0;
 }
 
-/* Itens do carrinho */
 .item-carrinho {
     display: flex;
     align-items: center;
     background: #fff;
-    border-radius: 12px;
-    padding: 14px;
-    gap: 16px;
-    margin-bottom: 18px;
+    border-radius: 16px;
+    padding: 18px;
+    gap: 18px;
+    margin-bottom: 5px;
     width: 100%;
-    border: 1px solid #f3f3f3;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    transition: all 0.3s ease;
+    border: none;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    transition: transform 0.2s ease;
 }
 
 .item-carrinho:hover {
-    box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
 
 .item-carrinho img {
-    width: 85px;
-    height: 85px;
+    width: 110px;
+    height: 110px;
     object-fit: cover;
-    border-radius: 10px;
-    border: 1px solid #ddd;
+    border-radius: 12px;
+    border: none;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .item-info {
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    justify-content: space-between;
+    gap: 8px;
 }
 
 .item-info h2 {
-    font-size: 0.95rem;
+    font-size: 1.2rem;
+    font-weight: 550;
+    margin-bottom: 4px;
+}
+
+.item-detalhes {
+    font-size: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.item-preco,
+.item-subtotal {
     font-weight: 500;
 }
 
-.item-info p {
-    font-size: 0.85rem;
-}
-
-/* Controle de quantidade */
 .quantidade-controle {
     display: flex;
-    align-items: center;
-    gap: 6px;
-    margin-top: 6px;
+    align-items: stretch;
+    border-radius: 6px;
+    overflow: hidden;
+    width: fit-content;
 }
 
 .quantidade-controle button {
-    padding: 5px 10px;
-    font-size: 0.85rem;
-    border: none;
-    border-radius: 6px;
+    border: 1px solid #ccc;
+    width: 32px;
     background-color: #ff5722;
-    color: white;
+    color: #fff;
+    font-size: 1.1rem;
     cursor: pointer;
-    transition: 0.3s ease;
+    transition: background-color 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.quantidade-controle button:hover:not(:disabled) {
+.quantidade-controle button:first-child {
+    border-right: 1px solid #ccc;
+}
+
+.quantidade-controle button:hover {
     background-color: #e64a19;
 }
 
-.quantidade-controle button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
+.quantidade-controle span {
+    border: 1px solid #ccc;
+    padding: 6px 12px;
+    min-width: 32px;
+    text-align: center;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
+/* Barra inferior */
 .barra-finalizar {
     position: fixed;
     bottom: 0;
@@ -126,23 +150,23 @@ h1 {
     width: 100%;
     display: flex;
     justify-content: space-between;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     font-weight: 500;
     padding: 6px 4px;
 }
 
 .total-finalizar {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     font-weight: 500;
 }
 
 .botao-finalizar {
     width: 100%;
-    padding: 15px 0;
-    font-size: 1.2rem;
-    font-weight: 550;
+    padding: 16px 0;
+    font-size: 1.3rem;
+    font-weight: 600;
     letter-spacing: 1px;
-    text-shadow: 0.8px 0.8px 2px rgba(0, 0, 0, 0.3);
+    text-shadow: 0.3px 0.3px 1px rgba(0, 0, 0, 0.15);
     background-color: #ff5722;
     color: white;
     border: none;
@@ -173,12 +197,12 @@ h1 {
     background: #fbf5ed;
     padding: 20px;
     border-radius: 12px;
-    max-width: 360px;
+    max-width: 380px;
     box-shadow: 0 0 16px rgba(0,0,0,0.15);
 }
 
 #form-cliente-popup h2 {
-    font-size: 1.2rem;
+    font-size: 1.25rem;
     text-align: center;
     color: #3e2723;
     margin-bottom: 10px;
@@ -223,7 +247,12 @@ h1 {
     color: #000;
 }
 
+/* Responsividade */
 @media (max-width: 390px) {
+    main {
+        max-width: 95%;
+    }
+
     .item-carrinho {
         flex-direction: row;
         align-items: flex-start;
@@ -237,11 +266,11 @@ h1 {
     }
 
     .item-info h2 {
-        font-size: 0.9rem;
+        font-size: 1rem;
     }
 
-    .item-info p {
-        font-size: 0.8rem;
+    .item-detalhes {
+        font-size: 0.85rem;
     }
 
     .quantidade-controle button {
@@ -249,8 +278,12 @@ h1 {
         font-size: 0.8rem;
     }
 
+    .quantidade-controle span {
+        padding: 4px 8px;
+    }
+
     .botao-finalizar {
-        font-size: 1rem;
+        font-size: 1.05rem;
         padding: 14px 0;
     }
 
