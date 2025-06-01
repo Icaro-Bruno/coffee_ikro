@@ -17,13 +17,9 @@ body {
 }
 
 main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #fff8f0;
-    max-width: 680px;
     width: 100%;
-    padding: 8px 8px 0 8px;
+    max-width: 380px;
+    padding: 16px;
 }
 
 /* Título */
@@ -35,98 +31,86 @@ h1 {
 }
 
 .item-carrinho {
-    display: flex;
-    align-items: center;
-    background: #fff;
+    background-color: #fff;
     border-radius: 16px;
     padding: 18px;
-    gap: 18px;
-    margin-bottom: 5px;
+    margin-bottom: 18px;
     width: 100%;
-    border: none;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
-    transition: transform 0.2s ease;
+    max-width: 600px;
+    margin-inline: auto;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.item-carrinho:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+.item-carrinho-conteudo {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
 }
 
-.item-carrinho img {
-    width: 110px;
-    height: 110px;
+.item-imagem {
+    flex-shrink: 0;
+}
+
+.item-imagem img {
+    width: 140px;
+    height: 140px;
     object-fit: cover;
     border-radius: 12px;
-    border: none;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
-.item-info {
+.item-infos {
     flex: 1;
     display: flex;
     flex-direction: column;
+    gap: 10px;
     justify-content: space-between;
-    gap: 8px;
 }
 
-.item-info h2 {
-    font-size: 1.2rem;
-    font-weight: 550;
-    margin-bottom: 4px;
+.item-infos h2 {
+    font-size: 1.080rem;
+    color: #333;
 }
 
-.item-detalhes {
+.item-infos p {
     font-size: 1rem;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
+    color: #555;
 }
 
-.item-preco,
-.item-subtotal {
-    font-weight: 500;
+.linha-preco, .linha-subtotal {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .quantidade-controle {
     display: flex;
-    align-items: stretch;
-    border-radius: 6px;
-    overflow: hidden;
-    width: fit-content;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
 }
 
 .quantidade-controle button {
-    border: 1px solid #ccc;
-    width: 32px;
-    background-color: #ff5722;
-    color: #fff;
+    padding: 6px 12px;
     font-size: 1.1rem;
+    background: #ff5722;
+    border: none;
+    border-radius: 6px;
     cursor: pointer;
-    transition: background-color 0.2s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.quantidade-controle button:first-child {
-    border-right: 1px solid #ccc;
+    transition: background-color 0.2s ease;
 }
 
 .quantidade-controle button:hover {
-    background-color: #e64a19;
+    background: #d6d6d6;
 }
 
-.quantidade-controle span {
-    border: 1px solid #ccc;
-    padding: 6px 12px;
-    min-width: 32px;
+.quantidade-num {
+    min-width: 20px;
     text-align: center;
-    font-weight: 500;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    color: #fff;
 }
 
 /* Barra inferior */
@@ -143,7 +127,6 @@ h1 {
     align-items: center;
     padding: 17px 19px;
     gap: 10px;
-    height: auto;
 }
 
 .linha-total-finalizar {
@@ -152,7 +135,6 @@ h1 {
     justify-content: space-between;
     font-size: 1.2rem;
     font-weight: 500;
-    padding: 6px 4px;
 }
 
 .total-finalizar {
@@ -254,32 +236,37 @@ h1 {
     }
 
     .item-carrinho {
-        flex-direction: row;
+        flex-direction: column;
         align-items: flex-start;
-        padding: 10px;
+        padding: 12px;
         gap: 12px;
     }
 
-    .item-carrinho img {
-        width: 75px;
-        height: 75px;
+    .item-carrinho-conteudo {
+        flex-direction: column;
+        align-items: center;
     }
 
-    .item-info h2 {
+    .item-imagem img {
+        width: 120px;
+        height: 120px;
+    }
+
+    .item-infos h2 {
         font-size: 1rem;
     }
 
-    .item-detalhes {
-        font-size: 0.85rem;
+    .item-infos p {
+        font-size: 0.9rem;
     }
 
     .quantidade-controle button {
         padding: 4px 8px;
-        font-size: 0.8rem;
+        font-size: 0.9rem;
     }
 
-    .quantidade-controle span {
-        padding: 4px 8px;
+    .quantidade-num {
+        font-size: 1rem;
     }
 
     .botao-finalizar {
