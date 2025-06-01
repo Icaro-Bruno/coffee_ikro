@@ -58,22 +58,30 @@
         const div = document.createElement('div');
         div.classList.add('item-carrinho');
 
-        div.innerHTML = `
-          <img src="${item.img}" alt="${item.nome}">
-          <div class="item-info">
-            <h2>${item.nome}</h2>
-            <div class="item-detalhes">
-                <p>Preço: ${formatarReal(item.preco)}</p>
-                <p>Subtotal: ${formatarReal(subtotal)}</p>
-            <div>
-           <div class="quantidade-controle">
-              <button onclick="alterarQuantidade(${index}, -1)">-</button>
-              <span class="quantidade-num">${item.quantidade}</span>
-              <button onclick="alterarQuantidade(${index}, 1)">+</button>
-           </div>
+div.innerHTML = `
+  <div class="item-carrinho-conteudo">
+    <div class="item-imagem">
+      <img src="${item.img}" alt="${item.nome}">
+    </div>
+    <div class="item-infos">
+      <h2>${item.nome}</h2>
+      <div class="linha-preco">
+        <span>Preço:</span>
+        <span>R$ ${item.preco.toFixed(2)}</span>
+      </div>
+      <div class="linha-subtotal">
+        <span>Subtotal:</span>
+        <span>R$ ${(item.preco * item.quantidade).toFixed(2)}</span>
+      </div>
+      <div class="quantidade-controle">
+        <button onclick="alterarQuantidade(${index}, -1)">-</button>
+        <span class="quantidade-num">${item.quantidade}</span>
+        <button onclick="alterarQuantidade(${index}, 1)">+</button>
+      </div>
+    </div>
+  </div>
+`;
 
-          </div>
-        `;
         lista.appendChild(div);
       });
 
