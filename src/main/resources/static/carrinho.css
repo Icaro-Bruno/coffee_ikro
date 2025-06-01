@@ -66,18 +66,18 @@ h1 {
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
     justify-content: space-between;
 }
 
 .item-infos h2 {
-    font-size: 1.080rem;
-    color: #333;
+    text-align:center;
+    font-size: 1rem;
+    font-weight: 560;
 }
 
 .item-infos p {
     font-size: 1rem;
-    color: #555;
 }
 
 .linha-preco, .linha-subtotal {
@@ -87,6 +87,7 @@ h1 {
 }
 
 .quantidade-controle {
+    align-self: center;
     display: flex;
     align-items: center;
     gap: 8px;
@@ -121,7 +122,7 @@ h1 {
     width: 100%;
     background-color: #fff;
     box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.15);
-    z-index: 1000;
+    z-index: 998;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -143,44 +144,56 @@ h1 {
 }
 
 .botao-finalizar {
-    width: 100%;
-    padding: 16px 0;
-    font-size: 1.3rem;
-    font-weight: 600;
-    letter-spacing: 1px;
-    text-shadow: 0.3px 0.3px 1px rgba(0, 0, 0, 0.15);
-    background-color: #ff5722;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    text-align: center;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  padding: 14px 0; /* Reduz um pouco o padding vertical */
+  font-size: 1.2rem; /* Aumenta um pouco o tamanho da fonte */
+  font-weight: 600;
+  letter-spacing: 1.5px; /* Diminui um pouco o espaçamento entre letras */
+  text-shadow: 0.1px 0.2px 1px rgba(0, 0, 0, 0.15);
+  background-color: #ff5722;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Ajuste no box-shadow para ficar mais suave */
 }
 
 .botao-finalizar:hover {
     background-color: #e64a19;
 }
-
-/* Popup */
 #form-cliente-overlay {
     display: none;
     position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(0, 0, 0, 0.6);
+    top: 0;
+    left: 0;
+    /* Usar 100vw e 100vh para cobrir a viewport exatamente */
+    width: 100vw;
+    height: 100vh;
+    /* Consolidar e garantir a cor de fundo semi-transparente */
+    background-color: rgba(0, 0, 0, 0.6);
     z-index: 999;
-    padding: 20px;
+    /* REMOVER PADDING AQUI - o padding deve ser apenas no popup interno */
+    /* padding: 20px; */
+
+    display: flex; /* Ativado via JS */
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(1px); /* Ajuste o valor para a intensidade do borrão */
+    -webkit-backdrop-filter: blur(1px); /* Para compatibilidade com WebKit */
 }
 
 #form-cliente-popup {
     position: relative;
-    margin: auto;
     background: #fbf5ed;
     padding: 20px;
     border-radius: 12px;
     max-width: 380px;
+    width: 90%;
     box-shadow: 0 0 16px rgba(0,0,0,0.15);
+    box-sizing: border-box;
+    padding-top: 40px;
 }
 
 #form-cliente-popup h2 {
@@ -197,6 +210,7 @@ h1 {
     border-radius: 6px;
     font-size: 0.95rem;
     margin-bottom: 12px;
+    box-sizing: border-box;
 }
 
 #form-cliente-popup button {
@@ -208,6 +222,7 @@ h1 {
     border-radius: 6px;
     font-size: 1rem;
     cursor: pointer;
+    box-sizing: border-box; /* Corrigido de 'border-sizing' */
 }
 
 #form-cliente-popup button:hover {
@@ -216,19 +231,22 @@ h1 {
 
 .fechar-popup {
     position: absolute;
-    top: 8px;
-    right: 12px;
-    font-size: 22px;
-    border: none;
-    background: none;
+    top: 10px;
+    right: 10px;
+    font-size: 1.5rem;
     cursor: pointer;
-    color: #444;
+    color: #666;
+    z-index: 1000;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
 }
 
 .fechar-popup:hover {
     color: #000;
+    background-color: rgba(0, 0, 0, 0.1);
 }
-
 /* Responsividade */
 @media (max-width: 390px) {
     main {
