@@ -97,6 +97,7 @@ h1 {
     padding: 6px 12px;
     font-size: 1.1rem;
     background: #ff5722;
+    color: #fff;
     border: none;
     border-radius: 6px;
     cursor: pointer;
@@ -110,7 +111,6 @@ h1 {
 .quantidade-num {
     min-width: 20px;
     text-align: center;
-    color: #fff;
 }
 
 /* Barra inferior */
