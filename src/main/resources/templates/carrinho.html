@@ -107,17 +107,19 @@ div.innerHTML = `
         return;
       }
 
-      const overlay = document.getElementById('form-cliente-overlay');
-      overlay.style.display = 'flex';
+   document.body.classList.add("popup-aberto");
+  const overlay = document.getElementById('form-cliente-overlay');
+  overlay.style.display = 'flex';
 
-      setTimeout(() => {
-        document.getElementById('form-cliente-popup').scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }, 100);
-    }
+  setTimeout(() => {
+    document.getElementById('form-cliente-popup').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }, 100);
+}
 
-    function fecharPopup() {
-      document.getElementById('form-cliente-overlay').style.display = 'none';
-    }
+function fecharPopup() {
+  document.getElementById('form-cliente-overlay').style.display = 'none';
+  document.body.classList.remove("popup-aberto");
+}
 
     function fecharSeClicarFora(event) {
       const popup = document.getElementById('form-cliente-popup');
