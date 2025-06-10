@@ -147,7 +147,7 @@ h1 {
   width: 100%;
   padding: 14px 0; /* Reduz um pouco o padding vertical */
   font-size: 1.2rem; /* Aumenta um pouco o tamanho da fonte */
-  font-weight: 600;
+  font-weight: 540;
   letter-spacing: 1.5px; /* Diminui um pouco o espaçamento entre letras */
   text-shadow: 0.1px 0.2px 1px rgba(0, 0, 0, 0.15);
   background-color: #ff5722;
@@ -269,63 +269,64 @@ h1 {
 }
 
 @media (max-width: 390px) {
-  /* Carrinho: container geral */
-  .item-carrinho {
-    padding: 12px;
-    gap: 10px;
-    width: 100%;
-    max-width: 100%; /* Garante que não ultrapasse a tela */
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  }
+      h1 {
+        font-size: 1.4rem;
+      }
 
-  /* Conteúdo do carrinho ajustado para empilhar */
-  .item-carrinho-conteudo {
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-  }
+      .item-carrinho {
+        padding: 14px;
+      }
 
-  /* Imagem menor para caber melhor */
-  .item-imagem img {
-    width: 90px;
-    height: 90px;
-  }
+      .item-imagem img {
+        width: 130px;
+        height: 130px;
+      }
 
-  /* Textos do produto */
-  .item-infos {
-    gap: 8px;
-    align-items: center; /* Centraliza o conteúdo */
-    text-align: center;
-  }
+      .item-infos h2 {
+        font-size: 0.90rem;
+      }
 
-  .item-infos h2 {
-    font-size: 0.9rem;
-  }
+      .item-infos p {
+        font-size: 0.88rem;
+      }
 
-  .item-infos p {
-    font-size: 0.85rem;
-  }
+       .linha-preco, .linha-subtotal{
+          font-size: 0.88rem;
+       }
 
-  /* Preço/Subtotal em coluna (não lado a lado) */
-  .linha-preco,
-  .linha-subtotal {
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
-  }
+       .linha-total-finalizar {
+           font-size: 0.98rem;
+       }
 
-  /* Controle de quantidade mais compacto */
-  .quantidade-controle {
-    gap: 4px;
-    margin-top: 6px;
-  }
+      .quantidade-controle button {
+        margin-top: -5px;
+        padding: 5px 10px;
+        font-size: 1rem;
+      }
 
-  .quantidade-controle button {
-    font-size: 0.95rem;
-    padding: 5px 9px;
-  }
+      .quantidade-num {
+        font-size: 1rem;
+        margin-top: -5px;
+      }
 
-  .quantidade-num {
-    font-size: 0.95rem;
-  }
-}
+      .botao-finalizar {
+        padding: 12px 0;
+        font-size: 0.90rem;
+        font-weight: 520;
+      }
+
+      #form-cliente-popup h2 {
+        font-size: 1.3rem;
+      }
+
+      #form-cliente-popup input[type="text"] {
+        font-size: 0.95rem;
+        padding: 0.7rem;
+      }
+
+      #btn-enviar {
+        font-size: 1rem;
+        padding: 0.7rem;
+      }
+    }
+
