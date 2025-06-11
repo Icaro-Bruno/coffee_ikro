@@ -20,16 +20,21 @@
         <span>Total:</span>
         <span id="valor-total-finalizar">R$ 0,00</span>
     </div>
-    <button class="botao-finalizar" onclick="finalizarCompra()">Finalizar</button>
+    <!--Mudança no conteudo do botao de "finalizar" pra "encaminhar"-->
+    <button class="botao-finalizar" onclick="finalizarCompra()">Encaminhar Pedido</button>
 </div>
 
 <div id="form-cliente-overlay" onclick="fecharSeClicarFora(event)">
     <div id="form-cliente-popup">
         <button class="fechar-popup" onclick="fecharPopup()">×</button>
-        <h2>Dados do Cliente</h2>
-        <input type="text" id="nome-cliente" placeholder="Nome completo">
-        <input type="text" id="telefone-cliente" placeholder="Telefone">
-        <input type="text" id="endereco-cliente" placeholder="Endereço">
+        <h2>Entrega</h2>
+        <div class="input-popup">
+            <input type="text" id="nome-cliente" placeholder="Nome completo">
+            <input type="text" id="telefone-cliente" placeholder="Telefone">
+            <input type="text" id="endereco-cliente" placeholder="Endereço">
+            <p>Este campo é válido apenas para pagamentos em espécie</p>
+            <input type="text" id="troco-pagamento" placeholder="Troco para quanto">
+        </div>
         <button id="btn-enviar" onclick="enviarPedido()">Finalizar Compra</button>
     </div>
 </div>
@@ -137,6 +142,7 @@ function fecharPopup() {
         const nome = document.getElementById('nome-cliente').value.trim();
         const telefone = document.getElementById('telefone-cliente').value.trim();
         const endereco = document.getElementById('endereco-cliente').value.trim();
+        const troco = document.getElementById('troco-pagamento').value.trim();
 
         if (!nome || !telefone || !endereco) {
           alert("Preencha todos os dados!");
