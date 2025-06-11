@@ -143,13 +143,11 @@ html, body {
     border-radius: 8px;
     width: 100%;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-    transition: all 0.2s ease;
     text-align: center;
 }
 
 .botao-adicionar:hover {
     background: linear-gradient(90deg, #e64a19, #ff5722);
-    transform: translateY(-1px);
 }
 
 #popup-overlay.popup-escond {
