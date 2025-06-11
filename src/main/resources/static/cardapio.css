@@ -1,5 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:wght@499..500&display=swap');
 
+:root{
+    --cor-fundo-itens: #ffece4;
+    --cor-text: #b65736;
+    --cor-botao: #fff8f0;
+}
+
 body {
     width: 100%;
     margin: 0 auto;
@@ -9,10 +15,6 @@ body {
     box-sizing: border-box;
     overflow-x: hidden;
 }
-
-/*#bodysemfrag{
-    padding: 2px;
-}*/
 
 .topobody{
      max-width: 800px;
@@ -32,7 +34,7 @@ h1 {
     display: flex;
     gap: 7px;
     padding: 0 12px 4px 12px;
-    margin: 10px auto 10px auto;
+    margin: 10px auto 15px auto;
     flex-wrap: nowrap;
     overflow-x: auto;
     justify-content:center;
@@ -45,9 +47,9 @@ h1 {
 }
 
 .categoria-botao {
-    background-color: #ffece4;
-    color: #b65736;
-    border: 1.5px solid #e06b43;
+    background-color: var(--cor-text);
+    color: var(--cor-botao);
+    border: 0.5px solid #e06b43;
     padding: 8px 10px;
     border-radius: 12px;
     font-size: 0.75rem;
@@ -65,7 +67,7 @@ h1 {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 8px;
-    padding: 5px;
+    padding: 8px;
     width: 100%;
     max-width: 100%;
     margin: 0;
@@ -74,7 +76,7 @@ h1 {
 }
 
 .item {
-    background-color: #ffece4;
+    background-color: var(--cor-fundo-itens);
     border: 1px solid #e2cfc8;
     border-radius: 10px;
     box-shadow: 0 3px 5px rgba(0, 0, 0, 0.010);
@@ -89,7 +91,6 @@ h1 {
     min-height: 190px;
     overflow: hidden;
     position: relative;
-    margin-bottom: 3px;
 }
 
 .item-conteudo {
@@ -101,7 +102,7 @@ h1 {
 
 .banner {
         width: 100%;
-        aspect-ratio: 4 / 4;
+        aspect-ratio: 4 / 3.5;
         object-fit: cover;
         margin-bottom: 0;
         margin: 0;
@@ -123,7 +124,7 @@ h1 {
 #preco {
     font-size: 0.7rem;
     font-weight: 415;
-    color: #b65736;
+    color: var(--cor-text);
     margin: 0;
     padding: 0 7px;
 }
@@ -135,10 +136,10 @@ h1 {
 .botao {
     width: calc(100% + 20px);
     margin: auto -10px 0 -10px;
-    height: 36px;
-    font-size: 0.85rem;
-    background-color: #FF5722;
-    color: white;
+    height: 40px;
+    font-size: 0.84rem;
+    background-color: var(--cor-text);
+    color: var(--cor-botao);
     border: none;
     border-radius: 0 0 10px 10px;
     font-weight: 545;
@@ -159,13 +160,9 @@ h1 {
 }
 
 @media (min-width: 390px) and (max-width: 480px) {
-    .topobody {
-        padding: 0 20px;
-    }
-
     .cardapio-container {
         grid-template-columns: repeat(2, 1fr);
-        gap: 2px;
+        gap: 8px;
     }
 
     .categoria-botao {
@@ -181,7 +178,7 @@ h1 {
 
     .botao {
         font-size: 0.95rem;
-        height: 46px;
+        height: 45px;
     }
 
     h1 {
