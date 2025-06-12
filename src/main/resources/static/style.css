@@ -10,12 +10,12 @@ body {
 .header {
      width: 100%;
      background-color: #fff8f0;
-     padding: 2px 16px;
+     padding: 10px 16px;
      display: flex;
      justify-content: space-between;
      align-items: center;
      border-bottom: 1px solid #eee;
-     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.09);
+     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.07);
      position: sticky;
      top: 0;
      z-index: 10;
@@ -23,14 +23,16 @@ body {
  }
 
 .logo {
-    height: 95px;
+    margin-top: 3px;
+    height: 60px;
     max-height: 28vh;
     object-fit: contain;
+    margin-left: 10px;
 }
 
 .icon {
-    height: 28px;
-    width: 28px;
+    height: 23px;
+    width: 22px;
     margin-right: 22px;
     opacity: 0.85;
     transition: 0.2s ease;
@@ -42,11 +44,12 @@ body {
 }
 
 h1 {
-    font-size: 1.35rem;
-    margin-top: 3px;
+    font-size: 1.3rem;
+    margin-top: 15px;
     margin-bottom: 20px;
     font-family: 'Merienda', cursive;
     text-align: center;
+    color: #4a2e1e;
 }
 
 .container {
@@ -74,31 +77,25 @@ h1 {
     width: 85%;
     max-width: 320px;
     padding: 14px 0;
-    background-color: #ff5722;
+    background-color: #4a2e1e;
     color: white;
-    font-size: 1rem;
-    font-weight: 48;
-    letter-spacing: 0.5px;
+    font-size: 0.9rem;
+    letter-spacing: 1.2px;
     border: none;
     border-radius: 8px;
     text-align: center;
     text-decoration: none;
     transition: background-color 0.3s ease;
-    margin-bottom: 25px;
-}
-
-.button:hover {
-    background-color: #e64a19;
+    margin-bottom: 22px;
 }
 
 .footer {
-    background-color:  #fff8f0;
-    padding: 0px 24px;
+    padding: 15px 24px 15px 24px;
     border-top: 2px solid #ddd;
-    font-size: 10px;
-    color: #333;
+    font-size: 11px;
+    color: #4a2e1e;
     display: flex;
-    margin-top: -20px;
+    margin-top: -10px;
 }
 
 .footer-container {
@@ -110,35 +107,36 @@ h1 {
 }
 
 #email{
-    color: #e66a48;
+    color: #b65736;
 }
 
 .footer-links {
     display: flex;
     gap: 12px;
-    color: #e66a48;
+    color: #b65736;
 
 }
 
 .footer-links a {
     text-decoration: none;
     font-weight: 550;
-    color: #e66a48;
+    color: #b65736;
 }
 
-@media (min-width: 380px) and (max-width: 480px) {
+@media (min-width: 390px) and (max-width: 480px) {
     .logo {
-     height: 94px;
+     height: 70px;
      max-height: 25vh;
      }
 
     .icon {
-     height: 28px;
-     width: 28px;
+     height: 26px;
+     width: 26px;
      margin-right: 25px;
      }
 
     h1 {
+
         font-size: 1.4rem;
     }
 
@@ -150,6 +148,8 @@ h1 {
 
     .footer {
         font-size: 13px;
+        margin-top: -23px;
+        padding-top: 30px;
     }
 
 }
