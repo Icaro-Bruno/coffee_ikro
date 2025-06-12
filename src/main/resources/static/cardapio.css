@@ -2,8 +2,9 @@
 
 :root{
     --cor-fundo-itens: #ffece4;
-    --cor-text: #b65736;
+    --cor-text: #4a2e1e;
     --cor-botao: #fff8f0;
+    /*h1/titulos: #4a2e1e*/
 }
 
 body {
@@ -23,17 +24,17 @@ body {
 
 h1 {
     text-align: center;
-    padding: 8px 10px;
-    color: #000000;
+    padding: 10px 13px;
+    color: #4a2e1e;
     font-size: 1.4rem;
     font-family: 'Merienda', cursive;
-    margin: 20px 0 20px 0;
+    margin: 30px 0 20px 0;
 }
 
 .categorias-filtros {
     display: flex;
     gap: 7px;
-    padding: 0 12px 4px 12px;
+    padding: 5px 12px 6px 12px;
     margin: 10px auto 15px auto;
     flex-wrap: nowrap;
     overflow-x: auto;
@@ -48,13 +49,12 @@ h1 {
 
 .categoria-botao {
     background-color: var(--cor-text);
-    color: var(--cor-botao);
-    border: 0.5px solid #e06b43;
+    color: white;
+    border: none;
     padding: 8px 10px;
-    border-radius: 12px;
-    font-size: 0.75rem;
+    border-radius: 16px;
+    font-size: 0.70rem;
     font-weight: 450;
-    line-height: 0.7;
     cursor: pointer;
     white-space: nowrap;
     display: inline-block;
@@ -124,7 +124,7 @@ h1 {
 #preco {
     font-size: 0.7rem;
     font-weight: 415;
-    color: var(--cor-text);
+    color: #330d00;
     margin: 0;
     padding: 0 7px;
 }
@@ -156,7 +156,7 @@ h1 {
 }
 
 .botao:hover {
-    background-color: #e64a19;
+    background-color: #9c4324;
 }
 
 @media (min-width: 390px) and (max-width: 480px) {

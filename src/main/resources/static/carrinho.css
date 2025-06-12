@@ -23,12 +23,12 @@ main {
     padding-bottom: 110px;
 }
 
-/* Título */
 h1 {
     font-family: 'Merienda', cursive;
     font-size: 1.5rem;
     text-align: center;
     margin: 25px 0;
+    color: #4a2e1e;
 }
 
 .item-carrinho {
@@ -75,7 +75,7 @@ h1 {
     text-align:center;
     font-size: 0.90rem;
     font-weight: 560;
-    color: #242424;
+    color: #4a2e1e;
 }
 
 .item-infos span {
@@ -100,7 +100,7 @@ h1 {
 .quantidade-controle button {
     padding: 4px 8px;
     font-size: 1rem;
-    background: #ff5722;
+    background: #b65736;
     color: #fff;
     border: none;
     border-radius: 6px;
@@ -109,7 +109,7 @@ h1 {
 }
 
 .quantidade-controle button:hover {
-    background: #e64a19;
+    background: #9c4324;
 }
 
 .quantidade-num {
@@ -143,7 +143,7 @@ h1 {
 }
 
 .botao-finalizar {
-      background: linear-gradient(90deg, #FF5722, #ff7043);
+      background-color: #4a2e1e;
       color: white;
       font-size: 0.9rem;
       font-weight: 300;
@@ -154,10 +154,6 @@ h1 {
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
       text-align: center;
       letter-spacing: 0.100rem;
-}
-
-.botao-finalizar:hover {
-    background: linear-gradient(90deg, #e64a19, #ff5722);
 }
 
 /* Overlay permanece inalterado */
@@ -298,6 +294,11 @@ h1 {
 
        .item-infos span {
          font-size: 0.80rem;
+       }
+
+       .input-popup p {
+         font-size: 0.60rem;
+         text-align: center;
        }
 
        .linha-total-finalizar {
