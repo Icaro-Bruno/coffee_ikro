@@ -32,7 +32,7 @@ h1 {
 }
 
 .item-carrinho {
-    background-color: #fff;
+    background-color: #ffffff;
     border-radius: 16px;
     padding: 12px 18px;
     margin-bottom: 10px;
@@ -61,6 +61,7 @@ h1 {
     height: 135px;
     object-fit: cover;
     border-radius: 12px;
+    border: 1px solid #e2cfc8;
 }
 
 .item-infos {
