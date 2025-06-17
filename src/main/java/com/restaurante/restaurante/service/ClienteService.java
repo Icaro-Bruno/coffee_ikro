@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -63,5 +64,19 @@ public class ClienteService {
     public List<ClienteResponse> buscarPorEndereco(String endereco){
         return repository.findByEnderecoContainingIgnoreCase(endereco)
                 .stream().map(this::converterToResponse).collect(Collectors.toList());
+    }
+
+    //Login via google
+    public ClienteModel buscarCriar(String email,String nome) {
+        Optional<ClienteModel> clienteExiste = repository.findByEmail(email);
+
+        if (clienteExiste.isPresent()) {
+            return clienteExiste.get();
+        }
+        ClienteModel novoCliente = new ClienteModel();
+        novoCliente.setEmail(email);
+        novoCliente.setNome(nome);
+
+        return repository.save(novoCliente);
     }
 }

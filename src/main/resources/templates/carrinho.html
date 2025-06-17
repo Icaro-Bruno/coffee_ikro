@@ -154,7 +154,7 @@ function fecharPopup() {
           return;
         }
 
-        const clienteResponse = await fetch("/api/clientes", {
+        const clienteResponse = await fetch("/cliente", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ nome, telefone, endereco })

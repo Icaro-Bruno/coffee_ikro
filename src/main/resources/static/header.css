@@ -27,7 +27,7 @@ header {
     left: 0;
     width: 160px;
     height: 100%;
-    background: linear-gradient(180deg, #b65736 0%, #d96f4b 100%);
+    background: linear-gradient(180deg, #4a2e1e 0%, #d96f4b 100%);
     box-shadow: 4px 0 15px rgba(0, 0, 0, 0.2);
     padding: 15px 10px;
     transform: translateX(-100%);
