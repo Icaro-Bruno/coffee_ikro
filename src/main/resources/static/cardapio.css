@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:wght@499..500&display=swap');
 
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0.1);
+}
+
 :root{
     --cor-fundo-itens: #ffece4;
     --cor-text: #4a2e1e;
@@ -153,10 +157,6 @@ h1 {
     align-items: center;
     justify-content: center;
     margin-top: auto;
-}
-
-.botao:hover {
-    background-color: #9c4324;
 }
 
 @media (min-width: 390px) and (max-width: 480px) {
