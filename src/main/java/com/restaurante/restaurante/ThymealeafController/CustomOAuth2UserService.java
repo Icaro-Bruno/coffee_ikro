@@ -29,9 +29,9 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         oauth2User.getAttributes().forEach((key, value) -> System.out.println(key + ": " + value));
 
         return new DefaultOAuth2User(
-                oauth2User.getAuthorities(),         // roles, escopos
-                oauth2User.getAttributes(),          // atributos vindos do Google
-                "sub"                                // chave principal (Google usa "sub" como ID do usuário)
+                oauth2User.getAuthorities(),
+                oauth2User.getAttributes(),
+                "sub"
         );
     }
 }
