@@ -13,20 +13,16 @@
     <img th:src="@{/img/logo.png}" alt="Logo da empresa" class="logo">
 
     <!-- Se NÃO estiver logado -->
-    <div th:if="${#authentication == null}">
+    <div th:if="${foto == null}">
         <a href="/oauth2/authorization/google">
             <img src="https://i.imgur.com/pTPrSiF.png" alt="Login" class="icon" />
         </a>
     </div>
 
     <!-- Se estiver logado -->
-    <div th:if="${#authentication != null}">
-        <img th:src="${#authentication.principal.attributes['picture'] ?: '/img/user-icon.png'}"
-             onerror="this.src='/img/user-icon.png';"
-             alt="Foto de perfil" class="icon" />
-
-        <span th:text="${#authentication.principal.attributes['given_name']}">Usuário</span>
-
+    <div th:if="${foto != null}">
+        <img th:src="${foto}" alt="Foto do usuário" class="icon" />
+       <!-- <span th:text="${nome}">Usuário</span>-->
         <script>
             localStorage.removeItem('carrinho');
         </script>

@@ -7,6 +7,8 @@ import com.restaurante.restaurante.service.PedidoService;
 import com.restaurante.restaurante.service.ProdutoService;
 import com.restaurante.restaurante.service.PromocaoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,9 +29,18 @@ public class ExibirPag {
     private PedidoService pedidoService;
 
     @GetMapping("/")
-    public String home(Model model){
+    public String home(Model model, Authentication authentication){
         List<PromocaoResponse> promocoes = promocaoService.listarTodas();
         model.addAttribute("promocoes", promocoes);
+
+        if (authentication != null && authentication.getPrincipal() instanceof OAuth2User oAuth2User) {
+            String foto = (String) oAuth2User.getAttributes().get("picture");
+            String nome = (String) oAuth2User.getAttributes().get("given_name");
+
+            model.addAttribute("foto", foto);
+            model.addAttribute("nome", nome);
+
+        }
         return "index";
     }
 

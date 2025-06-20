@@ -19,7 +19,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/", "/index", "/login/**", "/oauth2/**", "/error",
                                 "/js/**", "/img/**",
-                                "/style.css", "/header.css", "/carrinho.css", "/cardapio.css", "/pagprod.css"
+                                "/style.css", "/header.css", "/carrinho.css", "/cardapio.css",
+                                "/pagprod.css","/cardapio.html","/carrinho.html","/pagprod.html"
                         ).permitAll()
                         .anyRequest().authenticated()
                 )
@@ -28,7 +29,7 @@ public class SecurityConfig {
                         .userInfoEndpoint(userInfo -> userInfo
                                 .userService(customOAuth2UserService)
                         )
-                        .defaultSuccessUrl("/", true) // Redireciona para a home após login com sucesso
+                        .defaultSuccessUrl("/", false)
                 )
                 .logout(logout -> logout
                         .logoutSuccessUrl("/")
