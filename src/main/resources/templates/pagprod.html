@@ -44,9 +44,8 @@
         <div id="popup-carrinho">
             <p id="popup-msg"></p>
             <div class="popup-botoes">
-                <a href="/carrinho" class="btn-carrinho" type="button">Ir para o carrinho</a>
-                <button id="continuar-comprando" type="button" class="btn-continuar">
-                    Continuar comprando</button>
+                    <a href="/carrinho" class="btn-carrinho">Ir para o carrinho</a>
+                    <a href="#" id="continuar-comprando" class="btn-continuar">Continuar comprando</a>
             </div>
         </div>
     </div>
@@ -70,7 +69,8 @@
       function atualizarPrecoTotal() {
         const qtd = parseInt(quantidadeInput.value, 10);
         const total = (precoUnitario * qtd).toFixed(2).replace('.', ',');
-        botaoAdicionar.innerText = `R$ ${total} | Adicionar ao carrinho`;
+        botaoAdicionar.textContent = `R$ ${total} | Adicionar ao carrinho`;
+
       }
 
       function modificarQuantidade(diff) {
@@ -98,7 +98,7 @@
         window.salvarCarrinho(carrinho);
         window.atualizarContadorCarrinho();
 
-       msgPopup.innerHTML = `<span class="popup-texto">✅ ${quantidade}× ${nome} adicionado ao carrinho!</span>`;
+       msgPopup.innerHTML = `<span class="popup-texto">✅ ${quantidade} ${nome} adicionado ao carrinho!</span>`;
        overlay.classList.remove('popup-escond');
       });
 
@@ -116,7 +116,7 @@
       btnContinuar.addEventListener('click', (e) => {
       e.preventDefault();
       console.log('Clique detectado: Continuar comprando');
-      overlay.classList.add('popup-escond'); // Corrigido aqui!
+      overlay.classList.add('popup-escond');
     });
 
       // Reset da mensagem do popup

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:wght@499..500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:wght@100..500&display=swap');
 
 * {
   -webkit-tap-highlight-color: rgba(0,0,0,0.1);
@@ -67,7 +67,7 @@ html, body {
 
 .produto-descricao h2 {
     font-size: 0.99rem;
-    font-weight: 550;
+    font-weight: 400;
     color: #333;
     margin-bottom: 1px;
 }
@@ -103,13 +103,13 @@ html, body {
 }
 
 .controle-quantidade button {
-    width: 36px;
-    height: 36px;
-    font-size: 1.2rem;
+    width: 31px;
+    height: 31px;
+    font-size: 1rem;
     border: none;
     border-radius: 6px;
-    background-color: #f4f4f4;
-    color: #333;
+    background-color: #b65736;
+    color: #fff;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -118,16 +118,20 @@ html, body {
     transition: background-color 0.2s ease;
 }
 
+.controle-quantidade button:hover {
+    background: #9c4324;
+}
+
 #menos {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
 }
 
 #quantidade {
-    width: 33px;
-    height: 33px;
-    font-size: 1rem;
+    width: 31px;
+    height: 31px;
+    font-size: 0.9rem;
     text-align: center;
-    border: 1px solid #ccc;
+    border: 1px solid #e0e0e0;
     border-radius: 6px;
     background-color: #fff;
     color: #333;
@@ -139,13 +143,23 @@ html, body {
     background-color: #4a2e1e;
     color: white;
     font-size: 0.9rem;
-    font-weight: 400;
+    font-weight: 300;
+    letter-spacing: 0.100rem;
     padding: 20px;
     border: none;
     border-radius: 8px;
     width: 100%;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
     text-align: center;
+    position: relative;
+    z-index: 0;
+}
+
+.botao-adicionar::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
 }
 
 #popup-overlay.popup-escond {
@@ -199,8 +213,8 @@ html, body {
 }
 
 .popup-texto {
-    font-size: 1.1rem;
-    font-weight: 550;
+    font-size: 1rem;
+    font-weight: 300;
 }
 
 #popup-msg {
@@ -222,12 +236,13 @@ html, body {
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    font-weight: 500;
-    font-size: 1rem;
+    font-size: 0.9rem;
     box-sizing: border-box;
     text-decoration: none;
     display: inline-block;
     width: 100%;
+    font-weight: 200;
+    letter-spacing: 0.100rem;
 }
 
 .btn-carrinho {
@@ -236,8 +251,8 @@ html, body {
 }
 
 .btn-continuar {
-    background-color: #f0f0f0;
-    color: #333;
+   background-color: #7a523c;
+   color: white;
 }
 
 @media (max-width: 380px) {
@@ -269,19 +284,13 @@ html, body {
     }
 
     .botao-adicionar {
-        font-size: 0.87rem;
-        padding: 17px;
+        font-size: 0.8rem;
+        padding: 19px 20px;
+        margin-bottom: 5px;
     }
 
     .controle-quantidade{
         padding: 11px 14px;
-    }
-
-    .controle-quantidade button {
-        padding: 8px 12px;
-        font-size: 1.2rem;
-        width: 38px;
-        height: 34px;
     }
 
     #quantidade {
@@ -296,13 +305,12 @@ html, body {
     }
 
     .popup-texto {
-        font-size: 0.9rem;
-        font-weight: 550;
+        font-size: 0.8rem;
+        font-weight: 300;
     }
 
     .btn-carrinho,
     .btn-continuar {
-        font-weight: 480;
         font-size: 0.87rem;
     }
 }

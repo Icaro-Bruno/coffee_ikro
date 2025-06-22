@@ -52,7 +52,4 @@ public class PromocaoController {
         service.deletarPromocao(id);
     }
 
-
-
-
 }
