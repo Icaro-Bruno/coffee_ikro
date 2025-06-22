@@ -3,6 +3,8 @@ package com.restaurante.restaurante.controller;
 import com.restaurante.restaurante.dto.AtualizarPedidoRequest;
 import com.restaurante.restaurante.dto.PedidoRequest;
 import com.restaurante.restaurante.dto.PedidoResponse;
+import com.restaurante.restaurante.model.PedidoModel;
+import com.restaurante.restaurante.repository.PedidoRepository;
 import com.restaurante.restaurante.service.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +16,11 @@ import java.util.List;
 public class PedidoController {
     @Autowired
     private PedidoService service;
+
+    @GetMapping("/{id}")
+    public PedidoResponse buscarPorId(@PathVariable Long id){
+        return service.buscarPorId(id);
+    }
 
     @GetMapping("/antigos")
     public List<PedidoResponse> listarPedAntigos(){

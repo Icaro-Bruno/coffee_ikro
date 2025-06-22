@@ -28,6 +28,12 @@ public class PedidoService {
     @Autowired
     private ProdutoService produtoService;
 
+    public PedidoResponse buscarPorId(Long id){
+        PedidoModel pedido = repository.findById(id)
+                .orElseThrow(()-> new RuntimeException("Pedido não encontrado."));
+        return converterPraResponse(pedido);
+    }
+
     public List<PedidoResponse> listarAntigos(){
         return repository.findAllByOrderByDataHoraAsc()
                 .stream().map(this::converterPraResponse).collect(Collectors.toList());
@@ -60,8 +66,12 @@ public class PedidoService {
     }
 
     public PedidoResponse criarPedido(PedidoRequest request){
-        ClienteModel cliente = clienteRepository.findById(request.getClienteId())
-                .orElseThrow(()-> new RuntimeException("Cliente não encontrado"));
+        ClienteRequest clienteDto = request.getCliente();
+        ClienteModel cliente = new ClienteModel();
+        cliente.setNome(clienteDto.getNome());
+        cliente.setTelefone(clienteDto.getTelefone());
+        cliente.setEndereco(clienteDto.getEndereco());
+        clienteRepository.save(cliente);
 
         ClienteResponse clienteResponse = new ClienteResponse();
         clienteResponse.setId(cliente.getId());
@@ -71,7 +81,7 @@ public class PedidoService {
 
         PedidoModel pedido = new PedidoModel();
         pedido.setCliente(cliente);
-        pedido.setStatus(StatusPedido.PENDENTE);
+        pedido.setStatus(StatusPedido.A_CAMINHO);
         pedido.setDataHora(LocalDateTime.now());
 
         List<ItemDoPedidoModel> itens = request.getItens().stream()
