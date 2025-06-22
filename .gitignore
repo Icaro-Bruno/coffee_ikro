@@ -32,3 +32,8 @@ build/
 ### VS Code ###
 .vscode/
 data/cardapio-db.mv.db
+src/main/resources/application-dev.properties
+*.properties
+*.properties
+src/main/resources/application-prod.properties
+src/main/resources/application-dev.properties
