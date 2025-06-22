@@ -45,24 +45,7 @@
     </div>
 </div>
 
-<!--CARRINHO-->
-<!--<script>
-    let count = 0;
-    const carrinhoCount = document.getElementById('carrinho-count');
-
-    // Como os botões "Adicionar" são criados dinamicamente, espere o DOM carregar
-    document.addEventListener('DOMContentLoaded', () => {
-        const botoesAdicionar = document.querySelectorAll('.botao');
-
-        botoesAdicionar.forEach(botao => {
-            botao.addEventListener('click', () => {
-                count++;
-                carrinhoCount.textContent = count;
-            });
-        });
-    });
-</script>-->
-
+<script th:src="@{/js/header.js}"></script>
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         const botoesCategoria = document.querySelectorAll('.categoria-botao');
@@ -83,8 +66,13 @@
         });
     });
 </script>
-
-<script th:src="@{/js/header.js}"></script>
+<script>
+    window.addEventListener('pageshow', function(event) {
+        if (event.persisted) {
+            window.atualizarContadorCarrinho?.();
+        }
+    });
+</script>
 
 </body>
 </html>

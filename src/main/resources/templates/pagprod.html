@@ -51,6 +51,7 @@
     </div>
 </div>
 
+<script th:src="@{/js/header.js}"></script>
 <script>
     document.addEventListener('DOMContentLoaded', () => {
       const menosBtn = document.getElementById('menos');
@@ -84,23 +85,27 @@
       menosBtn.addEventListener('click', () => modificarQuantidade(-1));
       maisBtn.addEventListener('click', () => modificarQuantidade(1));
 
-      botaoAdicionar.addEventListener('click', () => {
-        const id = parseInt(botaoAdicionar.dataset.produtoId, 10);
-        const nome = document.querySelector('.produto-nome').innerText;
-        const img = document.querySelector('.produto-img').src;
-        const quantidade = parseInt(quantidadeInput.value, 10);
-        if (!id || !nome || !precoUnitario || !img || !quantidade) return;
+    botaoAdicionar.addEventListener('click', () => {
+    const id = parseInt(botaoAdicionar.dataset.produtoId, 10);
+    const nome = document.querySelector('.produto-nome').innerText;
+    const img = document.querySelector('.produto-img').src;
+    const quantidade = parseInt(quantidadeInput.value, 10);
 
-        let carrinho = window.obterCarrinho();
-        const existente = carrinho.find(item => item.id === id);
-        if (existente) existente.quantidade += quantidade;
-        else carrinho.push({ id, nome, preco: precoUnitario, img, quantidade });
-        window.salvarCarrinho(carrinho);
-        window.atualizarContadorCarrinho();
+    if (!id || !nome || !precoUnitario || !img || !quantidade) return;
 
-       msgPopup.innerHTML = `<span class="popup-texto">✅ ${quantidade} ${nome} adicionado ao carrinho!</span>`;
-       overlay.classList.remove('popup-escond');
-      });
+    const produto = {
+        id: id,
+        nome: nome,
+        preco: precoUnitario,
+        img: img,
+        quantidade: quantidade
+    };
+
+    window.addAoCarrinho(produto);
+
+    msgPopup.innerHTML = `<span class="popup-texto">${quantidade} ${nome} adicionado ao carrinho!</span>`;
+    overlay.classList.remove('popup-escond');
+});
 
       // Clicar fora do popup fecha
       overlay.addEventListener('click', () => {
@@ -127,6 +132,5 @@
     });
 </script>
 
-<script th:src="@{/js/header.js}"></script>
 </body>
 </html>

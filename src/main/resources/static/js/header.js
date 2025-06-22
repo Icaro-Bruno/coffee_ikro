@@ -44,3 +44,18 @@ window.atualizarContadorCarrinho = function () {
     const span = document.getElementById('carrinho-count');
     if (span) span.textContent = total;
 };
+
+window.addAoCarrinho = function(produto) {
+    const carrinho = window.obterCarrinho();
+    const existente = carrinho.find(item => item.id === produto.id);
+
+    if (existente) {
+        existente.quantidade += 1;
+    } else {
+        produto.quantidade = 1;
+        carrinho.push(produto);
+    }
+
+    window.salvarCarrinho(carrinho);
+    window.atualizarContadorCarrinho();
+};
