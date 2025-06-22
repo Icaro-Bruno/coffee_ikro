@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title th:text="'Pedido #' + ${pedido.id}">Pedido</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:wght@100..500&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Merienda&display=swap');
+
+    :root {
+      --cor-fundo: #fff8f0;
+      --cor-principal: #4a2e1e;
+      --cor-texto: #242424;
+      --cor-claro: #ffffff;
+      --cor-borda: #e2cfc8;
+      --cor-sombra: rgba(0, 0, 0, 0.05);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Roboto Flex', sans-serif;
+    }
+
+    body {
+      background-color: var(--cor-fundo);
+      padding: 24px;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .pedido-box {
+      width: 100%;
+      max-width: 600px;
+      background-color: var(--cor-claro);
+      padding: 32px;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px var(--cor-sombra);
+    }
+
+    h1 {
+      font-family: 'Merienda', cursive;
+      font-size: 1.5rem;
+      color: var(--cor-principal);
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    h3 {
+      font-size: 1rem;
+      font-weight: 500;
+      margin-top: 22px;
+      margin-bottom: 6px;
+      color: var(--cor-texto);
+      border-bottom: 1px solid var(--cor-borda);
+      padding-bottom: 4px;
+    }
+
+    p, li, span {
+      font-size: 0.95rem;
+      color: var(--cor-texto);
+      line-height: 1.6;
+      margin-bottom: 8px;
+      letter-spacing: 0.2px;
+    }
+
+    strong {
+      font-weight: 500;
+    }
+
+    ul {
+      margin-top: 8px;
+      padding-left: 20px;
+    }
+
+    li {
+      list-style: square;
+      margin-bottom: 6px;
+    }
+
+    .status {
+      padding: 3px 10px;
+      border-radius: 12px;
+      font-size: 0.7rem;
+      font-weight: bold;
+      color: white;
+      text-transform: uppercase;
+      display: inline-block;
+      margin-left: 6px;
+    }
+
+    .status-PENDENTE {
+      background-color: #ff9800;
+    }
+
+    .status-A_CAMINHO {
+      background-color: #42a5f5;
+    }
+
+    .status-ENTREGUE {
+      background-color: #4caf50;
+    }
+
+    .status-CANCELADO {
+      background-color: #f44336;
+    }
+
+    a {
+      display: block;
+      margin-top: 28px;
+      text-align: center;
+      text-decoration: none;
+      color: #ffffff;
+      background-color: var(--cor-principal);
+      padding: 18px 20px;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+
+    a:hover {
+      background-color: #3a2318;
+      transform: translateY(-1px);
+    }
+
+    @media (max-width: 480px) {
+      .pedido-box {
+        padding: 20px;
+      }
+
+      h1 {
+        font-size: 1.4rem;
+      }
+
+      h3 {
+        font-size: 0.95rem;
+      }
+
+      p, li, span {
+        font-size: 0.88rem;
+      }
+
+      a {
+        font-size: 0.85rem;
+        padding: 14px 16px;
+      }
+    }
+  </style>
+
+
+</head>
+<body>
+<main class="pedido-box">
+  <h1 th:text="'Pedido nº ' + ${pedido.id}"></h1>
+
+  <h3><strong>Status:</strong>
+    <span th:text="${pedido.status}" th:class="'status status-' + ${pedido.status}"></span>
+  </h3>
+
+  <h3>Cliente</h3>
+  <p><strong>Nome:</strong> <span th:text="${pedido.cliente.nome}"></span></p>
+  <p><strong>Telefone:</strong> <span th:text="${pedido.cliente.telefone}"></span></p>
+  <p><strong>Endereço:</strong> <span th:text="${pedido.cliente.endereco}"></span></p>
+
+  <h3>Itens do Pedido</h3>
+  <ul>
+    <li th:each="item : ${pedido.itens}">
+      <span th:text="${item.produto.nome}"></span> -
+      <span th:text="${item.quantidade}"></span>x -
+      <span th:text="'R$ ' + ${item.subtotal}"></span>
+    </li>
+  </ul>
+
+  <p><strong>Total:</strong> <span th:text="'R$ ' + ${pedido.total}"></span></p>
+
+  <a href="/" style="display:block; margin-top: 1rem;">Voltar à Página Inicial</a>
+</main>
+</body>
+</html>

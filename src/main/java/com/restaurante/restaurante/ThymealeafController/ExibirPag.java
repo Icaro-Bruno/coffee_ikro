@@ -78,4 +78,11 @@ public class ExibirPag {
     public String verCarrinho() {
         return "carrinho";
     }
+
+    @GetMapping("/detalhespedido/{id}")
+    public String verPedido(@PathVariable Long id, Model model){
+        PedidoResponse pedido = pedidoService.buscarPorId(id);
+        model.addAttribute("pedido",pedido);
+        return "status-pedido";
+    }
 }
