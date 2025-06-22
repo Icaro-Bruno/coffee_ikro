@@ -314,3 +314,9 @@ html, body {
         font-size: 0.87rem;
     }
 }
+
+@media (max-height: 885px) {
+.botao-adicionar{
+    margin-bottom: 30px;
+    }
+}
