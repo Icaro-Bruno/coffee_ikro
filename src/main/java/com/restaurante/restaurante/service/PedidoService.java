@@ -6,6 +6,7 @@ import com.restaurante.restaurante.repository.ClienteRepository;
 import com.restaurante.restaurante.repository.PedidoRepository;
 import com.restaurante.restaurante.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -32,6 +33,12 @@ public class PedidoService {
         PedidoModel pedido = repository.findById(id)
                 .orElseThrow(()-> new RuntimeException("Pedido não encontrado."));
         return converterPraResponse(pedido);
+    }
+
+    public List<PedidoResponse> listarPedEmail(String email){
+        List<PedidoModel> pedidos = repository.findAllByClienteEmail(email);
+        return pedidos.stream()
+                .map(this::converterPraResponse).collect(Collectors.toList());
     }
 
     public List<PedidoResponse> listarAntigos(){
@@ -65,13 +72,40 @@ public class PedidoService {
                 .stream().map(this::converterPraResponse).collect(Collectors.toList());
     }
 
-    public PedidoResponse criarPedido(PedidoRequest request){
-        ClienteRequest clienteDto = request.getCliente();
-        ClienteModel cliente = new ClienteModel();
-        cliente.setNome(clienteDto.getNome());
-        cliente.setTelefone(clienteDto.getTelefone());
-        cliente.setEndereco(clienteDto.getEndereco());
-        clienteRepository.save(cliente);
+    public PedidoResponse criarPedido(PedidoRequest request, String emailAutenticado){
+        ClienteModel cliente = clienteRepository.findByEmail(emailAutenticado)
+            .map(c -> {
+                ClienteRequest dto = request.getCliente();
+                boolean atualizado = false;
+
+                if (c.getTelefone() == null || c.getTelefone().isBlank()) {
+                    c.setTelefone(dto.getTelefone());
+                    atualizado = true;
+                }
+
+                if (c.getEndereco() == null || c.getEndereco().isBlank()) {
+                    c.setEndereco(dto.getEndereco());
+                    atualizado = true;
+                }
+
+                if (c.getNome() == null || c.getNome().isBlank()) {
+                    c.setNome(dto.getNome());
+                    atualizado = true;
+                }
+
+                return atualizado ? clienteRepository.save(c) : c;
+            })
+            .orElseGet(() -> {
+                ClienteModel novo = new ClienteModel();
+                ClienteRequest clienteDto = request.getCliente();
+
+                novo.setNome(clienteDto.getNome());
+                novo.setTelefone(clienteDto.getTelefone());
+                novo.setEndereco(clienteDto.getEndereco());
+                novo.setEmail(emailAutenticado);
+
+                return clienteRepository.save(novo);
+            });
 
         ClienteResponse clienteResponse = new ClienteResponse();
         clienteResponse.setId(cliente.getId());

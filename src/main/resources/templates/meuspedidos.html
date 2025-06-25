@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Meus Pedidos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:wght@100..500&family=Merienda&display=swap" rel="stylesheet" />
+
+    <style>
+        :root {
+          --cor-fundo: #fff8f0;
+          --cor-principal: #4a2e1e;
+          --cor-texto: #242424;
+          --cor-claro: #ffffff;
+          --cor-borda: #e2cfc8;
+          --cor-sombra: rgba(0, 0, 0, 0.05);
+        }
+
+        * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+          font-family: 'Roboto Flex', sans-serif;
+        }
+
+        body {
+          background-color: var(--cor-fundo);
+          padding: 24px;
+          min-height: 100vh;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
+        .pedido-box {
+          width: 100%;
+          max-width: 600px;
+          background-color: var(--cor-claro);
+          padding: 32px;
+          border-radius: 15px;
+          box-shadow: 0 4px 12px var(--cor-sombra);
+        }
+
+        h1 {
+          font-family: 'Merienda', cursive;
+          font-size: 1.5rem;
+          color: var(--cor-principal);
+          text-align: center;
+          margin-bottom: 28px;
+        }
+
+        .pedido {
+          margin-bottom: 26px;
+          border-bottom: 1px solid var(--cor-borda);
+          padding-bottom: 14px;
+        }
+
+        p, span {
+          font-size: 0.95rem;
+          color: var(--cor-texto);
+          line-height: 1.6;
+          margin-bottom: 6px;
+        }
+
+        .status {
+          padding: 3px 10px;
+          border-radius: 12px;
+          font-size: 0.7rem;
+          font-weight: bold;
+          color: white;
+          text-transform: uppercase;
+          display: inline-block;
+          margin-left: 6px;
+        }
+
+        .status-PENDENTE {
+          background-color: #ff9800;
+        }
+
+        .status-A_CAMINHO {
+          background-color: #42a5f5;
+        }
+
+        .status-ENTREGUE {
+          background-color: #4caf50;
+        }
+
+        .status-CANCELADO {
+          background-color: #f44336;
+        }
+
+        a.detalhes {
+          display: inline-block;
+          margin-top: 12px;
+          text-decoration: none;
+          color: #ffffff;
+          background-color: var(--cor-principal);
+          padding: 10px 14px;
+          border-radius: 8px;
+          font-size: 0.85rem;
+          box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        }
+
+        a.detalhes:hover {
+          background-color: #3a2318;
+        }
+
+        .nenhum-pedido {
+          text-align: center;
+          font-size: 1rem;
+          color: var(--cor-texto);
+        }
+
+        @media (max-width: 480px) {
+          .pedido-box {
+            padding: 20px;
+          }
+
+          h1 {
+            font-size: 1.4rem;
+          }
+
+          p, span {
+            font-size: 0.88rem;
+          }
+
+          a.detalhes {
+            font-size: 0.82rem;
+          }
+        }
+    </style>
+</head>
+<body>
+<div class="pedido-box">
+    <h1>Meus Pedidos</h1>
+
+    <div th:if="${pedidos.isEmpty()}" class="nenhum-pedido">
+        <p>Você ainda não fez nenhum pedido.</p>
+    </div>
+
+    <div th:each="pedido : ${pedidos}" class="pedido">
+        <p>ID: <span th:text="${pedido.id}"></span></p>
+        <p>Status:
+            <span th:text="${pedido.status}" th:class="'status status-' + ${pedido.status}"></span>
+        </p>
+        <a th:href="@{/detalhespedido/{id}(id=${pedido.id})}" class="detalhes">Ver Detalhes</a>
+    </div>
+</div>
+</body>
+</html>
