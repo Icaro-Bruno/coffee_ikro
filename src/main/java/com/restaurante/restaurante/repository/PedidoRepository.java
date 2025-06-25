@@ -13,4 +13,6 @@ public interface PedidoRepository extends JpaRepository<PedidoModel, Long> {
 
     //inverso da que está acima
     List<PedidoModel> findAllByOrderByDataHoraDesc();
+
+    List<PedidoModel> findAllByClienteEmail(String email);
 }

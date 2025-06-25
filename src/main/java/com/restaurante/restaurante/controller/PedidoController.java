@@ -7,6 +7,8 @@ import com.restaurante.restaurante.model.PedidoModel;
 import com.restaurante.restaurante.repository.PedidoRepository;
 import com.restaurante.restaurante.service.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,8 +35,9 @@ public class PedidoController {
     }
 
     @PostMapping("/fazer")
-    public PedidoResponse fazerPedido(@RequestBody PedidoRequest request){
-        return service.criarPedido(request);
+    public PedidoResponse fazerPedido(@RequestBody PedidoRequest request, @AuthenticationPrincipal OAuth2User user){
+        String email = user.getAttribute("email");
+        return service.criarPedido(request,email);
     }
 
     @PutMapping("/{id}")

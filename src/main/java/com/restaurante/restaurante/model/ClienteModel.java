@@ -18,6 +18,8 @@ public class ClienteModel {
     private String nome;
     private String telefone;
     private String endereco;
+
+    @Column(nullable = false, unique = true)
     private String email;
 
 }

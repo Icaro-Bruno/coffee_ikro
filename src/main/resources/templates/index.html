@@ -12,20 +12,25 @@
 <header class="header">
     <img th:src="@{/img/logo.png}" alt="Logo da empresa" class="logo">
 
-    <!-- Se NÃO estiver logado -->
-    <div th:if="${foto == null}">
+    <div th:if="${foto == null}" class="perfil-container">
         <a href="/oauth2/authorization/google">
-            <img src="https://i.imgur.com/pTPrSiF.png" alt="Login" class="icon" />
+            <img src="https://i.imgur.com/pTPrSiF.png" alt="Login" class="icon-padrao" />
         </a>
     </div>
 
-    <!-- Se estiver logado -->
-    <div th:if="${foto != null}">
-        <img th:src="${foto}" alt="Foto do usuário" class="icon" />
-       <!-- <span th:text="${nome}">Usuário</span>-->
-        <!--<script>
-            localStorage.removeItem('carrinho');
-        </script>-->
+    <!-- LOGADO -->
+    <div th:if="${foto != null}" class="perfil-container">
+        <div class="dropdown" id="dropdown">
+            <img th:src="${foto}" alt="Foto do usuário" class="icon-perfil" id="icone-perfil"   onerror="this.src='https://i.imgur.com/pTPrSiF.png'; this.alt='Login'"/>
+            <div class="dropdown-content" id="dropdown-content">
+                <div class="user-info">
+                    <p class="user-nome" th:text="${nome}">Nome</p>
+                    <p class="user-email" th:text="${email}">email@exemplo.com</p>
+                </div>
+                <a href="/meuspedidos">Meus Pedidos</a>
+                <a href="/logout">Sair</a>
+            </div>
+        </div>
     </div>
 
 </header>
@@ -52,5 +57,23 @@
     </div>
 </footer>
 
+<!--Aba do icon-->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const iconePerfil = document.getElementById('icone-perfil');
+        const dropdown = document.getElementById('dropdown-content');
+
+        iconePerfil.addEventListener('click', (e) => {
+            e.stopPropagation(); // Impede que o clique feche o menu
+            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!dropdown.contains(e.target)) {
+                dropdown.style.display = 'none';
+            }
+        });
+    });
+</script>
 </body>
 </html>
