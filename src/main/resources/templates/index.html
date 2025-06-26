@@ -20,9 +20,15 @@
 
     <!-- LOGADO -->
     <div th:if="${foto != null}" class="perfil-container">
-        <div class="dropdown" id="dropdown">
-            <img th:src="${foto}" alt="Foto do usuário" class="icon-perfil" id="icone-perfil"   onerror="this.src='https://i.imgur.com/pTPrSiF.png'; this.alt='Login'"/>
-            <div class="dropdown-content" id="dropdown-content">
+        <img th:src="${foto}" alt="Foto do usuário" class="icon-perfil" id="icone-perfil"
+             onerror="this.src='https://i.imgur.com/pTPrSiF.png'; this.alt='Login'"/>
+
+        <!-- Overlay -->
+        <div class="perfil-overlay" id="perfil-overlay"></div>
+
+        <!-- Menu lateral -->
+        <div class="perfil-lateral" id="perfil-lateral">
+            <div id="conteudomenu">
                 <div class="user-info">
                     <p class="user-nome" th:text="${nome}">Nome</p>
                     <p class="user-email" th:text="${email}">email@exemplo.com</p>
@@ -31,6 +37,7 @@
                 <a href="/logout">Sair</a>
             </div>
         </div>
+    </div>
     </div>
 
 </header>
@@ -57,21 +64,29 @@
     </div>
 </footer>
 
-<!--Aba do icon-->
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         const iconePerfil = document.getElementById('icone-perfil');
-        const dropdown = document.getElementById('dropdown-content');
+        const lateral = document.getElementById('perfil-lateral');
+        const overlay = document.getElementById('perfil-overlay');
 
         iconePerfil.addEventListener('click', (e) => {
-            e.stopPropagation(); // Impede que o clique feche o menu
-            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+            e.stopPropagation();
+            lateral.style.right = '0';
+            overlay.style.display = 'block';
         });
 
-        document.addEventListener('click', (e) => {
-            if (!dropdown.contains(e.target)) {
-                dropdown.style.display = 'none';
-            }
+        overlay.addEventListener('click', () => {
+            lateral.style.right = '-80%';
+            overlay.style.display = 'none';
+        });
+
+        // Opcional: clicar em links fecha o menu
+        document.querySelectorAll('#perfil-lateral a').forEach(link => {
+            link.addEventListener('click', () => {
+                lateral.style.right = '-80%';
+                overlay.style.display = 'none';
+            });
         });
     });
 </script>
