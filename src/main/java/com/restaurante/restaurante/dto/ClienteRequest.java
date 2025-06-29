@@ -12,5 +12,5 @@ public class ClienteRequest {   //ENTRADA
     private String nome;
     private String telefone;
     private String endereco;
-
+    private boolean sobrescrever;
 }

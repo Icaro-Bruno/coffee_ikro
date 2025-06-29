@@ -28,10 +28,25 @@
     <div id="form-cliente-popup">
         <button class="fechar-popup" onclick="fecharPopup()">×</button>
         <h2>Entrega</h2>
+        <label>
+            <div class="linha-radio">
+                <input type="radio" name="endereco-opcao" value="salvo" checked>
+                <span>Usar endereço salvo:</span>
+            </div>
+            <span id="resumo-endereco">Btn1, Santa Rita, 234A</span>
+        </label>
+
+        <label>
+            <div class="linha-radio">
+                <input type="radio" name="endereco-opcao" value="novo">
+                <span>Informar novo endereço:</span>
+            </div>
+        </label>
+
         <div class="input-popup">
             <input type="text" id="nome-cliente" placeholder="Nome completo">
             <input type="text" id="telefone-cliente" placeholder="Telefone">
-            <input type="text" id="endereco-cliente" placeholder="Endereço">
+            <input type="text" id="endereco-cliente" placeholder="Bairro,rua,n°">
             <p>Este campo é válido apenas para pagamentos em espécie</p>
             <input type="text" id="troco-pagamento" placeholder="Troco para quanto">
         </div>
@@ -63,34 +78,34 @@
         const div = document.createElement('div');
         div.classList.add('item-carrinho');
 
-div.innerHTML = `
-  <div class="item-carrinho-conteudo">
-    <div class="item-imagem">
-      <img src="${item.img}" alt="${item.nome}">
-    </div>
-    <div class="item-infos">
-      <h2>${item.nome}</h2>
-      <div class="linha-preco">
-        <span>Preço:</span>
-        <span>R$ ${item.preco.toFixed(2)}</span>
-      </div>
-      <div class="linha-subtotal">
-        <span>Subtotal:</span>
-        <span>R$ ${(item.preco * item.quantidade).toFixed(2)}</span>
-      </div>
-      <div class="quantidade-controle">
-        <button onclick="alterarQuantidade(${index}, -1)">-</button>
-        <span class="quantidade-num">${item.quantidade}</span>
-        <button onclick="alterarQuantidade(${index}, 1)">+</button>
-      </div>
-    </div>
-  </div>
-`;
+        div.innerHTML = `
+          <div class="item-carrinho-conteudo">
+            <div class="item-imagem">
+              <img src="${item.img}" alt="${item.nome}">
+            </div>
+            <div class="item-infos">
+              <h2>${item.nome}</h2>
+              <div class="linha-preco">
+                <span>Preço:</span>
+                <span>R$ ${item.preco.toFixed(2)}</span>
+              </div>
+              <div class="linha-subtotal">
+                <span>Subtotal:</span>
+                <span>R$ ${(item.preco * item.quantidade).toFixed(2)}</span>
+              </div>
+              <div class="quantidade-controle">
+                <button onclick="alterarQuantidade(${index}, -1)">-</button>
+                <span class="quantidade-num">${item.quantidade}</span>
+                <button onclick="alterarQuantidade(${index}, 1)">+</button>
+              </div>
+            </div>
+          </div>
+        `;
 
         lista.appendChild(div);
       });
 
-    document.getElementById('valor-total-finalizar').textContent = formatarReal(total);
+      document.getElementById('valor-total-finalizar').textContent = formatarReal(total);
     }
 
     function alterarQuantidade(index, delta) {
@@ -112,19 +127,35 @@ div.innerHTML = `
         return;
       }
 
-   document.body.classList.add("popup-aberto");
-  const overlay = document.getElementById('form-cliente-overlay');
-  overlay.style.display = 'flex';
+      document.body.classList.add("popup-aberto");
+      const overlay = document.getElementById('form-cliente-overlay');
+      overlay.style.display = 'flex';
 
-  setTimeout(() => {
-    document.getElementById('form-cliente-popup').scrollIntoView({ behavior: 'smooth', block: 'center' });
-  }, 100);
-}
+      fetch('/cliente/logado', { method: 'GET' })
+      .then(res => res.json())
+      .then(cliente => {
+      console.log("Cliente retornado:", cliente);
+      const endereco = cliente.endereco;
 
-function fecharPopup() {
-  document.getElementById('form-cliente-overlay').style.display = 'none';
-  document.body.classList.remove("popup-aberto");
-}
+      const enderecoFinal = (!endereco || endereco === "null" || endereco.trim() === "")
+        ? "Não cadastrado"
+        : endereco;
+
+      document.getElementById('resumo-endereco').textContent = enderecoFinal;
+    })
+        .catch(() => {
+          document.getElementById('resumo-endereco').textContent = 'Erro ao carregar endereço';
+        });
+
+      setTimeout(() => {
+        document.getElementById('form-cliente-popup').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 100);
+    }
+
+    function fecharPopup() {
+      document.getElementById('form-cliente-overlay').style.display = 'none';
+      document.body.classList.remove("popup-aberto");
+    }
 
     function fecharSeClicarFora(event) {
       const popup = document.getElementById('form-cliente-popup');
@@ -133,71 +164,81 @@ function fecharPopup() {
       }
     }
 
-  async function enviarPedido() {
-  const btn = document.getElementById('btn-enviar');
-  btn.disabled = true;
-  btn.textContent = "Enviando...";
+    async function enviarPedido() {
+      const btn = document.getElementById('btn-enviar');
+      btn.disabled = true;
+      btn.textContent = "Enviando...";
 
-  try {
-    const nome = document.getElementById('nome-cliente').value.trim();
-    const telefone = document.getElementById('telefone-cliente').value.trim();
-    const endereco = document.getElementById('endereco-cliente').value.trim();
-    const troco = document.getElementById('troco-pagamento').value.trim();
+      try {
+        const opcaoEndereco = document.querySelector('input[name="endereco-opcao"]:checked').value;
+        const troco = document.getElementById('troco-pagamento').value.trim();
+        let cliente = null;
 
-    if (!nome || !telefone || !endereco) {
-      alert("Preencha todos os dados!");
-      return;
+        if (opcaoEndereco === "novo") {
+          const nome = document.getElementById('nome-cliente').value.trim();
+          const telefone = document.getElementById('telefone-cliente').value.trim();
+          const endereco = document.getElementById('endereco-cliente').value.trim();
+
+          if (!nome || !telefone || !endereco) {
+            alert("Preencha todos os dados!");
+            return;
+          }
+
+          if (!/^\d{8,15}$/.test(telefone)) {
+            alert("Telefone inválido.");
+            return;
+          }
+
+          cliente = { nome, telefone, endereco, sobrescrever: true};
+        }
+
+        const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+        if (carrinho.length === 0) {
+          alert("Carrinho vazio.");
+          return;
+        }
+
+        const pedidoRequest = {
+          cliente: cliente,
+          troco: troco,
+          itens: carrinho.map(item => ({
+            produtoId: item.id,
+            quantidade: item.quantidade
+          }))
+        };
+
+        console.log("Enviando pedido:", JSON.stringify(pedidoRequest));
+        const pedidoResponse = await fetch("/pedido/fazer", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(pedidoRequest)
+        });
+
+        if (!pedidoResponse.ok) throw new Error("Erro ao fazer o pedido.");
+
+        const resultado = await pedidoResponse.json();
+        window.location.href = `/detalhespedido/${resultado.id}`;
+
+        localStorage.removeItem('carrinho');
+        carregarCarrinho();
+        fecharPopup();
+
+      } catch (error) {
+        console.error(error);
+        alert("Erro ao enviar o pedido. Tente novamente.");
+      } finally {
+        btn.disabled = false;
+        btn.textContent = "Finalizar Compra";
+      }
     }
-
-    if (!/^\d{8,15}$/.test(telefone)) {
-      alert("Telefone inválido.");
-      return;
-    }
-
-    const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
-    if (carrinho.length === 0) {
-      alert("Carrinho vazio.");
-      return;
-    }
-
-    const pedidoRequest = {
-      cliente: {
-        nome: nome,
-        telefone: telefone,
-        endereco: endereco
-      },
-      troco: troco,
-      itens: carrinho.map(item => ({
-        produtoId: item.id,
-        quantidade: item.quantidade
-      }))
-    };
-
-    console.log("Enviando pedido:", JSON.stringify(pedidoRequest));
-    const pedidoResponse = await fetch("/pedido/fazer", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(pedidoRequest)
-    });
-
-    if (!pedidoResponse.ok) throw new Error("Erro ao fazer o pedido.");
-
-    const resultado = await pedidoResponse.json();
-    window.location.href = `/detalhespedido/${resultado.id}`;
-
-    localStorage.removeItem('carrinho');
-    carregarCarrinho();
-    fecharPopup();
-
-  } catch (error) {
-    console.error(error);
-    alert("Erro ao enviar o pedido. Tente novamente.");
-  } finally {
-    btn.disabled = false;
-    btn.textContent = "Finalizar Compra";
-  }
-}
+    document.querySelectorAll('input[name="endereco-opcao"]').forEach(input => {
+    input.addEventListener('change', () => {
+    const campoNovoEndereco = document.querySelector('.input-popup');
+    campoNovoEndereco.style.display = input.value === 'novo' ? 'block' : 'none';
+  });
+});
     document.addEventListener('DOMContentLoaded', carregarCarrinho);
 </script>
+
 </body>
 </html>
