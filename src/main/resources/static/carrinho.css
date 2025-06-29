@@ -172,9 +172,71 @@ h1 {
   z-index: 9999;
 }
 
-/* Popup central — estrutura mantida */
+#form-cliente-popup label {
+  display: block;
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 0.8rem 1rem;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+#form-cliente-popup label:hover {
+  border-color: #4CAF50;
+}
+
+.linha-radio {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+  color: #333;
+  font-weight: 400;
+}
+
+#form-cliente-popup input[type="radio"] {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border: 2px solid #4CAF50;
+  border-radius: 50%;
+  position: relative;
+  margin: 0;
+  margin-top: 1px;
+  cursor: pointer;
+}
+
+#form-cliente-popup input[type="radio"]:checked::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 8px;
+  background-color: #4CAF50;
+  border-radius: 50%;
+}
+
+#resumo-endereco {
+  display: block;
+  margin-top: 0.4rem;
+  margin-left: 1.6rem;
+  font-weight: 400;
+  color: #2e7d32;
+  font-size: 0.95rem;
+  word-break: break-word;
+  white-space: pre-wrap;
+}
+/* Espaçamento entre as opções */
+#form-cliente-popup label + label {
+  margin-top: 1rem;
+}
+
 #form-cliente-popup {
-  background: linear-gradient(135deg, #ffffff, #f9f9f9); /* fundo mais claro e elegante */
+  background: linear-gradient(135deg, #ffffff, #f9f9f9);
   padding: 2rem;
   border-radius: 12px;
   width: 90%;
@@ -183,6 +245,10 @@ h1 {
   position: relative;
   animation: surgir 0.3s ease;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.input-popup {
+  display: none;
 }
 
 .input-popup input{

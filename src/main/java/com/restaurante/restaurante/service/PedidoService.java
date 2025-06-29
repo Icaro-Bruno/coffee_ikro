@@ -76,19 +76,20 @@ public class PedidoService {
         ClienteModel cliente = clienteRepository.findByEmail(emailAutenticado)
             .map(c -> {
                 ClienteRequest dto = request.getCliente();
+                if (dto == null) return c;
+
+                boolean sobrescrever = dto.isSobrescrever();
                 boolean atualizado = false;
 
-                if (c.getTelefone() == null || c.getTelefone().isBlank()) {
+                if (sobrescrever || c.getTelefone() == null || c.getTelefone().isBlank()) {
                     c.setTelefone(dto.getTelefone());
                     atualizado = true;
                 }
-
-                if (c.getEndereco() == null || c.getEndereco().isBlank()) {
+                if (sobrescrever || c.getEndereco() == null || c.getEndereco().isBlank()) {
                     c.setEndereco(dto.getEndereco());
                     atualizado = true;
                 }
-
-                if (c.getNome() == null || c.getNome().isBlank()) {
+                if (sobrescrever || c.getNome() == null || c.getNome().isBlank()) {
                     c.setNome(dto.getNome());
                     atualizado = true;
                 }
