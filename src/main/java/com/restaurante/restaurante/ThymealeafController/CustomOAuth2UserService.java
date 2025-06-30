@@ -31,7 +31,7 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         return new DefaultOAuth2User(
                 oauth2User.getAuthorities(),
                 oauth2User.getAttributes(),
-                "sub"
+                "email"
         );
     }
 }

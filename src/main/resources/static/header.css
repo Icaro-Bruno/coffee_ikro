@@ -56,11 +56,12 @@ header {
 #menu ul li a {
     text-decoration: none;
     color: white;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     font-weight: 600;
     display: block;
     transition: color 0.3s ease, transform 0.2s;
     font-family: 'Merienda', cursive;
+    padding-left: 10px;
 }
 
 #menu ul li a:hover {
@@ -121,10 +122,6 @@ header {
     #menu {
         width: 360px;
         padding: 35px 20px;
-    }
-
-    #menu ul li a {
-        font-size: 2rem;
     }
 
     #menu ul li {
