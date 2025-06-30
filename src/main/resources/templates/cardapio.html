@@ -18,7 +18,7 @@
         <h1>Nosso Cardápio</h1>
 
         <div class="categorias-filtros">
-            <button class="categoria-botao" data-categoria="todos">Todos</button>
+            <button class="categoria-botao ativa" data-categoria="todos">Todos</button>
             <button class="categoria-botao" data-categoria="comidas">Comidas</button>
             <button class="categoria-botao" data-categoria="bebidas">Bebidas</button>
             <button class="categoria-botao" data-categoria="sobremesas">Sobremesas</button>
@@ -55,8 +55,13 @@
             botao.addEventListener('click', () => {
                 const categoria = botao.getAttribute('data-categoria');
 
+                document.querySelector('.categoria-botao.ativa')?.classList.remove('ativa');
+                botao.classList.add('ativa');
+
                 itens.forEach(item => {
-                    if (item.getAttribute('data-categoria') === categoria || categoria === 'todos') {
+                    const itemCategoria = item.getAttribute('data-categoria');
+
+                    if (categoria === 'todos' || itemCategoria === categoria) {
                         item.style.display = 'block';
                     } else {
                         item.style.display = 'none';
