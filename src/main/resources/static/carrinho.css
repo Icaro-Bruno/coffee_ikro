@@ -11,7 +11,7 @@
 .botao-voltar {
     background: none;
     border: none;
-    color: #000;
+    color: rgba(0, 0, 0, 0.6);
     font-size: 1rem;
     cursor: pointer;
     display: flex;
@@ -115,12 +115,13 @@ h1 {
 }
 
 .quantidade-controle button {
-    padding: 4px 8px;
-    font-size: 1rem;
+    width: 21px;
+    height: 21px;
+    font-size: 0.98rem;
     background: #b65736;
     color: #fff;
     border: none;
-    border-radius: 6px;
+    border-radius: 50%;
     cursor: pointer;
     transition: background-color 0.2s ease;
 }
@@ -390,8 +391,9 @@ h1 {
 
       .quantidade-controle button {
         margin-top: -5px;
-        padding: 3px 7px;
-        font-size: 0.90rem;
+        width: 20px;
+        height: 20px;
+        font-size: 0.89rem;
       }
 
       .quantidade-num {
@@ -400,8 +402,8 @@ h1 {
       }
 
       .botao-finalizar {
-        padding: 14px 0;
-        font-size: 0.8rem;
+        padding: 16px 0;
+        font-size: 0.83rem;
         font-weight: 300;
       }
 
