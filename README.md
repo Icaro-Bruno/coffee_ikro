@@ -4,7 +4,7 @@ Coffee Ikro é um sistema web de delivery desenvolvido em Java com Spring Boot, 
 
 ## Link para demonstração
 
-A aplicação está hospedada gratuitamente na plataforma Render (sujeita a instabilidades em períodos de inatividade):
+A aplicação está hospedada gratuitamente na plataforma Render (sujeita a instabilidades por causa do plano grátis):
 
 [https://coffe-ikro.onrender.com](https://coffe-ikro.onrender.com)
 
