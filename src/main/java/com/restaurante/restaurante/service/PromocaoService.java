@@ -28,9 +28,9 @@ public class PromocaoService {
         return converterToResponse(promocao); //transformando model em dto nvmt
     }
 
-    public PromocaoResponse atualizarPromocao(Long id,PromocaoRequest request){
+    public PromocaoResponse atualizarPromocao(Long id, PromocaoRequest request) {
         PromocaoModel promocao = repository.findById(id)
-                .orElseThrow(()-> new RuntimeException("Promocao não existe"));
+                .orElseThrow(() -> new RuntimeException("Promocao não existe"));
 
         promocao.setTitulo(request.getTitulo());
         promocao.setImgUrl(request.getImgUrl());
@@ -42,24 +42,24 @@ public class PromocaoService {
         return converterToResponse(promocao);
     }
 
-    public List<PromocaoResponse> buscarPorTitulo(String titulo){
+    public List<PromocaoResponse> buscarPorTitulo(String titulo) {
         return repository.findByTituloContainingIgnoreCase(titulo)
                 .stream().map(this::converterToResponse).collect(Collectors.toList());
     }
 
-    public void alterarStatusPromo(Long id,boolean ativo){
+    public void alterarStatusPromo(Long id, boolean ativo) {
         PromocaoModel promocao = repository.findById(id)
-                .orElseThrow(()-> new RuntimeException("Promoção não localizada"));
+                .orElseThrow(() -> new RuntimeException("Promoção não localizada"));
         promocao.setAtivo(ativo);
         repository.save(promocao);
     }
 
-    public List<PromocaoResponse> listarTodas(){
+    public List<PromocaoResponse> listarTodas() {
         return repository.findAll()
                 .stream().map(this::converterToResponse).collect(Collectors.toList());
     }
 
-    public List<PromocaoResponse> listarRecentes(){
+    public List<PromocaoResponse> listarRecentes() {
         return repository.findAllByOrderByDataInicioDesc()
                 .stream().map(this::converterToResponse).collect(Collectors.toList());
     }
@@ -75,7 +75,12 @@ public class PromocaoService {
         );
     }
 
-    public void deletarPromocao(Long id){
+    public void deletarPromocao(Long id) {
         repository.deleteById(id);
     }
+
+    public long contarAtivas() {
+        return repository.countByAtivoTrue();
+    }
 }
+

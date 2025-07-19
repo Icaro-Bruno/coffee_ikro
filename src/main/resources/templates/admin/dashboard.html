@@ -1,0 +1,62 @@
+<!-- templates/admin/painel.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Painel Admin</title>
+    <link rel="stylesheet" th:href="@{/admin/dashboard.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+</head>
+<body>
+<header>
+    <h1>Painel Administrativo</h1>
+    <nav>
+        <a th:href="@{/admin/pedidos}"><i class="fa fa-receipt"></i> Pedidos</a>
+        <a th:href="@{/admin/produtos}"><i class="fa fa-box"></i> Produtos</a>
+        <a th:href="@{/admin/clientes}"><i class="fa fa-users"></i> Clientes</a>
+        <a th:href="@{/admin/promocoes}"><i class="fa fa-tags"></i> Promoções</a>
+        <a th:href="@{/admin/logout}"><i class="fa fa-sign-out-alt"></i> Sair</a>
+    </nav>
+</header>
+
+<main class="dashboard-grid">
+
+    <!-- PEDIDOS -->
+    <section class="card highlight">
+        <i class="fa fa-receipt fa-2x"></i>
+        <h2>Pedidos</h2>
+        <p>Total: <span th:text="${totalPedidos}"></span></p>
+        <p>Pendentes: <span th:text="${pedidosPendentes}"></span></p>
+        <p>Enviados: <span th:text="${pedidosEnviados}"></span></p>
+        <p>Cancelados: <span th:text="${pedidosCancelados}"></span></p>
+        <a th:href="@{/admin/pedidos}" class="btn">Ver pedidos</a>
+    </section>
+
+    <!-- PRODUTOS -->
+    <section class="card">
+        <i class="fa fa-box fa-2x"></i>
+        <h2>Produtos</h2>
+        <p>Total: <span th:text="${totalProdutos}"></span></p>
+        <a th:href="@{/admin/produtos}" class="btn">Ver produtos</a>
+    </section>
+
+    <!-- CLIENTES -->
+    <section class="card">
+        <i class="fa fa-users fa-2x"></i>
+        <h2>Clientes</h2>
+        <p>Total: <span th:text="${totalClientes}"></span></p>
+        <a th:href="@{/admin/clientes}" class="btn">Ver clientes</a>
+    </section>
+
+    <!-- PROMOÇÕES -->
+    <section class="card">
+        <i class="fa fa-tags fa-2x"></i>
+        <h2>Promoções</h2>
+        <p>Ativas: <span th:text="${totalPromocoes}"></span></p>
+        <a th:href="@{/admin/promocoes}" class="btn">Ver promoções</a>
+    </section>
+
+</main>
+</body>
+</html>

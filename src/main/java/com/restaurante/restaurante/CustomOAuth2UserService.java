@@ -1,4 +1,4 @@
-package com.restaurante.restaurante.ThymealeafController;
+package com.restaurante.restaurante;
 
 import com.restaurante.restaurante.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;

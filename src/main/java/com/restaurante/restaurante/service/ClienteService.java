@@ -18,13 +18,13 @@ public class ClienteService {
     private ClienteRepository repository;
 
     public ClienteResponse criarCliente(ClienteRequest request) {
-       ClienteModel cliente = new ClienteModel();
-       cliente.setNome(request.getNome());
-       cliente.setEndereco(request.getEndereco());
-       cliente.setTelefone(request.getTelefone());
+        ClienteModel cliente = new ClienteModel();
+        cliente.setNome(request.getNome());
+        cliente.setEndereco(request.getEndereco());
+        cliente.setTelefone(request.getTelefone());
 
-       cliente = repository.save(cliente);
-       return converterToResponse(cliente);
+        cliente = repository.save(cliente);
+        return converterToResponse(cliente);
     }
 
     private ClienteResponse converterToResponse(ClienteModel cliente){
@@ -82,5 +82,9 @@ public class ClienteService {
         novoCliente.setNome(nome);
 
         return repository.save(novoCliente);
+    }
+
+    public long contar() {
+        return repository.count();
     }
 }
