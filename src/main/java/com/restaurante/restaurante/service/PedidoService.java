@@ -156,4 +156,12 @@ public class PedidoService {
     public void excluirPedido(Long id){
         repository.deleteById(id);
     }
+
+    public long contarTodos() {
+        return repository.count();
+    }
+
+    public long contarPorStatus(String status) {
+        return repository.countByStatus(StatusPedido.valueOf(status));
+    }
 }

@@ -1,6 +1,7 @@
 package com.restaurante.restaurante.repository;
 
 import com.restaurante.restaurante.model.PedidoModel;
+import com.restaurante.restaurante.model.StatusPedido;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -15,4 +16,6 @@ public interface PedidoRepository extends JpaRepository<PedidoModel, Long> {
     List<PedidoModel> findAllByOrderByDataHoraDesc();
 
     List<PedidoModel> findAllByClienteEmail(String email);
+
+    long countByStatus(StatusPedido statusPedido);
 }

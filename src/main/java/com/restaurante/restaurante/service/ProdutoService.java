@@ -93,4 +93,7 @@ public class ProdutoService {
         return false;
     }
 
+    public long contar() {
+        return repository.count();
+    }
 }

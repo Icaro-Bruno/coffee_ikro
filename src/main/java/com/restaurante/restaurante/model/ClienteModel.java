@@ -21,5 +21,4 @@ public class ClienteModel {
 
     @Column(nullable = false, unique = true)
     private String email;
-
 }
