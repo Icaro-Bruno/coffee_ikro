@@ -4,9 +4,7 @@ import com.restaurante.restaurante.dto.*;
 import com.restaurante.restaurante.model.*;
 import com.restaurante.restaurante.repository.ClienteRepository;
 import com.restaurante.restaurante.repository.PedidoRepository;
-import com.restaurante.restaurante.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -35,10 +33,51 @@ public class PedidoService {
         return converterPraResponse(pedido);
     }
 
+    public List<PedidoResponse> listarTodos(){
+        List<PedidoModel> pedidos = repository.findAll();
+        return pedidos.stream().map(this::converterPraResponse)
+                .collect(Collectors.toList());
+    }
+
+    public List<PedidoResponse> buscarPorTelefone(String telefone) {
+        List<PedidoModel> pedidos = repository.buscarPorTelefone(telefone);
+        return pedidos.stream().map(PedidoResponse::new).toList();
+    }
+
     public List<PedidoResponse> listarPedEmail(String email){
         List<PedidoModel> pedidos = repository.findAllByClienteEmail(email);
         return pedidos.stream()
                 .map(this::converterPraResponse).collect(Collectors.toList());
+    }
+
+    public List<PedidoResponse> filtrarPorStatusEOrdenacao(StatusPedido status, String ordem) {
+        List<PedidoModel> pedidos;
+
+        if (status != null) {
+            if ("recentes".equals(ordem)) {
+                pedidos = repository.findByStatusOrderByDataHoraDesc(status);
+            } else if ("antigos".equals(ordem)) {
+                pedidos = repository.findByStatusOrderByDataHoraAsc(status);
+            } else {
+                pedidos = repository.findByStatus(status);
+            }
+        } else {
+            if ("recentes".equals(ordem)) {
+                pedidos = repository.findAllByOrderByDataHoraDesc();
+            } else if ("antigos".equals(ordem)) {
+                pedidos = repository.findAllByOrderByDataHoraAsc();
+            } else {
+                pedidos = repository.findAll();
+            }
+        }
+        return pedidos.stream().map(PedidoResponse::new).collect(Collectors.toList());
+    }
+
+    public void atualizarStatus(Long pedidoId, StatusPedido novoStatus) {
+        PedidoModel pedido = repository.findById(pedidoId)
+                .orElseThrow(() -> new RuntimeException("Pedido não encontrado"));
+        pedido.setStatus(novoStatus);
+        repository.save(pedido);
     }
 
     public List<PedidoResponse> listarAntigos(){

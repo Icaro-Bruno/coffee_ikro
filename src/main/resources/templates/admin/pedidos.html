@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedidos - Admin</title>
+    <link rel="stylesheet" th:href="@{/admin/pedidos.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+</head>
+<body>
+<header>
+    <h1>Gestão de Pedidos</h1>
+    <nav>
+        <a th:href="@{/admin/dashboard}"><i class="fa fa-home"></i> Dashboard</a>
+        <a th:href="@{/admin/produtos}"><i class="fa fa-box"></i> Produtos</a>
+        <a th:href="@{/admin/clientes}"><i class="fa fa-users"></i> Clientes</a>
+        <a th:href="@{/admin/promocoes}"><i class="fa fa-tags"></i> Promoções</a>
+        <a th:href="@{/admin/logout}"><i class="fa fa-sign-out-alt"></i> Sair</a>
+    </nav>
+</header>
+
+<main class="container">
+    <h2>Lista de Pedidos</h2>
+
+    <form action="#" th:action="@{/admin/pedidos/telefone}" method="get" class="form-busca">
+        <input type="text" name="telefone" placeholder="Buscar por telefone..." required>
+        <button type="submit"><i class="fa fa-search"></i> Buscar</button>
+    </form>
+
+    <div class="filtros">
+        <form th:action="@{/admin/pedidos}" method="get" style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <select name="ordem" class="filtro-btn">
+                <option value="" th:selected="${ordemAtual == null}">Todos</option>
+                <option th:value="'recentes'" th:selected="${ordemAtual == 'recentes'}">Recentes</option>
+                <option th:value="'antigos'" th:selected="${ordemAtual == 'antigos'}">Antigos</option>
+            </select>
+
+            <select name="status" class="filtro-btn">
+                <option value="" th:selected="${statusAtual == null}">Todos os Status</option>
+                <option th:value="'PENDENTE'" th:selected="${statusAtual == 'PENDENTE'}">Pendentes</option>
+                <option th:value="'A_CAMINHO'" th:selected="${statusAtual == 'A_CAMINHO'}">A Caminho</option>
+                <option th:value="'ENTREGUE'" th:selected="${statusAtual == 'ENTREGUE'}">Entregues</option>
+                <option th:value="'CANCELADO'" th:selected="${statusAtual == 'CANCELADO'}">Cancelados</option>
+            </select>
+
+            <button type="submit" class="filtro-btn">Filtrar</button>
+        </form>
+    </div>
+
+    <table class="tabela-pedidos">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Cliente</th>
+            <th>Status</th>
+            <th>Total</th>
+            <th>Data</th>
+            <th>Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="pedido : ${pedidos}">
+            <td th:text="${pedido.id}">1</td>
+            <td th:text="${pedido.cliente.nome}">João</td>
+            <td th:text="${pedido.status}">PENDENTE</td>
+            <td th:text="'R$ ' + ${#numbers.formatDecimal(pedido.total, 1, 'COMMA', 2, 'COMMA')}">R$ 10,25</td>
+            <td th:text="${pedido.dataHora != null ? #temporals.format(pedido.dataHora, 'dd/MM/yyyy HH:mm') : '---'}">10/07/2025</td>
+            <td>
+                <a th:href="@{/admin/detalhespedido/{id}(id=${pedido.id})}" class="btn">Detalhes</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+</body>
+</html>
