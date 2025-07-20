@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/admin")
@@ -27,22 +28,31 @@ public class PagsAdmin {
     private ClienteService clienteService;
 
     @GetMapping("/login")
-    public String mostrarLogin(){
+    public String mostrarLogin(@RequestParam(value= "erro", required = false)
+                               String erro, Model model){
+        if(erro != null) {
+            model.addAttribute("erro", "Usuário ou senha inválidos");
+        }
         return "admin/login";
     }
 
     @PostMapping("/login")
-    public String fazerLogin(@RequestParam String usuario, @RequestParam String senha,Model model){
+    public String fazerLogin(@RequestParam String usuario, @RequestParam String senha,
+                             HttpSession session, RedirectAttributes redirect) {
         if (adminService.autenticar(usuario, senha)) {
-            model.addAttribute("usuarioLogado", usuario);
+            session.setAttribute("adminLogado", true);
             return "redirect:/admin/dashboard";
         }
-        model.addAttribute("erro", "Dados inválidos");
-        return "admin/login";
+
+        redirect.addAttribute("erro", "true");
+        return "redirect:/admin/login";
     }
 
     @GetMapping("/dashboard")
-    public String mostrarDashboard(Model model) {
+    public String mostrarDashboard(HttpSession session,Model model) {
+        if(session.getAttribute("adminLogado") == null) {
+            return "redirect:/admin/login";
+        }
         model.addAttribute("totalPedidos", pedidoService.contarTodos());
         model.addAttribute("pedidosPendentes", pedidoService.contarPorStatus("PENDENTE"));
         model.addAttribute("pedidosEnviados", pedidoService.contarPorStatus("ENTREGUE"));
