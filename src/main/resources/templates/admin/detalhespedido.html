@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes do Pedido</title>
+    <link rel="stylesheet" th:href="@{/admin/pedidos.css}">
+</head>
+<body>
+<header>
+    <h1>Detalhes do Pedido</h1>
+    <nav>
+        <a th:href="@{/admin/dashboard}"><i class="fa fa-home"></i> Dashboard</a>
+        <a th:href="@{/admin/pedidos}"><i class="fa fa-arrow-left"></i> Voltar</a>
+    </nav>
+</header>
+
+<main class="container">
+    <h2 th:text="'Pedido #' + ${pedido.id}">Pedido #32</h2>
+
+    <table class="tabela-pedidos">
+        <tr>
+            <th>Cliente</th>
+            <td th:text="${pedido.cliente.nome}">João</td>
+        </tr>
+        <tr>
+            <th>Telefone</th>
+            <td th:text="${pedido.cliente.telefone}">(99) 99999-9999</td>
+        </tr>
+        <tr>
+            <th>Data do Pedido</th>
+            <td th:text="${#temporals.format(pedido.dataHora, 'dd/MM/yyyy HH:mm')}">10/07/2025 14:30</td>
+        </tr>
+        <tr>
+            <th>Total</th>
+            <td th:text="'R$ ' + ${#numbers.formatDecimal(pedido.total, 1, 'COMMA', 2, 'COMMA')}">R$ 105,50</td>
+        </tr>
+        <tr>
+            <th>Status</th>
+            <td>
+                <form th:action="@{/admin/pedido/atualizarStatus}" method="post" style="display: flex; gap: 10px;">
+                    <input type="hidden" name="pedidoId" th:value="${pedido.id}" />
+                    <select name="novoStatus" class="filtro-btn">
+                        <option th:each="status : ${statusList}"
+                                th:value="${status}"
+                                th:text="${status}"
+                                th:selected="${status == pedido.status}">
+                        </option>
+                    </select>
+                    <button type="submit" class="btn">Atualizar</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+
+    <h3 style="margin-top: 2rem;">Produtos do Pedido</h3>
+
+    <table class="tabela-pedidos">
+        <thead>
+        <tr>
+            <th>Produto</th>
+            <th>Quantidade</th>
+            <th>Preço Unitário</th>
+            <th>Subtotal</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item : ${pedido.itens}">
+            <td th:text="${item.produto.nome}">Produto</td>
+            <td th:text="${item.quantidade}">1</td>
+            <td th:text="'R$ ' + ${#numbers.formatDecimal(item.precoUnitario, 1, 'COMMA', 2, 'COMMA')}">R$ 00,00</td>
+            <td th:text="'R$ ' + ${#numbers.formatDecimal(item.subtotal, 1, 'COMMA', 2, 'COMMA')}">R$ 00,00</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div style="margin-top: 1.5rem;">
+        <a th:href="@{/admin/pedidos}" class="btn">Voltar para lista</a>
+    </div>
+</main>
+</body>
+</html>

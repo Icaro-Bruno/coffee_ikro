@@ -24,6 +24,11 @@ public class PedidoController {
         return service.buscarPorId(id);
     }
 
+    @GetMapping("/todos")
+    public List<PedidoResponse> listarTodos(){
+        return service.listarTodos();
+    }
+
     @GetMapping("/antigos")
     public List<PedidoResponse> listarPedAntigos(){
         return service.listarAntigos();
