@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Editar Promoção</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" th:href="@{/admin/dashboard.css}">
+</head>
+<body>
+
+<header>
+  <h1>Editar Promoção</h1>
+  <nav>
+    <a th:href="@{/admin/promocoes}">← Voltar para Promoções</a>
+  </nav>
+</header>
+
+<main class="container">
+  <form th:action="@{/admin/promocoes/atualizar}" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="id" th:value="${promocao.id}">
+
+    <label for="titulo">Título:</label>
+    <input type="text" id="titulo" name="titulo" th:value="${promocao.titulo}" required>
+
+    <label>Imagem Atual:</label>
+    <img th:src="${promocao.imgUrl}" alt="Imagem Promoção" width="120">
+
+    <label for="imagem">Nova Imagem (opcional):</label>
+    <input type="file" id="imagem" name="imagem" accept="image/*">
+
+    <label for="ativo">Ativa?</label>
+    <select id="ativo" name="ativo" th:value="${promocao.ativo}">
+      <option th:selected="${promocao.ativo}" value="true">Sim</option>
+      <option th:selected="${!promocao.ativo}" value="false">Não</option>
+    </select>
+
+    <label for="dataInicio">Data Início:</label>
+    <input type="date" id="dataInicio" name="dataInicio" th:value="${promocao.dataInicio}" required>
+
+    <label for="dataFim">Data Fim:</label>
+    <input type="date" id="dataFim" name="dataFim" th:value="${promocao.dataFim}" required>
+
+    <button type="submit">Atualizar Promoção</button>
+  </form>
+</main>
+
+</body>
+</html>

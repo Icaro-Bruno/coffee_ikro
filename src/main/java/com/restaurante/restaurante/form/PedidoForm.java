@@ -1,4 +1,4 @@
-package com.restaurante.restaurante.dto;
+package com.restaurante.restaurante.form;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

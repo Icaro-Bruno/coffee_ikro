@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Produtos - Admin</title>
+  <link rel="stylesheet" th:href="@{/admin/dashboard.css}">
+</head>
+<body>
+<header>
+  <h1>Produtos Cadastrados</h1>
+  <nav>
+    <a th:href="@{/admin/dashboard}">← Voltar para Dashboard</a>
+    <a th:href="@{/admin/produto/criar}" class="btn">+ Novo Produto</a>
+  </nav>
+</header>
+
+<main class="container">
+  <table class="tabela-pedidos">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nome</th>
+      <th>Categoria</th>
+      <th>Preço</th>
+      <th>Ações</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="produto : ${produtos}">
+      <td th:text="${produto.id}">1</td>
+      <td th:text="${produto.nome}">Pizza</td>
+      <td th:text="${produto.categoria}">Pizza</td>
+      <td th:text="'R$ ' + ${produto.preco}">R$ 55,90</td>
+      <td>
+        <a th:href="@{'/admin/produto/editar/' + ${produto.id}}" class="btn">Editar</a>
+        <a th:href="@{'/admin/produto/excluir/' + ${produto.id}}" class="btn"
+           onclick="return confirm('Tem certeza que deseja excluir este produto?')">Excluir</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</main>
+</body>
+</html>

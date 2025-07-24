@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Promoções - Admin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/admin/dashboard.css}">
+</head>
+<body>
+
+<header>
+    <h1>Gerenciar Promoções</h1>
+    <nav>
+        <a th:href="@{/admin/dashboard}">← Voltar ao Painel</a>
+        <a th:href="@{/admin/promocoes/criar}" class="btn-criar">+ Nova Promoção</a>
+    </nav>
+</header>
+
+<main class="container">
+    <table class="tabela-pedidos">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Título</th>
+            <th>Imagem</th>
+            <th>Ativa</th>
+            <th>Início</th>
+            <th>Fim</th>
+            <th>Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="promocao : ${promocoes}">
+            <td th:text="${promocao.id}">1</td>
+            <td th:text="${promocao.titulo}">Super Desconto</td>
+            <td><img th:src="${promocao.imgUrl}" alt="Imagem Promoção" width="80"></td>
+            <td th:text="${promocao.ativo ? 'Sim' : 'Não'}">Sim</td>
+            <td th:text="${#dates.format(promocao.dataInicio, 'dd/MM/yyyy')}">23/07/2025</td>
+            <td th:text="${#dates.format(promocao.dataFim, 'dd/MM/yyyy')}">30/07/2025</td>
+            <td>
+                <a th:href="@{/admin/promocoes/editar/{id}(id=${promocao.id})}">Editar</a> |
+                <a th:href="@{/admin/promocoes/deletar/{id}(id=${promocao.id})}" onclick="return confirm('Deseja excluir esta promoção?')">Excluir</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+
+</body>
+</html>

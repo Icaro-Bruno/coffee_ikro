@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Clientes - Admin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/admin/dashboard.css}">
+</head>
+<body>
+
+<header>
+    <h1>Clientes Cadastrados</h1>
+    <nav>
+        <a th:href="@{/admin/dashboard}">← Voltar ao Painel</a>
+    </nav>
+</header>
+
+<main class="container">
+    <table class="tabela-pedidos">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Telefone</th>
+            <th>Endereço</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="cliente : ${clientes}">
+            <td th:text="${cliente.id}">1</td>
+            <td th:text="${cliente.nome}">João</td>
+            <td th:text="${cliente.telefone}">(88) 99999-9999</td>
+            <td th:text="${cliente.endereco}">Rua Exemplo, 123</td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+
+</body>
+</html>

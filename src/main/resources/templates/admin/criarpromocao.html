@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Criar Promoção</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" th:href="@{/admin/dashboard.css}">
+</head>
+<body>
+
+<header>
+  <h1>Criar Nova Promoção</h1>
+  <nav>
+    <a th:href="@{/admin/promocoes}">← Voltar para Promoções</a>
+  </nav>
+</header>
+
+<main class="container">
+  <form th:action="@{/admin/promocoes/salvar}" method="post" enctype="multipart/form-data">
+    <label for="titulo">Título:</label>
+    <input type="text" id="titulo" name="titulo" required>
+
+    <label for="imagem">Imagem:</label>
+    <input type="file" id="imagem" name="imagem" accept="image/*" required>
+
+    <label for="ativo">Ativa?</label>
+    <select id="ativo" name="ativo">
+      <option value="true">Sim</option>
+      <option value="false">Não</option>
+    </select>
+
+    <label for="dataInicio">Data Início:</label>
+    <input type="date" id="dataInicio" name="dataInicio" required>
+
+    <label for="dataFim">Data Fim:</label>
+    <input type="date" id="dataFim" name="dataFim" required>
+
+    <button type="submit">Salvar Promoção</button>
+  </form>
+</main>
+
+</body>
+</html>
