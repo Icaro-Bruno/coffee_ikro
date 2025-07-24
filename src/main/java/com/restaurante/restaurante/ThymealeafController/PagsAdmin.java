@@ -1,7 +1,8 @@
 package com.restaurante.restaurante.ThymealeafController;
 
-import com.restaurante.restaurante.dto.PedidoResponse;
-import com.restaurante.restaurante.model.PedidoModel;
+import com.restaurante.restaurante.dto.*;
+import com.restaurante.restaurante.form.ProdutoForm;
+import com.restaurante.restaurante.form.PromocaoForm;
 import com.restaurante.restaurante.model.StatusPedido;
 import com.restaurante.restaurante.service.*;
 import jakarta.servlet.http.HttpSession;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -66,7 +68,7 @@ public class PagsAdmin {
         model.addAttribute("totalPromocoes", promocaoService.contarAtivas());
         return "admin/dashboard";
     }
-
+    //PEDIDOS
     @GetMapping("/pedidos")
     public String pedidos(@RequestParam(required = false)StatusPedido status,@RequestParam(required = false) String ordem,HttpSession session, Model model) {
         if(session.getAttribute("adminLogado") == null) {
@@ -106,19 +108,122 @@ public class PagsAdmin {
         return "admin/pedidos";
     }
 
-    /*@GetMapping("/pedidos/recentes")
-    public String listarRecentes(Model model) {
-            List<PedidoResponse> pedidos= pedidoService.listarRecentes();
-            model.addAttribute("pedidos", pedidos);
-            return "admin/pedidos";
+    //PRODUTOS
+    @GetMapping("produto/listar")
+    public String listarProdutos(Model model,HttpSession session){
+        if(session.getAttribute("adminLogado") == null) {
+            return "redirect:/admin/login";
+        }
+        model.addAttribute("produtos", produtoService.listarTodos());
+        return "admin/produtos";
     }
 
-    @GetMapping("/pedidos/antigos")
-    public String listarAntigos(Model model) {
-        List<PedidoResponse> pedidos = pedidoService.listarAntigos();
-        model.addAttribute("pedidos", pedidos);
-        return "admin/pedidos";
-    }*/
+    @GetMapping("/produtos")
+    public String redirecionarProdutos() {
+        return "redirect:/admin/produto/listar";
+    }
+
+    @GetMapping("produto/criar")
+    public String mostrarFormulario(Model model,HttpSession session){
+        if(session.getAttribute("adminLogado") == null) {
+            return "redirect:/admin/login";
+        }
+        model.addAttribute("produto", new ProdutoForm());
+        return "admin/criarproduto";
+    }
+
+    @PostMapping("produto/salvar")
+    public String salvarProduto(@ModelAttribute ProdutoForm produtoForm, @RequestParam("imagem")MultipartFile imagem,RedirectAttributes redirect,HttpSession session){
+        if(session.getAttribute("adminLogado") == null){
+            return "redirect:/admin/login";
+        }
+        try{
+            produtoService.salvarComImagem(produtoForm,imagem);
+            redirect.addFlashAttribute("sucesso","Produto cadastrado.");
+        } catch (Exception e){
+            redirect.addFlashAttribute("erro","Erro ao tentar salvar prodouto: " + e.getMessage());
+        }
+        return "redirect:/admin/produto/listar";
+    }
+
+    @GetMapping("produto/editar/{id}")
+    public String editarProduto(@PathVariable Long id, Model model, HttpSession session) {
+        if(session.getAttribute("adminLogado") == null) {
+            return "redirect:/admin/login";
+        }
+        ProdutoResponse produto = produtoService.buscarPorId(id);
+        model.addAttribute("produto", produto);
+        return "admin/editarproduto";
+    }
+
+    @PostMapping("/produto/editar/{id}")
+    public String atualizarProduto(@PathVariable Long id,
+                                   @ModelAttribute ProdutoForm produtoForm,
+                                   @RequestParam("imagem") MultipartFile imagem,
+                                   RedirectAttributes redirect,
+                                   HttpSession session) {
+        if (session.getAttribute("adminLogado") == null) {
+            return "redirect:/admin/login";
+        }
+
+        try {
+            produtoService.atualizarComImagem(id, produtoForm, imagem); // método que você deve implementar
+            redirect.addFlashAttribute("sucesso", "Produto atualizado com sucesso.");
+        } catch (Exception e) {
+            redirect.addFlashAttribute("erro", "Erro ao atualizar produto: " + e.getMessage());
+        }
+
+        return "redirect:/admin/produto/listar";
+    }
+
+    @GetMapping("produto/excluir/{id}")
+    public String excluirProduto(@PathVariable Long id, RedirectAttributes redirect, HttpSession session) {
+        if(session.getAttribute("adminLogado") == null) {
+            return "redirect:/admin/login";
+        }
+        produtoService.deletarProduto(id);
+        redirect.addFlashAttribute("sucesso", "Produto excluído com sucesso.");
+        return "redirect:/admin/produto/listar";
+    }
+
+    //CLIENTE
+    @GetMapping("/clientes")
+    public String listarClientes(Model model, HttpSession session) {
+        if(session.getAttribute("adminLogado") == null) {
+            return "redirect:/admin/login";
+        }
+        List<ClienteResponse> clientes = clienteService.listarTodos();
+        model.addAttribute("clientes", clientes);
+        return "admin/clientes";
+    }
+
+    //PROMOCOES
+    @GetMapping("/promocoes")
+    public String listarPromocoes(Model model, HttpSession session){
+        if(session.getAttribute("adminLogado") == null) {
+            return "redirect:/admin/login";
+        }
+        List<PromocaoResponse> promocoes = promocaoService.listarTodas();
+        model.addAttribute("promocoes", promocoes);
+        return "admin/promocoes";
+    }
+
+
+    @GetMapping("/criar")
+    public String mostrarFormularioCriar(Model model, HttpSession session) {
+        if (session.getAttribute("adminLogado") == null) {
+            return "redirect:/admin/login";
+        }
+        model.addAttribute("promocao", new PromocaoForm()); // DTO de entrada
+        return "admin/criarpromocao";
+    }
+
+    @PostMapping("/salvar")
+    public String salvarPromocao(@ModelAttribute PromocaoForm form) {
+        promocaoService.salvarViaForm(form);
+        return "redirect:/admin/promocoes";
+    }
+
 
     @GetMapping("/logout")
     public String logout(HttpSession session){
