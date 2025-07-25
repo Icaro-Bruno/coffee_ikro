@@ -33,10 +33,13 @@
         <tr th:each="promocao : ${promocoes}">
             <td th:text="${promocao.id}">1</td>
             <td th:text="${promocao.titulo}">Super Desconto</td>
-            <td><img th:src="${promocao.imgUrl}" alt="Imagem Promoção" width="80"></td>
+            <td>
+                <img th:if="${promocao.imgUrl != null}" th:src="${promocao.imgUrl}" alt="Imagem Promoção" width="80">
+                <span th:if="${promocao.imgUrl == null}">Sem imagem</span>
+            </td>
             <td th:text="${promocao.ativo ? 'Sim' : 'Não'}">Sim</td>
-            <td th:text="${#dates.format(promocao.dataInicio, 'dd/MM/yyyy')}">23/07/2025</td>
-            <td th:text="${#dates.format(promocao.dataFim, 'dd/MM/yyyy')}">30/07/2025</td>
+            <td th:if="${promocao.dataInicio != null}" th:text="${#dates.format(promocao.dataInicio, 'dd/MM/yyyy')}">-</td>
+            <td th:if="${promocao.dataFim != null}" th:text="${#dates.format(promocao.dataFim, 'dd/MM/yyyy')}">-</td>
             <td>
                 <a th:href="@{/admin/promocoes/editar/{id}(id=${promocao.id})}">Editar</a> |
                 <a th:href="@{/admin/promocoes/deletar/{id}(id=${promocao.id})}" onclick="return confirm('Deseja excluir esta promoção?')">Excluir</a>

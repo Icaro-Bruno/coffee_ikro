@@ -21,11 +21,7 @@ public class PromocaoModel {
     private String descricao;
     private String imgUrl;
     private boolean ativo;
-
     private LocalDate dataInicio;
     private LocalDate dataFim;
 
-    public boolean getAtivo() {
-        return ativo;
-    }
 }

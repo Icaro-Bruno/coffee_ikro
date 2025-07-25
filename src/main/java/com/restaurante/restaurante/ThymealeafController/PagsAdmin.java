@@ -3,6 +3,7 @@ package com.restaurante.restaurante.ThymealeafController;
 import com.restaurante.restaurante.dto.*;
 import com.restaurante.restaurante.form.ProdutoForm;
 import com.restaurante.restaurante.form.PromocaoForm;
+import com.restaurante.restaurante.model.PromocaoModel;
 import com.restaurante.restaurante.model.StatusPedido;
 import com.restaurante.restaurante.service.*;
 import jakarta.servlet.http.HttpSession;
@@ -209,7 +210,7 @@ public class PagsAdmin {
     }
 
 
-    @GetMapping("/criar")
+    @GetMapping("promocoes/criar")
     public String mostrarFormularioCriar(Model model, HttpSession session) {
         if (session.getAttribute("adminLogado") == null) {
             return "redirect:/admin/login";
@@ -218,12 +219,48 @@ public class PagsAdmin {
         return "admin/criarpromocao";
     }
 
-    @PostMapping("/salvar")
+    @PostMapping("promocoes/salvar")
     public String salvarPromocao(@ModelAttribute PromocaoForm form) {
         promocaoService.salvarViaForm(form);
         return "redirect:/admin/promocoes";
     }
 
+    @GetMapping("promocoes/editar/{id}")
+    public String mostrarFormularioEdicao(@PathVariable Long id, Model model, HttpSession session) {
+        if (session.getAttribute("adminLogado") == null) {
+            return "redirect:/admin/login";
+        }
+
+        PromocaoModel promocao = promocaoService.buscarEntidadePorId(id);
+        PromocaoForm form = new PromocaoForm();
+
+        form.setTitulo(promocao.getTitulo());
+        form.setAtivo(promocao.isAtivo());
+        form.setDataInicio(promocao.getDataInicio());
+        form.setDataFim(promocao.getDataFim());
+        form.setImgUrl(promocao.getImgUrl()); // usado pra manter imagem antiga se não trocar
+
+        model.addAttribute("promocaoId", id);
+        model.addAttribute("promocao", form);
+
+        return "admin/editarpromocao";
+    }
+
+    @PostMapping("promocoes/editar/{id}")
+    public String editarPromocao(@PathVariable Long id, @ModelAttribute PromocaoForm form) {
+        promocaoService.editarViaForm(id, form);
+        return "redirect:/admin/promocoes";
+    }
+
+    @GetMapping("promocoes/deletar/{id}")
+    public String deletarPromocao(@PathVariable Long id, HttpSession session) {
+        if (session.getAttribute("adminLogado") == null) {
+            return "redirect:/admin/login";
+        }
+
+        promocaoService.deletarPromocao(id);
+        return "redirect:/admin/promocoes";
+    }
 
     @GetMapping("/logout")
     public String logout(HttpSession session){

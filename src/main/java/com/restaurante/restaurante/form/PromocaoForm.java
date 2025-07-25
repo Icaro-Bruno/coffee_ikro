@@ -14,4 +14,6 @@ public class PromocaoForm {
     private boolean ativo;
     private LocalDate dataInicio;
     private LocalDate dataFim;
+    private String imgUrl;
+    
 }
