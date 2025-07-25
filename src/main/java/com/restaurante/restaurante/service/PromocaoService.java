@@ -11,8 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -40,6 +42,31 @@ public class PromocaoService {
                 Map uploadResult = cloudinary.uploader()
                         .upload(form.getImagem().getBytes(), ObjectUtils.emptyMap());
                 String url = uploadResult.get("secure_url").toString();
+                promocao.setImgUrl(url);
+            } catch (IOException e) {
+                throw new RuntimeException("Erro ao fazer upload da imagem", e);
+            }
+        }
+
+        repository.save(promocao);
+    }
+
+    public void editarViaForm(Long id, PromocaoForm form) {
+        PromocaoModel promocao = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Promoção não encontrada"));
+
+        // Atualiza os campos da promoção com os dados do form
+        promocao.setTitulo(form.getTitulo());
+        promocao.setDescricao(form.getDescricao());
+        promocao.setAtivo(form.isAtivo());
+        promocao.setDataInicio(form.getDataInicio());
+        promocao.setDataFim(form.getDataFim());
+
+        // Se tem imagem nova no form, faz upload e atualiza URL
+        if (form.getImagem() != null && !form.getImagem().isEmpty()) {
+            try {
+                Map uploadResult = cloudinary.uploader().upload(form.getImagem().getBytes(), ObjectUtils.emptyMap());
+                String url = (String) uploadResult.get("secure_url");
                 promocao.setImgUrl(url);
             } catch (IOException e) {
                 throw new RuntimeException("Erro ao fazer upload da imagem", e);
@@ -86,6 +113,10 @@ public class PromocaoService {
         return converterToResponse(promocao);
     }
 
+    public PromocaoModel buscarEntidadePorId(Long id){
+        return repository.findById(id).orElseThrow(()->new RuntimeException("A Promoção não foi encontrada."));
+    }
+
     public void alterarStatusPromo(Long id, boolean ativo) {
         PromocaoModel promocao = repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Promoção não localizada"));
@@ -94,8 +125,11 @@ public class PromocaoService {
     }
 
     public List<PromocaoResponse> listarTodas() {
-        return repository.findAll()
-                .stream().map(this::converterToResponse).collect(Collectors.toList());
+        return Optional.ofNullable(repository.findAll())
+                .orElse(Collections.emptyList())
+                .stream()
+                .map(this::converterToResponse)
+                .collect(Collectors.toList());
     }
 
     public List<PromocaoResponse> listarRecentes() {
@@ -108,7 +142,7 @@ public class PromocaoService {
                 promocao.getId(),
                 promocao.getTitulo(),
                 promocao.getImgUrl(),
-                promocao.getAtivo(),
+                promocao.isAtivo(),
                 promocao.getDataInicio(),
                 promocao.getDataFim()
         );
