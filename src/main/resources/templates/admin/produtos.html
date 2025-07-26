@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Produtos - Admin</title>
-  <link rel="stylesheet" th:href="@{/admin/dashboard.css}">
+  <link rel="stylesheet" th:href="@{/admin/produtos.css}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 <header>
@@ -15,7 +16,28 @@
   </nav>
 </header>
 
+
 <main class="container">
+  <h2>Lista de Produtos</h2>
+
+  <!-- BUSCA POR NOME -->
+  <form action="/admin/produto/buscar" method="get" class="form-busca">
+    <input type="text" name="nome" placeholder="Buscar por nome..." required>
+    <button type="submit"><i class="fa fa-search"></i> Buscar</button>
+  </form>
+
+  <!-- FILTRO POR CATEGORIA -->
+  <form action="/admin/produto/filtrar" method="get" class="filtros" style="gap: 10px;">
+    <select name="categoria" class="filtro-btn" required>
+      <option value="" disabled selected>Filtrar por categoria</option>
+      <option value="todos">Todos</option>
+      <option value="Comidas">Comidas</option>
+      <option value="Bebidas">Bebidas</option>
+      <option value="Sobremesas">Sobremesas</option>
+    </select>
+    <button type="submit" class="filtro-btn">Filtrar</button>
+  </form>
+
   <table class="tabela-pedidos">
     <thead>
     <tr>

@@ -1,0 +1,166 @@
+/* Estilo unificado - Produtos */
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f7fa;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background: #2f3e46;
+    color: white;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+header h1 {
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+header nav {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+header nav a {
+    color: white;
+    text-decoration: none;
+    background: #3c8dbc;
+    padding: 0.5rem 0.8rem;
+    border-radius: 6px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: background-color 0.2s ease;
+}
+
+header nav a:hover {
+    background: #367fa9;
+}
+
+.container {
+    padding: 2rem;
+}
+
+.tabela-pedidos {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.tabela-pedidos th,
+.tabela-pedidos td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.tabela-pedidos th {
+    background: #ececec;
+    font-weight: 600;
+    color: #333;
+}
+
+.tabela-pedidos tr:hover {
+    background-color: #f9f9f9;
+}
+
+.tabela-pedidos a.btn {
+    background: #2f3e46;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 5px;
+    font-size: 0.85rem;
+    text-decoration: none;
+    margin-right: 6px;
+    transition: background-color 0.2s ease;
+}
+
+.tabela-pedidos a.btn:hover {
+    background: #1e2a30;
+}
+
+.header-produtos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.form-busca {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+    align-items: center;
+}
+
+.form-busca input {
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    width: 250px;
+}
+
+.form-busca button {
+    padding: 8px 12px;
+    background-color: #3c8dbc;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.form-busca button:hover {
+    background-color: #367fa9;
+}
+
+.filtros {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.filtro-btn {
+    background-color: #eee;
+    color: #333;
+    padding: 8px 14px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background 0.2s;
+}
+
+.filtro-btn:hover {
+    background-color: #ccc;
+}
+
+@media (max-width: 600px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .tabela-pedidos th,
+    .tabela-pedidos td {
+        font-size: 14px;
+        padding: 0.8rem;
+    }
+
+    header h1 {
+        font-size: 1.3rem;
+    }
+}

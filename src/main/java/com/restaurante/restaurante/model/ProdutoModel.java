@@ -21,6 +21,8 @@ public class ProdutoModel {
 
     @NumberFormat(style = NumberFormat.Style.NUMBER,pattern = "#,##0.00")
     private BigDecimal preco;
+
+    @Column(nullable = false)
     private String categoria;
     private String imgUrl;
     @Enumerated(EnumType.STRING)

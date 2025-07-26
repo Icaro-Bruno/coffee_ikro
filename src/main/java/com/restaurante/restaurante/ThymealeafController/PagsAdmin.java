@@ -124,6 +124,30 @@ public class PagsAdmin {
         return "redirect:/admin/produto/listar";
     }
 
+    @GetMapping("produto/buscar")
+    public String buscarProduto(@RequestParam("nome") String nome,Model model,HttpSession session){
+        if(session.getAttribute("adminLogado")==null){
+            return "redirect:/admin/login";
+        }
+        model.addAttribute("produtos", produtoService.buscarNome(nome));
+        return "admin/produtos";
+    }
+
+    @GetMapping("produto/filtrar")
+    public String filtrarCategorias(@RequestParam("categoria") String categoria,Model model,HttpSession session) {
+        if (session.getAttribute("adminLogado") == null) {
+            return "redirect:/admin/login";
+        }
+        List<ProdutoResponse> produtos;
+        if(categoria.equalsIgnoreCase("todos")){
+            produtos = produtoService.listarTodos();
+        }else {
+            produtos = produtoService.buscarCategoria(categoria);
+        }
+        model.addAttribute("produtos", produtos);
+        return "admin/produtos";
+    }
+
     @GetMapping("produto/criar")
     public String mostrarFormulario(Model model,HttpSession session){
         if(session.getAttribute("adminLogado") == null) {

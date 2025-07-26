@@ -4,7 +4,107 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Produto - Admin</title>
-    <link rel="stylesheet" th:href="@{/admin/dashboard.css}">
+    <style>
+        body {
+         font-family: Arial, sans-serif;
+         background-color: #f9f9f9;
+         margin: 0;
+         padding: 0;
+     }
+
+     header {
+         background: #2f3e46;
+         color: white;
+         padding: 1rem 1.5rem;
+         display: flex;
+         justify-content: space-between;
+         align-items: center;
+     }
+
+     header h1 {
+         font-size: 1.4rem;
+         margin: 0;
+     }
+
+     header nav a {
+         color: #d0e6ea;
+         font-size: 0.95rem;
+         text-decoration: none;
+         font-weight: 500;
+         transition: color 0.2s ease;
+     }
+
+     header nav a:hover {
+         color: #ffffff;
+         text-decoration: underline;
+     }
+
+     .container {
+         max-width: 700px;
+         margin: 2rem auto;
+         background-color: #ffffff;
+         padding: 2rem;
+         border-radius: 12px;
+         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+     }
+
+     .form-group {
+         margin-bottom: 1.5rem;
+     }
+
+     label {
+         display: block;
+         margin-bottom: 0.5rem;
+         font-weight: bold;
+         color: #333;
+     }
+
+     input[type="text"],
+     input[type="number"],
+     input[type="file"],
+     textarea {
+         width: 100%;
+         padding: 0.6rem;
+         border: 1px solid #ccc;
+         border-radius: 8px;
+         font-size: 1rem;
+     }
+
+     textarea {
+         resize: vertical;
+         min-height: 100px;
+     }
+
+     .btn {
+         background-color: #3c8dbc;
+         color: white;
+         border: none;
+         padding: 0.75rem 1.5rem;
+         border-radius: 8px;
+         font-size: 1rem;
+         cursor: pointer;
+         transition: background-color 0.2s ease;
+     }
+
+     .btn:hover {
+         background-color: #367fa9;
+     }
+
+     img {
+         margin-top: 0.5rem;
+         max-width: 100%;
+         height: auto;
+         border: 1px solid #ccc;
+         border-radius: 8px;
+     }
+
+     p {
+         margin: 0.5rem 0 0.3rem;
+         font-size: 0.95rem;
+         color: #555;
+     }
+    </style>
+
 </head>
 <body>
 <header>
