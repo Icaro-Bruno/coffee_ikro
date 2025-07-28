@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Editar Cliente</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 40px auto;
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    h2 {
+      margin-top: 0;
+      margin-bottom: 24px;
+      color: #333;
+      font-size: 24px;
+      text-align: center;
+    }
+
+    .voltar {
+      display: inline-block;
+      margin-bottom: 20px;
+      color: #3498db;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .voltar i {
+      margin-right: 6px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    label {
+      font-weight: 500;
+      color: #555;
+      margin-bottom: 4px;
+    }
+
+    input[type="text"],
+    input[type="tel"] {
+      padding: 10px 14px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 15px;
+      width: 100%;
+    }
+
+    button {
+      padding: 12px;
+      background-color: #3c8dbc;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-weight: bold;
+      font-size: 15px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    button:hover {
+      background-color: #367fa9;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <a th:href="@{/admin/clientes}" class="voltar">
+    <i class="fas fa-arrow-left"></i> Voltar para lista de clientes
+  </a>
+
+  <h2>Editar Cliente</h2>
+
+  <form th:action="@{'/admin/cliente/editar/' + ${cliente.id}}" th:object="${cliente}" method="post">
+    <div>
+      <label for="nome">Nome:</label>
+      <input type="text" id="nome" th:field="*{nome}" required>
+    </div>
+
+    <div>
+      <label for="telefone">Telefone:</label>
+      <input type="text" id="telefone" th:field="*{telefone}" required>
+    </div>
+
+    <div>
+      <label for="endereco">Endereço:</label>
+      <input type="text" id="endereco" th:field="*{endereco}" required>
+    </div>
+
+    <button type="submit">
+      <i class="fas fa-save"></i> Salvar Alterações
+    </button>
+  </form>
+</div>
+
+</body>
+</html>

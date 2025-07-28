@@ -32,7 +32,6 @@ public class PromocaoService {
         PromocaoModel promocao = new PromocaoModel();
 
         promocao.setTitulo(form.getTitulo());
-        promocao.setDescricao(form.getDescricao());
         promocao.setAtivo(form.isAtivo());
         promocao.setDataInicio(form.getDataInicio());
         promocao.setDataFim(form.getDataFim());
@@ -47,7 +46,6 @@ public class PromocaoService {
                 throw new RuntimeException("Erro ao fazer upload da imagem", e);
             }
         }
-
         repository.save(promocao);
     }
 
@@ -57,7 +55,6 @@ public class PromocaoService {
 
         // Atualiza os campos da promoção com os dados do form
         promocao.setTitulo(form.getTitulo());
-        promocao.setDescricao(form.getDescricao());
         promocao.setAtivo(form.isAtivo());
         promocao.setDataInicio(form.getDataInicio());
         promocao.setDataFim(form.getDataFim());

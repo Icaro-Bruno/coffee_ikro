@@ -4,18 +4,41 @@
     <meta charset="UTF-8">
     <title>Clientes - Admin</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" th:href="@{/admin/dashboard.css}">
+    <link rel="stylesheet" th:href="@{/admin/clientes.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
 </head>
 <body>
 
 <header>
-    <h1>Clientes Cadastrados</h1>
+    <h1>Gestão de Clientes</h1>
     <nav>
-        <a th:href="@{/admin/dashboard}">← Voltar ao Painel</a>
+        <a th:href="@{/admin/dashboard}"><i class="fa fa-home"></i> Dashboard</a>
+        <a th:href="@{/admin/produtos}"><i class="fa fa-box"></i> Produtos</a>
+        <a th:href="@{/admin/pedidos}"><i class="fa fa-clipboard-list"></i> Pedidos</a>
+        <a th:href="@{/admin/promocoes}"><i class="fa fa-tags"></i> Promoções</a>
+        <a th:href="@{/admin/logout}"><i class="fa fa-sign-out-alt"></i> Sair</a>
     </nav>
 </header>
 
 <main class="container">
+    <h2>Lista de Clientes</h2>
+
+    <form th:action="@{/admin/cliente/buscar}" method="get" class="form-busca">
+        <input type="text" name="endereco" placeholder="Buscar por endereço" required>
+        <button type="submit"><i class="fa fa-search"></i> Buscar</button>
+    </form>
+
+    <div class="filtros">
+        <form th:action="@{/admin/clientes}" method="get" style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <select name="filtro" class="filtro-btn">
+                <option value="TODOS" th:selected="${filtro == 'TODOS'}">Todos</option>
+                <option value="ATIVOS" th:selected="${filtro == 'ATIVOS'}">Ativos</option>
+                <option value="INATIVOS" th:selected="${filtro == 'INATIVOS'}">Inativos</option>
+            </select>
+            <button type="submit" class="filtro-btn">Filtrar</button>
+        </form>
+    </div>
+
     <table class="tabela-pedidos">
         <thead>
         <tr>
@@ -23,14 +46,36 @@
             <th>Nome</th>
             <th>Telefone</th>
             <th>Endereço</th>
+            <th>Status</th>
+            <th>Ações</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="cliente : ${clientes}">
+        <tr th:each="cliente : ${listaClientes}">
             <td th:text="${cliente.id}">1</td>
             <td th:text="${cliente.nome}">João</td>
             <td th:text="${cliente.telefone}">(88) 99999-9999</td>
             <td th:text="${cliente.endereco}">Rua Exemplo, 123</td>
+            <td th:text="${cliente.ativo != null and cliente.ativo} ? 'Ativo' : 'Inativo'">Ativo</td>
+            <td>
+                <a th:href="@{'/admin/cliente/editar/' + ${cliente.id}}" class="btn">Editar</a>
+
+                <form th:if="${cliente.ativo}" th:action="@{'/admin/cliente/inativar/' + ${cliente.id}}"
+                      method="post" style="display:inline;">
+                    <button type="submit" class="btn" style="background-color:#e74c3c;"
+                            onclick="return confirm('Tem certeza que deseja inativar este cliente?')">
+                        Inativar
+                    </button>
+                </form>
+
+                <form th:if="${!cliente.ativo}" th:action="@{'/admin/cliente/ativar/' + ${cliente.id}}"
+                      method="post" style="display:inline;">
+                    <button type="submit" class="btn" style="background-color:#27ae60;"
+                            onclick="return confirm('Deseja ativar este cliente?')">
+                        Ativar
+                    </button>
+                </form>
+            </td>
         </tr>
         </tbody>
     </table>

@@ -22,8 +22,8 @@
 <main class="container">
     <h2>Lista de Pedidos</h2>
 
-    <form action="#" th:action="@{/admin/pedidos/telefone}" method="get" class="form-busca">
-        <input type="text" name="telefone" placeholder="Buscar por telefone (somente números)" required>
+    <form th:action="@{/admin/cliente/buscar}" method="get" class="form-busca">
+        <input type="text" name="endereco" placeholder="Buscar por endereço" required>
         <button type="submit"><i class="fa fa-search"></i> Buscar</button>
     </form>
 

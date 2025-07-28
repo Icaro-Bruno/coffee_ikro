@@ -18,7 +18,6 @@ public class PromocaoModel {
     private Long id;
 
     private String titulo;
-    private String descricao;
     private String imgUrl;
     private boolean ativo;
     private LocalDate dataInicio;

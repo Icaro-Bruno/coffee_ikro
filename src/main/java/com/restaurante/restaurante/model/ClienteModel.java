@@ -1,13 +1,12 @@
 package com.restaurante.restaurante.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @Table(name = "cliente_model")
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class ClienteModel {
@@ -19,6 +18,8 @@ public class ClienteModel {
     private String telefone;
     private String endereco;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
+    private Boolean ativo = true;
+    @Column(nullable = true, unique = true)
     private String email;
 }

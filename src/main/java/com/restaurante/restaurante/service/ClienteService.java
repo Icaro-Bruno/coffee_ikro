@@ -2,6 +2,7 @@ package com.restaurante.restaurante.service;
 
 import com.restaurante.restaurante.dto.ClienteRequest;
 import com.restaurante.restaurante.dto.ClienteResponse;
+import com.restaurante.restaurante.form.ClienteForm;
 import com.restaurante.restaurante.model.ClienteModel;
 import com.restaurante.restaurante.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,8 @@ public class ClienteService {
                 cliente.getId(),
                 cliente.getNome(),
                 cliente.getTelefone(),
-                cliente.getEndereco()
+                cliente.getEndereco(),
+                cliente.getAtivo()
         );
     }
 
@@ -86,5 +88,51 @@ public class ClienteService {
 
     public long contar() {
         return repository.count();
+    }
+
+    public ClienteResponse buscarPorId(Long id) {
+        ClienteModel cliente = repository.findById(id)
+                .orElseThrow(()-> new RuntimeException("Cliente não encontrado"));
+        return converterToResponse(cliente);
+    }
+
+    public void editar(Long id, ClienteForm form){
+        ClienteModel cliente = repository.findById(id)
+                .orElseThrow(()-> new RuntimeException("Cliente não encontrado"));
+        cliente.setNome(form.getNome());
+        cliente.setTelefone(form.getTelefone());
+        cliente.setEndereco(form.getEndereco());
+        repository.save(cliente);
+    }
+
+    public List<ClienteResponse> listarAtivos() {
+        return repository.findAllAtivos()
+                .stream()
+                .map(cliente -> {
+                    System.out.println("Ativo: " + cliente.getNome() + " - " + cliente.getAtivo());
+                    return new ClienteResponse(cliente);
+                })
+                .collect(Collectors.toList());
+    }
+
+    public List<ClienteResponse> listarInativos() {
+        return repository.findAllInativos()
+                .stream()
+                .map(ClienteResponse::new)
+                .collect(Collectors.toList());
+    }
+
+    public void inativar(Long id) {
+        ClienteModel cliente = repository.findById(id)
+                        .orElseThrow(()-> new RuntimeException("Cliente não encontrado"));
+        cliente.setAtivo(false);
+        repository.save(cliente);
+    }
+
+    public void ativar(Long id){
+        ClienteModel cliente = repository.findById(id)
+                .orElseThrow(()-> new RuntimeException("Cliente não encontrado"));
+        cliente.setAtivo(true);
+        repository.save(cliente);
     }
 }

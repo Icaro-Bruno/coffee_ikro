@@ -1,8 +1,10 @@
 package com.restaurante.restaurante.ThymealeafController;
 
 import com.restaurante.restaurante.dto.*;
+import com.restaurante.restaurante.form.ClienteForm;
 import com.restaurante.restaurante.form.ProdutoForm;
 import com.restaurante.restaurante.form.PromocaoForm;
+import com.restaurante.restaurante.model.ClienteModel;
 import com.restaurante.restaurante.model.PromocaoModel;
 import com.restaurante.restaurante.model.StatusPedido;
 import com.restaurante.restaurante.service.*;
@@ -75,9 +77,7 @@ public class PagsAdmin {
         if(session.getAttribute("adminLogado") == null) {
             return "redirect:/admin/login";
         }
-
         List<PedidoResponse> pedidos = pedidoService.filtrarPorStatusEOrdenacao(status,ordem);
-
         model.addAttribute("pedidos", pedidos);
         model.addAttribute("statusAtual", status);
         model.addAttribute("ordemAtual", ordem);
@@ -197,7 +197,6 @@ public class PagsAdmin {
         } catch (Exception e) {
             redirect.addFlashAttribute("erro", "Erro ao atualizar produto: " + e.getMessage());
         }
-
         return "redirect:/admin/produto/listar";
     }
 
@@ -213,13 +212,79 @@ public class PagsAdmin {
 
     //CLIENTE
     @GetMapping("/clientes")
-    public String listarClientes(Model model, HttpSession session) {
+    public String listarClientes(@RequestParam(value= "filtro",required=false,defaultValue = "TODOS") String filtro, Model model, HttpSession session) {
         if(session.getAttribute("adminLogado") == null) {
             return "redirect:/admin/login";
         }
-        List<ClienteResponse> clientes = clienteService.listarTodos();
-        model.addAttribute("clientes", clientes);
+        List<ClienteResponse> clientes;
+        switch (filtro.toUpperCase()){
+            case "ATIVOS":
+                clientes = clienteService.listarAtivos();
+                break;
+            case "INATIVOS":
+                clientes = clienteService.listarInativos();
+                break;
+            default:
+                clientes = clienteService.listarTodos();
+        }
+        model.addAttribute("listaClientes", clientes);
         return "admin/clientes";
+    }
+
+    @GetMapping("/cliente/buscar")
+    public String buscarCliente(@RequestParam("endereco") String endereco,Model model, HttpSession session){
+        if(session.getAttribute("adminLogado")==null){
+            return "redirect:/admin/login";
+        }
+        System.out.println("Endereço buscado: " + endereco);
+        List<ClienteResponse> clientes = clienteService.buscarPorEndereco(endereco);
+        System.out.println("Quantidade encontrada: " + clientes.size());
+        model.addAttribute("listaClientes", clientes);
+        return "admin/clientes";
+    }
+
+    @GetMapping("/cliente/editar/{id}")
+    public String editarClienteView(@PathVariable Long id,Model model,HttpSession session){
+        if(session.getAttribute("adminLogado")==null){
+            return "redirect:/admin/login";
+        }
+        ClienteResponse cliente = clienteService.buscarPorId(id);
+        ClienteForm form = new ClienteForm();
+        form.setId(cliente.getId());
+        form.setNome(cliente.getNome());
+        form.setTelefone(cliente.getTelefone());
+        form.setEndereco(cliente.getEndereco());
+        List<ClienteResponse> lista = clienteService.listarTodos();
+        model.addAttribute("listaClientes", lista);
+        model.addAttribute("cliente", form);
+        return "admin/editarcliente";
+    }
+
+    @PostMapping("/cliente/editar/{id}")
+    public String editarCliente(@PathVariable Long id, @ModelAttribute("cliente")ClienteForm form, HttpSession session){
+        if(session.getAttribute("adminLogado")==null){
+            return "redirect:/admin/login";
+        }
+        clienteService.editar(id, form);
+        return "redirect:/admin/clientes";
+    }
+
+    @PostMapping("/cliente/inativar/{id}")
+    public String inativarCliente(@PathVariable Long id, HttpSession session) {
+        if (session.getAttribute("adminLogado") == null) {
+            return "redirect:/admin/login";
+        }
+        clienteService.inativar(id);
+        return "redirect:/admin/clientes";
+    }
+
+    @PostMapping("/cliente/ativar/{id}")
+    public String ativarCliente(@PathVariable Long id, HttpSession session){
+        if(session.getAttribute("adminLogado")==null){
+            return "redirect:/admin/clientes";
+        }
+        clienteService.ativar(id);
+        return "redirect:/admin/clientes";
     }
 
     //PROMOCOES
@@ -232,7 +297,6 @@ public class PagsAdmin {
         model.addAttribute("promocoes", promocoes);
         return "admin/promocoes";
     }
-
 
     @GetMapping("promocoes/criar")
     public String mostrarFormularioCriar(Model model, HttpSession session) {

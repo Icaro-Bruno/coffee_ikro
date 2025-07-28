@@ -34,12 +34,16 @@
             <td th:text="${promocao.id}">1</td>
             <td th:text="${promocao.titulo}">Super Desconto</td>
             <td>
-                <img th:if="${promocao.imgUrl != null}" th:src="${promocao.imgUrl}" alt="Imagem Promoção" width="80">
-                <span th:if="${promocao.imgUrl == null}">Sem imagem</span>
+                <div th:if="${promocao.imgUrl != null and !#strings.isEmpty(promocao.imgUrl)}">
+                    <img th:src="${promocao.imgUrl}" alt="Imagem Promoção" width="80">
+                </div>
+                <div th:if="${promocao.imgUrl == null or #strings.isEmpty(promocao.imgUrl)}">
+                    <span>Sem imagem</span>
+                </div>
             </td>
             <td th:text="${promocao.ativo ? 'Sim' : 'Não'}">Sim</td>
-            <td th:if="${promocao.dataInicio != null}" th:text="${#dates.format(promocao.dataInicio, 'dd/MM/yyyy')}">-</td>
-            <td th:if="${promocao.dataFim != null}" th:text="${#dates.format(promocao.dataFim, 'dd/MM/yyyy')}">-</td>
+            <td th:text="${promocao.dataInicio != null ? #dates.format(promocao.dataInicio, 'dd/MM/yyyy') : '-'}">-</td>
+            <td th:text="${promocao.dataFim != null ? #dates.format(promocao.dataFim, 'dd/MM/yyyy') : '-'}">-</td>
             <td>
                 <a th:href="@{/admin/promocoes/editar/{id}(id=${promocao.id})}">Editar</a> |
                 <a th:href="@{/admin/promocoes/deletar/{id}(id=${promocao.id})}" onclick="return confirm('Deseja excluir esta promoção?')">Excluir</a>
