@@ -11,6 +11,7 @@ import java.util.List;
 public interface PromocaoRepository extends JpaRepository<PromocaoModel, Long> {
     List<PromocaoModel> findByTituloContainingIgnoreCase(String titulo);
     List<PromocaoModel> findAllByOrderByDataInicioDesc();
+    List<PromocaoModel> findByAtivoTrue();
 
     long countByAtivoTrue();
 }

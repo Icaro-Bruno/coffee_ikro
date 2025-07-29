@@ -289,11 +289,22 @@ public class PagsAdmin {
 
     //PROMOCOES
     @GetMapping("/promocoes")
-    public String listarPromocoes(Model model, HttpSession session){
-        if(session.getAttribute("adminLogado") == null) {
+    public String listarPromocoes(
+            @RequestParam(required = false) Boolean apenasAtivas,
+            Model model,
+            HttpSession session) {
+
+        if (session.getAttribute("adminLogado") == null) {
             return "redirect:/admin/login";
         }
-        List<PromocaoResponse> promocoes = promocaoService.listarTodas();
+
+        List<PromocaoResponse> promocoes;
+        if (Boolean.TRUE.equals(apenasAtivas)) {
+            promocoes = promocaoService.listarAtivas();
+        } else {
+            promocoes = promocaoService.listarTodas();
+        }
+
         model.addAttribute("promocoes", promocoes);
         return "admin/promocoes";
     }
@@ -318,10 +329,8 @@ public class PagsAdmin {
         if (session.getAttribute("adminLogado") == null) {
             return "redirect:/admin/login";
         }
-
         PromocaoModel promocao = promocaoService.buscarEntidadePorId(id);
         PromocaoForm form = new PromocaoForm();
-
         form.setTitulo(promocao.getTitulo());
         form.setAtivo(promocao.isAtivo());
         form.setDataInicio(promocao.getDataInicio());

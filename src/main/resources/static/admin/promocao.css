@@ -1,0 +1,121 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f7fa;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background: #2f3e46;
+    color: white;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header nav a {
+    color: white;
+    margin-left: 1rem;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+header .btn-criar {
+    background-color: #3c8dbc;
+    padding: 8px 12px;
+    border-radius: 6px;
+    color: white;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+
+header .btn-criar:hover {
+    background-color: #367fa9;
+}
+
+.container {
+    padding: 2rem;
+}
+
+h1 {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.tabela-pedidos {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    margin-top: 1rem;
+}
+
+.tabela-pedidos th,
+.tabela-pedidos td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.tabela-pedidos th {
+    background: #ececec;
+}
+
+.tabela-pedidos img {
+    border-radius: 4px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+
+.tabela-pedidos a.btn {
+    background: #2f3e46;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 5px;
+    font-size: 0.85rem;
+    text-decoration: none;
+    margin-right: 6px;
+    transition: background-color 0.2s ease;
+}
+
+.tabela-pedidos a.btn:hover {
+    background: #1e2a30;
+}
+.filtros {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.filtro-btn {
+    background-color: #eee;
+    color: #333;
+    padding: 8px 14px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background 0.2s;
+}
+
+.filtro-btn:hover {
+    background-color: #ccc;
+}
+
+.btn {
+    background-color: #3c8dbc;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 6px;
+    text-decoration: none;
+    margin-right: 5px;
+    font-weight: 500;
+    transition: background 0.2s;
+}
+
+.btn:hover {
+    background-color: #367fa9;
+}

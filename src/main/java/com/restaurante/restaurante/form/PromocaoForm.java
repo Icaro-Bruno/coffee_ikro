@@ -9,7 +9,6 @@ import java.time.LocalDate;
 @Setter
 public class PromocaoForm {
     private String titulo;
-    private String descricao;
     private MultipartFile imagem;
     private boolean ativo;
     private LocalDate dataInicio;

@@ -16,17 +16,14 @@
   </nav>
 </header>
 
-
 <main class="container">
   <h2>Lista de Produtos</h2>
 
-  <!-- BUSCA POR NOME -->
   <form action="/admin/produto/buscar" method="get" class="form-busca">
     <input type="text" name="nome" placeholder="Buscar por nome..." required>
     <button type="submit"><i class="fa fa-search"></i> Buscar</button>
   </form>
 
-  <!-- FILTRO POR CATEGORIA -->
   <form action="/admin/produto/filtrar" method="get" class="filtros" style="gap: 10px;">
     <select name="categoria" class="filtro-btn" required>
       <option value="" disabled selected>Filtrar por categoria</option>

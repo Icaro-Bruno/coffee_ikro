@@ -4,10 +4,88 @@
   <meta charset="UTF-8">
   <title>Editar Promoção</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" th:href="@{/admin/dashboard.css}">
+  <style>
+    /* admin/dashboard.css */
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+header {
+  background-color: #2c3e50;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+nav a {
+  color: #ecf0f1;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+.container {
+  max-width: 600px;
+  margin: 40px auto;
+  background-color: white;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+form label {
+  display: block;
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+form input[type="text"],
+form input[type="date"],
+form input[type="file"],
+form select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 6px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+form img {
+  margin-top: 10px;
+  border-radius: 4px;
+}
+
+form button {
+  margin-top: 30px;
+  padding: 12px 20px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+form button:hover {
+  background-color: #2980b9;
+}
+  </style>
 </head>
 <body>
-
 <header>
   <h1>Editar Promoção</h1>
   <nav>
@@ -16,22 +94,28 @@
 </header>
 
 <main class="container">
-  <form th:action="@{/admin/promocoes/atualizar}" method="post" enctype="multipart/form-data">
-    <input type="hidden" name="id" th:value="${promocao.id}">
+  <form th:action="@{'/admin/promocoes/editar/' + ${promocaoId}}" method="post" enctype="multipart/form-data">
 
     <label for="titulo">Título:</label>
     <input type="text" id="titulo" name="titulo" th:value="${promocao.titulo}" required>
 
-    <label>Imagem Atual:</label>
-    <img th:src="${promocao.imgUrl}" alt="Imagem Promoção" width="120">
+    <div th:if="${promocao.imgUrl != null and !#strings.isEmpty(promocao.imgUrl)}">
+      <label>Imagem Atual:</label>
+      <img th:src="${promocao.imgUrl}" alt="Imagem Promoção" width="120">
+    </div>
+
+    <div th:if="${promocao.imgUrl == null or #strings.isEmpty(promocao.imgUrl)}">
+      <label>Imagem Atual:</label>
+      <span>Sem imagem</span>
+    </div>
 
     <label for="imagem">Nova Imagem (opcional):</label>
     <input type="file" id="imagem" name="imagem" accept="image/*">
 
     <label for="ativo">Ativa?</label>
-    <select id="ativo" name="ativo" th:value="${promocao.ativo}">
-      <option th:selected="${promocao.ativo}" value="true">Sim</option>
-      <option th:selected="${!promocao.ativo}" value="false">Não</option>
+    <select id="ativo" name="ativo">
+      <option value="true" th:selected="${promocao.ativo}">Sim</option>
+      <option value="false" th:selected="${!promocao.ativo}">Não</option>
     </select>
 
     <label for="dataInicio">Data Início:</label>

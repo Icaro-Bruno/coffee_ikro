@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.cglib.core.Local;
 
 import java.time.LocalDate;
 
@@ -23,4 +24,14 @@ public class PromocaoModel {
     private LocalDate dataInicio;
     private LocalDate dataFim;
 
+    public boolean isAtivaNoPeriodo(){
+        LocalDate hoje = LocalDate.now();
+        if(!ativo) {
+            return false;
+        }
+        if(dataInicio != null && dataFim != null) {
+            return (!hoje.isBefore(dataInicio)) && (!hoje.isAfter(dataFim));
+        }
+        return ativo;
+    }
 }

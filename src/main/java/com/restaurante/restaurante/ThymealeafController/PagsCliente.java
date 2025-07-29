@@ -31,7 +31,7 @@ public class PagsCliente {
 
     @GetMapping("/")
     public String home(Model model, Authentication authentication){
-        List<PromocaoResponse> promocoes = promocaoService.buscarPorTitulo("Ofertas Da Semana");
+        List<PromocaoResponse> promocoes = promocaoService.listarAtivas();
         model.addAttribute("promocoes", promocoes);
 
         if (authentication != null && authentication.getPrincipal() instanceof OAuth2User oAuth2User) {

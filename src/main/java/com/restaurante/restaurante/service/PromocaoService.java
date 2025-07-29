@@ -129,6 +129,14 @@ public class PromocaoService {
                 .collect(Collectors.toList());
     }
 
+    public List<PromocaoResponse> listarAtivas() {
+       List<PromocaoModel> todasAtivas = repository.findByAtivoTrue();
+       List<PromocaoModel> ativasNoPeriodo = todasAtivas.stream()
+               .filter(PromocaoModel::isAtivaNoPeriodo).collect(Collectors.toList());
+
+       return ativasNoPeriodo.stream().map(this::converterToResponse).collect(Collectors.toList());
+    }
+
     public List<PromocaoResponse> listarRecentes() {
         return repository.findAllByOrderByDataInicioDesc()
                 .stream().map(this::converterToResponse).collect(Collectors.toList());
