@@ -66,7 +66,6 @@ public class PagsCliente {
         List<ProdutoResponse> produtos = produtoService.listarTodos();
         model.addAttribute("produtos", produtos);
         return "cardapio";
-//"produtos" é um nome que será utilizado no html,porem o produtos é o objeto;
     }
 
     @GetMapping("/produto/{id}")

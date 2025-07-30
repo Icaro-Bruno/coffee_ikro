@@ -143,6 +143,7 @@ public class PedidoService {
                 novo.setTelefone(clienteDto.getTelefone());
                 novo.setEndereco(clienteDto.getEndereco());
                 novo.setEmail(emailAutenticado);
+                novo.setAtivo(true);
 
                 return clienteRepository.save(novo);
             });
