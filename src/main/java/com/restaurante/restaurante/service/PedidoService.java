@@ -113,29 +113,34 @@ public class PedidoService {
 
     public PedidoResponse criarPedido(PedidoRequest request, String emailAutenticado){
         ClienteModel cliente = clienteRepository.findByEmail(emailAutenticado)
-            .map(c -> {
-                ClienteRequest dto = request.getCliente();
-                if (dto == null) return c;
+                .map(c -> {
+                    ClienteRequest dto = request.getCliente();
+                    if (dto == null) return c;
 
-                boolean sobrescrever = dto.isSobrescrever();
-                boolean atualizado = false;
+                    boolean sobrescrever = dto.isSobrescrever();
+                    boolean atualizado = false;
 
-                if (sobrescrever || c.getTelefone() == null || c.getTelefone().isBlank()) {
-                    c.setTelefone(dto.getTelefone());
-                    atualizado = true;
-                }
-                if (sobrescrever || c.getEndereco() == null || c.getEndereco().isBlank()) {
-                    c.setEndereco(dto.getEndereco());
-                    atualizado = true;
-                }
-                if (sobrescrever || c.getNome() == null || c.getNome().isBlank()) {
-                    c.setNome(dto.getNome());
-                    atualizado = true;
-                }
+                    if (sobrescrever || c.getTelefone() == null || c.getTelefone().isBlank()) {
+                        c.setTelefone(dto.getTelefone());
+                        atualizado = true;
+                    }
+                    if (sobrescrever || c.getEndereco() == null || c.getEndereco().isBlank()) {
+                        c.setEndereco(dto.getEndereco());
+                        atualizado = true;
+                    }
+                    if (sobrescrever || c.getNome() == null || c.getNome().isBlank()) {
+                        c.setNome(dto.getNome());
+                        atualizado = true;
+                    }
 
-                return atualizado ? clienteRepository.save(c) : c;
-            })
-            .orElseGet(() -> {
+                    if (c.getAtivo() == null) {
+                        c.setAtivo(true);
+                        atualizado = true;
+                    }
+
+                    return atualizado ? clienteRepository.save(c) : c;
+                })
+                .orElseGet(() -> {
                 ClienteModel novo = new ClienteModel();
                 ClienteRequest clienteDto = request.getCliente();
 
