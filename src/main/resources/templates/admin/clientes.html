@@ -56,10 +56,10 @@
             <td th:text="${cliente.nome}">João</td>
             <td th:text="${cliente.telefone}">(88) 99999-9999</td>
             <td th:text="${cliente.endereco}">Rua Exemplo, 123</td>
-            <td th:text="${cliente.ativo != null and cliente.ativo} ? 'Ativo' : 'Inativo'">Ativo</td>
+            <td th:text="${cliente.ativo == true ? 'Ativo' : 'Inativo'}">Status</td>
+
             <td>
                 <a th:href="@{'/admin/cliente/editar/' + ${cliente.id}}" class="btn">Editar</a>
-
                 <form th:if="${cliente.ativo}" th:action="@{'/admin/cliente/inativar/' + ${cliente.id}}"
                       method="post" style="display:inline;">
                     <button type="submit" class="btn" style="background-color:#e74c3c;"
@@ -68,8 +68,8 @@
                     </button>
                 </form>
 
-                <form th:if="${!cliente.ativo}" th:action="@{'/admin/cliente/ativar/' + ${cliente.id}}"
-                      method="post" style="display:inline;">
+                <form th:if="${cliente.ativo == false}" th:action="@{'/admin/cliente/ativar/' + ${cliente.id}}"
+                method="post" style="display:inline;">
                     <button type="submit" class="btn" style="background-color:#27ae60;"
                             onclick="return confirm('Deseja ativar este cliente?')">
                         Ativar

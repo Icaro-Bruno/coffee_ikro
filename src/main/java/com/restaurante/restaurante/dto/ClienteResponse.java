@@ -19,7 +19,7 @@ public class ClienteResponse { //saida
     private String endereco;
 
     @Column(nullable = false)
-    private Boolean ativo=true;
+    private Boolean ativo = true;
 
     public ClienteResponse(ClienteModel cliente) {
         this.id = cliente.getId();

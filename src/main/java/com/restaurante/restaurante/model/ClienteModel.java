@@ -20,6 +20,7 @@ public class ClienteModel {
 
     @Column(nullable = false)
     private Boolean ativo = true;
+
     @Column(nullable = true, unique = true)
     private String email;
 }
