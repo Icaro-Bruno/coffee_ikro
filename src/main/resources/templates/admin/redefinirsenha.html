@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" th:href="@{/admin/login.css}">
+  <title>Redefinir Senha</title>
+</head>
+<body>
+<div class="login-wrapper">
+  <img src="/img/logo.svg" alt="Logo Coffe Ikro" class="logo" style="width: 141px;">
+  <h2>Redefinir Senha</h2>
+
+  <form th:action="@{/admin/redefinir}" method="post">
+    <input type="hidden" name="token" th:value="${token}" />
+    <input type="password" name="novaSenha" placeholder="Nova Senha" required>
+    <button type="submit" class="primary">Redefinir</button>
+  </form>
+
+  <p th:if="${mensagem}" th:text="${mensagem}"></p>
+</div>
+</body>
+</html>

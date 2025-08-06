@@ -55,6 +55,46 @@ public class PagsAdmin {
         return "redirect:/admin/login";
     }
 
+    /*ATENÇÃO*/
+    @GetMapping("/recuperarsenha")
+    public String mostrarPaginaRecuperacao() {
+        return "admin/recuperarsenha";
+    }
+
+    @PostMapping("/recuperar")
+    public String processarRecuperacao(@RequestParam String email, Model model) {
+        boolean enviado = adminService.enviarLinkRecuperacao(email);
+        if (enviado) {
+            model.addAttribute("mensagem", "Verifique seu e-mail para redefinir a senha.");
+        } else {
+            model.addAttribute("mensagem", "E-mail não encontrado.");
+        }
+        return "admin/recuperarsenha";
+    }
+
+    @GetMapping("/redefinir")
+    public String mostrarRedefinir(@RequestParam String token, Model model) {
+        if (adminService.tokenValido(token)) {
+            model.addAttribute("token", token);
+            return "admin/redefinirsenha";
+        }
+        System.out.println("get recebido");
+        return "redirect:/admin/login?erro=token";
+    }
+
+    @PostMapping("/redefinir")
+    public String redefinirSenha(@RequestParam String token,
+                                 @RequestParam String novaSenha,
+                                 RedirectAttributes redirect) {
+        boolean sucesso = adminService.redefinirSenha(token, novaSenha);
+        if (sucesso) {
+            redirect.addFlashAttribute("mensagem", "Senha redefinida com sucesso.");
+            return "redirect:/admin/login";
+        }
+        redirect.addFlashAttribute("mensagem", "Token inválido ou expirado.");
+        return "redirect:/admin/redefinir?token=" + token;
+    }
+
     @GetMapping("/dashboard")
     public String mostrarDashboard(HttpSession session,Model model) {
         if(session.getAttribute("adminLogado") == null) {

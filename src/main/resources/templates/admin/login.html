@@ -2,21 +2,20 @@
 <html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{/admin/login.css}">
     <title>Login Administrativo</title>
-    <style>
-        body { font-family: sans-serif; text-align: center; padding: 40px; }
-        form { display: inline-block; padding: 20px; border: 1px solid #ccc; border-radius: 10px; }
-        input, button { display: block; margin: 10px auto; padding: 8px; width: 200px; }
-        p { color: red; }
-    </style>
 </head>
 <body>
-<h2>Área Administrativa</h2>
-<form th:action="@{/admin/login}" method="post">
-    <input type="text" name="usuario" placeholder="Usuário" required>
-    <input type="password" name="senha" placeholder="Senha" required>
-    <button type="submit">Entrar</button>
-</form>
-<p th:if="${erro}" th:text="${erro}"></p>
+<div class="login-wrapper">
+    <img src="/img/logo.svg" alt="Logo Coffe Ikro" class="logo" style="width: 141px;">
+    <h2>Entrar na Área Administrativa</h2>
+    <form th:action="@{/admin/login}" method="post">
+        <input type="text" name="usuario" placeholder="Usuário" required>
+        <input type="password" name="senha" placeholder="Senha" required>
+        <button type="submit" class="primary">Entrar</button>
+    </form>
+    <a href="/admin/recuperarsenha" class="forgot-link">Esqueceu a senha?</a>
+    <p th:if="${erro}" th:text="${erro}"></p>
+</div>
 </body>
 </html>

@@ -6,18 +6,17 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
-
 import java.time.LocalDateTime;
 
+@Entity
 @Getter
 @Setter
-@Entity
-public class AdminModel {
+public class RecuperacaoToken {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String token;
     private String email;
-    private String usuario;
-    private String senha;
+    private LocalDateTime expiracao;
 }

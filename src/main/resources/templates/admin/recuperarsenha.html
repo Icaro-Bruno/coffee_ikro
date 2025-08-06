@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Recuperar Senha</title>
+    <link rel="stylesheet" th:href="@{/admin/login.css}">
+    <style>
+        .login-wrapper p {
+          font-size: 14px;
+          color: #555555;
+          text-align: center;
+          margin-bottom: 20px;
+          line-height: 1.5;
+        }
+
+        input[type="email"] {
+          padding: 12px;
+          font-size: 15px;
+          border: 1px solid #ccc;
+          border-radius: 8px;
+          transition: border-color 0.3s ease;
+          width: 100%;
+          box-sizing: border-box;
+        }
+
+        input[type="email"]:focus {
+          border-color: #7a523c;
+          outline: none;
+        }
+
+        .forgot-link {
+          margin-top: 16px;
+          font-size: 14px;
+          color: #4a2e1e;
+          text-decoration: none;
+          text-align: left;
+          width: 100%;
+        }
+
+        .forgot-link:hover {
+          text-decoration: underline;
+        }
+
+        .login-wrapper form {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          gap: 16px;
+        }
+
+        .login-wrapper h2 {
+          font-size: 18px;
+          font-weight: 500;
+          margin-bottom: 16px;
+          text-align: center;
+          color: #333333;
+          letter-spacing: 0.3px;
+        }
+
+        p[th\\:if] {
+          color: green;
+          text-align: center;
+          margin-top: 10px;
+          font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+<div class="login-wrapper">
+    <img src="/img/logo.svg" alt="Logo Coffe Ikro" class="logo" style="width: 141px;">
+    <h2>Recuperar Senha</h2>
+    <p>Informe seu e-mail cadastrado. Enviaremos um link para redefinir sua senha.</p>
+    <form th:action="@{/admin/recuperar}" method="post">
+        <input type="email" name="email" placeholder="Seu e-mail" required>
+        <button type="submit" class="primary">Enviar link de recuperação</button>
+    </form>
+    <a href="/admin/login" class="forgot-link">Voltar para login</a>
+    <p th:if="${mensagem}" th:text="${mensagem}"></p>
+</div>
+</body>
+</html>
