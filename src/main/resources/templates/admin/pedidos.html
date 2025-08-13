@@ -8,69 +8,145 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
 </head>
 <body>
-<header>
-    <h1>Gestão de Pedidos</h1>
-    <nav>
-        <a th:href="@{/admin/dashboard}"><i class="fa fa-home"></i> Dashboard</a>
-        <a th:href="@{/admin/produtos}"><i class="fa fa-box"></i> Produtos</a>
-        <a th:href="@{/admin/clientes}"><i class="fa fa-users"></i> Clientes</a>
-        <a th:href="@{/admin/promocoes}"><i class="fa fa-tags"></i> Promoções</a>
-        <a th:href="@{/admin/logout}"><i class="fa fa-sign-out-alt"></i> Sair</a>
-    </nav>
+<header class="header-simples">
+    <div class="header-simples-content">
+        <h1>Gestão de Pedidos</h1>
+        <nav>
+            <a th:href="@{/admin/dashboard}"><i class="fa fa-home"></i> Início</a>
+            <a th:href="@{/admin/logout}"><i class="fa fa-sign-out-alt"></i> Sair</a>
+        </nav>
+    </div>
 </header>
 
 <main class="container">
-    <h2>Lista de Pedidos</h2>
-
     <form th:action="@{/admin/pedidos/telefone}" method="get" class="form-busca">
-        <input type="text" name="telefone" placeholder="Buscar por n° (apenas n°)" required>
+        <input type="text" name="telefone" placeholder="Buscar por telefone (apenas n°)" required>
         <button type="submit"><i class="fa fa-search"></i> Buscar</button>
     </form>
 
     <div class="filtros">
         <form th:action="@{/admin/pedidos}" method="get" style="display: flex; gap: 10px; flex-wrap: wrap;">
-            <select name="ordem" class="filtro-btn">
-                <option value="" th:selected="${ordemAtual == null}">Todos</option>
-                <option th:value="'recentes'" th:selected="${ordemAtual == 'recentes'}">Recentes</option>
-                <option th:value="'antigos'" th:selected="${ordemAtual == 'antigos'}">Antigos</option>
-            </select>
 
-            <select name="status" class="filtro-btn">
-                <option value="" th:selected="${statusAtual == null}">Todos os Status</option>
-                <option th:value="'PENDENTE'" th:selected="${statusAtual == 'PENDENTE'}">Pendentes</option>
-                <option th:value="'A_CAMINHO'" th:selected="${statusAtual == 'A_CAMINHO'}">A Caminho</option>
-                <option th:value="'ENTREGUE'" th:selected="${statusAtual == 'ENTREGUE'}">Entregues</option>
-                <option th:value="'CANCELADO'" th:selected="${statusAtual == 'CANCELADO'}">Cancelados</option>
-            </select>
+            <!-- Dropdown Ordem -->
+            <div class="dropdown" data-name="ordem">
+                <input type="hidden" name="ordem" th:value="${ordemAtual}" />
+                <button type="button" class="dropdown-toggle">
+                    <span></span> <!-- Texto será preenchido via JS -->
+                </button>
+                <ul class="dropdown-menu">
+                    <li data-value="">Todos</li>
+                    <li data-value="recentes">Recentes</li>
+                    <li data-value="antigos">Antigos</li>
+                </ul>
+            </div>
 
+            <!-- Dropdown Status -->
+            <div class="dropdown" data-name="status">
+                <input type="hidden" name="status" th:value="${statusAtual}" />
+                <button type="button" class="dropdown-toggle">
+                    <span></span> <!-- Texto será preenchido via JS -->
+                </button>
+                <ul class="dropdown-menu">
+                    <li data-value="">Todos os Status</li>
+                    <li data-value="PENDENTE">Pendentes</li>
+                    <li data-value="A_CAMINHO">A Caminho</li>
+                    <li data-value="ENTREGUE">Entregues</li>
+                    <li data-value="CANCELADO">Cancelados</li>
+                </ul>
+            </div>
             <button type="submit" class="filtro-btn">Filtrar</button>
         </form>
     </div>
 
-    <table class="tabela-pedidos">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Cliente</th>
-            <th>Status</th>
-            <th>Total</th>
-            <th>Data</th>
-            <th>Ações</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="pedido : ${pedidos}">
-            <td th:text="${pedido.id}">1</td>
-            <td th:text="${pedido.cliente.nome}">João</td>
-            <td th:text="${pedido.status}">PENDENTE</td>
-            <td th:text="'R$ ' + ${#numbers.formatDecimal(pedido.total, 1, 'COMMA', 2, 'COMMA')}">R$ 10,25</td>
-            <td th:text="${pedido.dataHora != null ? #temporals.format(pedido.dataHora, 'dd/MM/yyyy HH:mm') : '---'}">10/07/2025</td>
-            <td>
-                <a th:href="@{/admin/detalhespedido/{id}(id=${pedido.id})}" class="btn">Detalhes</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+   <div class="tabela-pedidos-wrapper">
+       <table class="tabela-pedidos">
+           <thead>
+           <tr>
+               <th>ID</th>
+               <th>Cliente</th>
+               <th>Status</th>
+               <th>Total</th>
+               <th>Data</th>
+               <th>Ações</th>
+           </tr>
+           </thead>
+           <tbody>
+           <tr th:each="pedido : ${pedidos}" th:attr="data-status=${pedido.status}">
+               <td data-label="ID" th:text="${pedido.id}">1</td>
+               <td data-label="Cliente" th:text="${#strings.abbreviate(pedido.cliente.nome, 13)}">João</td>
+               <td data-label="Status" th:text="${pedido.status}">PENDENTE</td>
+               <td data-label="Total" th:text="'R$ ' + ${#numbers.formatDecimal(pedido.total, 1, 'COMMA', 2, 'COMMA')}">R$ 10,25</td>
+               <td data-label="Data" th:text="${pedido.dataHora != null ? #temporals.format(pedido.dataHora, 'dd/MM/yyyy HH:mm') : '---'}">10/07/2025</td>
+               <td>
+                   <a th:href="@{/admin/detalhespedido/{id}(id=${pedido.id})}" class="btn">Detalhes</a>
+               </td>
+           </tr>
+           </tbody>
+       </table>
+   </div>
 </main>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const dropdowns = document.querySelectorAll('.dropdown');
+
+      const statusLabels = {
+        "": "Todos os Status",
+        "PENDENTE": "Pendentes",
+        "A_CAMINHO": "A Caminho",
+        "ENTREGUE": "Entregues",
+        "CANCELADO": "Cancelados"
+      };
+
+      const ordemLabels = {
+        "": "Todos",
+        "recentes": "Recentes",
+        "antigos": "Antigos"
+      };
+
+      dropdowns.forEach(dropdown => {
+        const toggle = dropdown.querySelector('.dropdown-toggle');
+        const menu = dropdown.querySelector('.dropdown-menu');
+        const hiddenInput = dropdown.querySelector('input[type="hidden"]');
+        const label = toggle.querySelector('span');
+        const name = dropdown.getAttribute('data-name');
+
+        // Inicializa o texto do botão
+        const value = hiddenInput.value;
+        if (name === "status") {
+          label.textContent = statusLabels[value] || value;
+        } else if (name === "ordem") {
+          label.textContent = ordemLabels[value] || value;
+        }
+
+        // Abrir/fechar ao clicar
+        toggle.addEventListener('click', function (e) {
+          e.stopPropagation();
+          dropdowns.forEach(d => d.classList.remove('open'));
+          dropdown.classList.toggle('open');
+        });
+
+        // Selecionar opção
+        menu.querySelectorAll('li').forEach(item => {
+          item.addEventListener('click', function () {
+            const selectedValue = item.getAttribute('data-value');
+            hiddenInput.value = selectedValue;
+
+            if (name === "status") {
+              label.textContent = statusLabels[selectedValue] || selectedValue;
+            } else if (name === "ordem") {
+              label.textContent = ordemLabels[selectedValue] || selectedValue;
+            }
+
+            dropdown.classList.remove('open');
+          });
+        });
+      });
+
+      // Fechar ao clicar fora
+      document.addEventListener('click', function () {
+        dropdowns.forEach(d => d.classList.remove('open'));
+      });
+    });
+</script>
 </body>
 </html>
