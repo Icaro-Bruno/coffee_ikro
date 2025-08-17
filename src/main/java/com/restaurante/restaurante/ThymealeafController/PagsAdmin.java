@@ -78,7 +78,6 @@ public class PagsAdmin {
             model.addAttribute("token", token);
             return "admin/redefinirsenha";
         }
-        System.out.println("get recebido");
         return "redirect:/admin/login?erro=token";
     }
 
@@ -276,9 +275,7 @@ public class PagsAdmin {
         if(session.getAttribute("adminLogado")==null){
             return "redirect:/admin/login";
         }
-        System.out.println("Endereço buscado: " + endereco);
         List<ClienteResponse> clientes = clienteService.buscarPorEndereco(endereco);
-        System.out.println("Quantidade encontrada: " + clientes.size());
         model.addAttribute("listaClientes", clientes);
         return "admin/clientes";
     }

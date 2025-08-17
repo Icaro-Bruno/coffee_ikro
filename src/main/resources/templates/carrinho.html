@@ -61,6 +61,8 @@
 </div>
 
 <script>
+    let clienteOriginal = null; // ← variável global
+
     function formatarReal(valor) {
       return `R$ ${valor.toFixed(2).replace('.', ',')}`;
     }
@@ -75,31 +77,10 @@
 
       if (carrinho.length === 0) {
         lista.innerHTML = `
-        <p style="
-            text-align: center;
-            font-size: 1rem;
-            margin-top: 80px;
-            padding: 12px 16px;
-            border-radius: 12px;
-            background-color: #ffece4;
-            color: #b65736;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-            max-width: 240px;
-            margin-left: auto;
-            margin-right: auto;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        ">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#b65736" viewBox="0 0 16 16">
-                <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm0 1.5A6.5 6.5 0 1 1 1.5 8 6.5 6.5 0 0 1 8 1.5zM8 4a.75.75 0 0 1 .75.75v3.5a.75.75 0 0 1-1.5 0v-3.5A.75.75 0 0 1 8 4zm.75 7.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0z"/>
-            </svg>
-            Seu carrinho está vazio
-        </p>
-    `;
+          <p style="...">Seu carrinho está vazio</p>
+        `;
       }
+
       carrinho.forEach((item, index) => {
         const subtotal = item.preco * item.quantidade;
         total += subtotal;
@@ -161,17 +142,18 @@
       overlay.style.display = 'flex';
 
       fetch('/cliente/logado', { method: 'GET' })
-      .then(res => res.json())
-      .then(cliente => {
-      console.log("Cliente retornado:", cliente);
-      const endereco = cliente.endereco;
+        .then(res => res.json())
+        .then(cliente => {
+          clienteOriginal = cliente; // ← salva cliente logado
+          console.log("Cliente retornado:", clienteOriginal);
 
-      const enderecoFinal = (!endereco || endereco === "null" || endereco.trim() === "")
-        ? "Não cadastrado"
-        : endereco;
+          const endereco = cliente.endereco;
+          const enderecoFinal = (!endereco || endereco === "null" || endereco.trim() === "")
+            ? "Não cadastrado"
+            : endereco;
 
-      document.getElementById('resumo-endereco').textContent = enderecoFinal;
-    })
+          document.getElementById('resumo-endereco').textContent = enderecoFinal;
+        })
         .catch(() => {
           document.getElementById('resumo-endereco').textContent = 'Erro ao carregar endereço';
         });
@@ -218,7 +200,11 @@
             return;
           }
 
-          cliente = { nome, telefone, endereco, sobrescrever: true};
+          const sobrescrever = clienteOriginal
+            ? nome !== clienteOriginal.nome || telefone !== clienteOriginal.telefone || endereco !== clienteOriginal.endereco
+            : true;
+
+          cliente = { nome, telefone, endereco, sobrescrever };
         }
 
         const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
@@ -260,12 +246,14 @@
         btn.textContent = "Finalizar Compra";
       }
     }
+
     document.querySelectorAll('input[name="endereco-opcao"]').forEach(input => {
-    input.addEventListener('change', () => {
-    const campoNovoEndereco = document.querySelector('.input-popup');
-    campoNovoEndereco.style.display = input.value === 'novo' ? 'block' : 'none';
-  });
-});
+      input.addEventListener('change', () => {
+        const campoNovoEndereco = document.querySelector('.input-popup');
+        campoNovoEndereco.style.display = input.value === 'novo' ? 'block' : 'none';
+      });
+    });
+
     document.addEventListener('DOMContentLoaded', carregarCarrinho);
 </script>
 

@@ -57,6 +57,44 @@
           padding-bottom: 14px;
         }
 
+        .pedido-info p {
+            margin: 5px 0;
+        }
+
+        .produto-lista {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+          display: inline;
+        }
+
+        .produto-lista li {
+          display: inline;
+          margin-right: 4px;
+          font-size: 0.9rem;
+          font-weight: normal;
+        }
+
+        .produto-lista li::after {
+          content: ",";
+          margin-left: 2px;
+        }
+
+        .produto-lista li:last-child::after {
+          content: "";
+        }
+
+        .label {
+            font-weight: 500;
+            color: #444;
+            font-size: 0.9rem;
+        }
+
+        .valor {
+          color: #555;
+          font-weight: 500;
+        }
+
         p, span {
           font-size: 0.95rem;
           color: var(--cor-texto);
@@ -141,10 +179,22 @@
     </div>
 
     <div th:each="pedido : ${pedidos}" class="pedido">
-        <p>ID: <span th:text="${pedido.id}"></span></p>
-        <p>Status:
-            <span th:text="${pedido.status}" th:class="'status status-' + ${pedido.status}"></span>
-        </p>
+        <div class="pedido-info">
+            <p>
+                <span class="label">Produtos:</span>
+            <ul class="produto-lista valor">
+                <li th:each="item : ${pedido.itens}" th:text="${item.produto.nome}"></li>
+            </ul>
+            </p>
+            <p>
+                <span class="label">Data e Hora:</span>
+                <span class="valor" th:text="${pedido.dataHoraFormatada}"></span>
+            </p>
+            <p>
+                <span class="label">Status:</span>
+                <span th:text="${pedido.status}" th:class="'status status-' + ${pedido.status}"></span>
+            </p>
+        </div>
         <a th:href="@{/detalhespedido/{id}(id=${pedido.id})}" class="detalhes">Ver Detalhes</a>
     </div>
 </div>

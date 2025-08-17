@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -39,16 +40,15 @@ public class ItemDoPedidoService {
 
         // CRIAR ITEM
         ItemDoPedidoModel item = new ItemDoPedidoModel();
-        item.setPedido(pedido); // já está em memória, sem precisar buscar
+        item.setPedido(pedido);
         item.setProduto(produto);
         item.setQuantidade(itemRequest.getQuantidade());
-        item.setPrecoUnitario(produto.getPreco());
+        item.setPrecoUnitario(precoUnitario);
         item.setSubtotal(subtotal);
 
-        // NÃO SALVA INDIVIDUALMENTE
+        pedido.getItens().add(item);
         return item;
     }
-
 
     public List<ItemDoPedidoResponse> atualizarQuant(Long itemId, AtualizarItemDoPedRequest request){
         ItemDoPedidoModel item = repository.findById(itemId)

@@ -30,11 +30,10 @@ public class ItemDoPedidoModel {
     private BigDecimal precoUnitario; //valor do item no ato da compra
     private BigDecimal subtotal;
 
-    public ItemDoPedidoModel(ProdutoModel produto, PedidoModel pedido, Integer quantidade) {
+    /*public ItemDoPedidoModel(ProdutoModel produto, PedidoModel pedido, Integer quantidade) {
         this.produto = produto;
         this.pedido = pedido;
         this.quantidade = quantidade;
-
-    }
+    }*/
 
 }

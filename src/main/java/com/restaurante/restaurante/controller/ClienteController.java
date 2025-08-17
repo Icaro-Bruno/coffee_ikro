@@ -47,8 +47,6 @@ public class ClienteController {
         response.setNome(clienteModel.getNome());
         response.setTelefone(clienteModel.getTelefone());
         response.setEndereco(clienteModel.getEndereco());
-        System.out.println("Endereço retornado: " + clienteModel.getEndereco());
-
         return ResponseEntity.ok(response);
     }
 

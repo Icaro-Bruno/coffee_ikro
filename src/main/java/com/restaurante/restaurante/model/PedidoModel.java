@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -22,7 +23,7 @@ public class PedidoModel {
     private Long id;
 
     @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL,orphanRemoval = true)
-    private List<ItemDoPedidoModel> itens;
+    private List<ItemDoPedidoModel> itens = new ArrayList<>();
     private BigDecimal total;
 
     @ManyToOne
@@ -33,5 +34,7 @@ public class PedidoModel {
     private StatusPedido status;
     private LocalDateTime dataHora;
 
-
+    private String nomeEntrega;
+    private String telefoneEntrega;
+    private String enderecoEntrega;
 }

@@ -24,8 +24,6 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         String nome = oauth2User.getAttribute("name");
 
         clienteService.buscarCriar(email, nome);
-
-        System.out.println("Atributos recebidos do Google:");
         oauth2User.getAttributes().forEach((key, value) -> System.out.println(key + ": " + value));
 
         return new DefaultOAuth2User(

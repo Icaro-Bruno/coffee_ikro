@@ -8,9 +8,14 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface PedidoRepository extends JpaRepository<PedidoModel, Long> {
+    @Query("SELECT p FROM PedidoModel p " + "LEFT JOIN FETCH p.itens i " +
+            "LEFT JOIN FETCH i.produto " + "WHERE p.id = :id")
+    Optional<PedidoModel> findByIdComItens(@Param("id") Long id);
+
     //do mais antigo pra o mais recente
     List<PedidoModel> findAllByOrderByDataHoraAsc();
     //inverso da que está acima

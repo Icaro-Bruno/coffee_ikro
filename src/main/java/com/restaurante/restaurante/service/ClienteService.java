@@ -73,12 +73,8 @@ public class ClienteService {
         Optional<ClienteModel> clienteExiste = repository.findByEmail(email);
 
         if (clienteExiste.isPresent()) {
-            System.out.println("[OAuth2] Cliente já existe: " + email);
             return clienteExiste.get();
         }
-
-        System.out.println("[OAuth2] Criando novo cliente: " + email);
-
         ClienteModel novoCliente = new ClienteModel();
         novoCliente.setEmail(email);
         novoCliente.setNome(nome);
@@ -109,7 +105,6 @@ public class ClienteService {
         return repository.findAllAtivos()
                 .stream()
                 .map(cliente -> {
-                    System.out.println("Ativo: " + cliente.getNome() + " - " + cliente.getAtivo());
                     return new ClienteResponse(cliente);
                 })
                 .collect(Collectors.toList());

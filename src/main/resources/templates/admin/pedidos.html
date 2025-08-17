@@ -73,7 +73,7 @@
            <tbody>
            <tr th:each="pedido : ${pedidos}" th:attr="data-status=${pedido.status}">
                <td data-label="ID" th:text="${pedido.id}">1</td>
-               <td data-label="Cliente" th:text="${#strings.abbreviate(pedido.cliente.nome, 13)}">João</td>
+               <td data-label="Cliente" th:text="${#strings.abbreviate(pedido.nomeEntrega, 13)}">João</td>
                <td data-label="Status" th:text="${pedido.status}">PENDENTE</td>
                <td data-label="Total" th:text="'R$ ' + ${#numbers.formatDecimal(pedido.total, 1, 'COMMA', 2, 'COMMA')}">R$ 10,25</td>
                <td data-label="Data" th:text="${pedido.dataHora != null ? #temporals.format(pedido.dataHora, 'dd/MM/yyyy HH:mm') : '---'}">10/07/2025</td>

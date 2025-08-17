@@ -4,43 +4,174 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detalhes do Pedido</title>
-    <link rel="stylesheet" th:href="@{/admin/pedidos.css}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f9f9f9;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        header {
+            background: #4b2e2b;
+            color: #fff;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.3rem;
+        }
+
+        header nav a {
+            color: #fff;
+            margin-left: 15px;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        header nav a:hover {
+            text-decoration: underline;
+        }
+
+        main.container {
+            padding: 20px;
+            max-width: 900px;
+            margin: auto;
+        }
+
+        h2, h3 {
+            color: #4b2e2b;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            font-size: 0.95rem;
+        }
+
+        th {
+            background: #f4f4f4;
+            color: #333;
+        }
+
+        tr:nth-child(even) {
+            background: #fafafa;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #4b2e2b;
+            color: #fff;
+            padding: 8px 15px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background: #3a2321;
+        }
+
+        select {
+            padding: 8px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 0.9rem;
+        }
+
+        form {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 600px) {
+            table, thead, tbody, th, td, tr {
+                display: block;
+                width: 100%;
+            }
+            thead {
+                display: none;
+            }
+            tr {
+                margin-bottom: 10px;
+                border-bottom: 1px solid #ddd;
+                background: #fff;
+                border-radius: 6px;
+                padding: 8px;
+            }
+            td {
+                display: flex;
+                justify-content: space-between;
+                padding: 8px;
+            }
+            td::before {
+                content: attr(data-label);
+                font-weight: bold;
+                color: #555;
+            }
+        }
+    </style>
 </head>
 <body>
+
 <header>
     <h1>Detalhes do Pedido</h1>
     <nav>
-        <a th:href="@{/admin/dashboard}"><i class="fa fa-home"></i> Dashboard</a>
-        <a th:href="@{/admin/pedidos}"><i class="fa fa-arrow-left"></i> Voltar</a>
+        <a th:href="@{/admin/dashboard}">Dashboard</a>
+        <a th:href="@{/admin/pedidos}">⬅ Voltar</a>
     </nav>
 </header>
 
 <main class="container">
-    <h2 th:text="'Pedido #' + ${pedido.id}">Pedido #32</h2>
+    <h2 th:text="'Pedido #' + ${pedido.id}">Pedido #0</h2>
 
-    <table class="tabela-pedidos">
+    <table>
         <tr>
             <th>Cliente</th>
-            <td th:text="${pedido.cliente.nome}">João</td>
+            <td th:text="${pedido.nomeEntrega}">Nome do Cliente</td>
         </tr>
-        <tr>
+        <!--<tr>
+            <th>Endereço</th>
+            <td th:text="${pedido.enderecoEntrega}">Endereço</td>
+        </tr>
+        <tr>-->
             <th>Telefone</th>
-            <td th:text="${pedido.cliente.telefone}">(99) 99999-9999</td>
+            <td th:text="${pedido.telefoneEntrega}">Telefone</td>
         </tr>
         <tr>
             <th>Data do Pedido</th>
-            <td th:text="${#temporals.format(pedido.dataHora, 'dd/MM/yyyy HH:mm')}">10/07/2025 14:30</td>
+            <td th:text="${#temporals.format(pedido.dataHora, 'dd/MM/yyyy HH:mm')}">Data</td>
         </tr>
         <tr>
             <th>Total</th>
-            <td th:text="'R$ ' + ${#numbers.formatDecimal(pedido.total, 1, 'COMMA', 2, 'COMMA')}">R$ 105,50</td>
+            <td th:text="'R$ ' + ${#numbers.formatDecimal(pedido.total, 1, 'COMMA', 2, 'COMMA')}">R$ 0,00</td>
         </tr>
         <tr>
             <th>Status</th>
             <td>
-                <form th:action="@{/admin/pedido/atualizarStatus}" method="post" style="display: flex; gap: 10px;">
+                <form th:action="@{/admin/pedido/atualizarStatus}" method="post">
                     <input type="hidden" name="pedidoId" th:value="${pedido.id}" />
-                    <select name="novoStatus" class="filtro-btn">
+                    <select name="novoStatus">
                         <option th:each="status : ${statusList}"
                                 th:value="${status}"
                                 th:text="${status}"
@@ -53,9 +184,9 @@
         </tr>
     </table>
 
-    <h3 style="margin-top: 2rem;">Produtos do Pedido</h3>
+    <h3>Produtos do Pedido</h3>
 
-    <table class="tabela-pedidos">
+    <table>
         <thead>
         <tr>
             <th>Produto</th>
@@ -66,10 +197,10 @@
         </thead>
         <tbody>
         <tr th:each="item : ${pedido.itens}">
-            <td th:text="${item.produto.nome}">Produto</td>
-            <td th:text="${item.quantidade}">1</td>
-            <td th:text="'R$ ' + ${#numbers.formatDecimal(item.precoUnitario, 1, 'COMMA', 2, 'COMMA')}">R$ 00,00</td>
-            <td th:text="'R$ ' + ${#numbers.formatDecimal(item.subtotal, 1, 'COMMA', 2, 'COMMA')}">R$ 00,00</td>
+            <td data-label="Produto" th:text="${item.produto.nome}">Produto</td>
+            <td data-label="Quantidade" th:text="${item.quantidade}">1</td>
+            <td data-label="Preço Unitário" th:text="'R$ ' + ${#numbers.formatDecimal(item.precoUnitario, 1, 'COMMA', 2, 'COMMA')}">R$ 0,00</td>
+            <td data-label="Subtotal" th:text="'R$ ' + ${#numbers.formatDecimal(item.subtotal, 1, 'COMMA', 2, 'COMMA')}">R$ 0,00</td>
         </tr>
         </tbody>
     </table>
@@ -78,5 +209,6 @@
         <a th:href="@{/admin/pedidos}" class="btn">Voltar para lista</a>
     </div>
 </main>
+
 </body>
 </html>

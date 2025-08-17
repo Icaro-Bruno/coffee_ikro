@@ -159,9 +159,10 @@
   </h3>
 
   <h3>Cliente</h3>
-  <p><strong>Nome:</strong> <span th:text="${pedido.cliente.nome}"></span></p>
-  <p><strong>Telefone:</strong> <span th:text="${pedido.cliente.telefone}"></span></p>
-  <p><strong>Endereço:</strong> <span th:text="${pedido.cliente.endereco}"></span></p>
+  <p><strong>Nome:</strong> <span th:text="${pedido.nomeEntrega}"></span></p>
+  <p><strong>Telefone:</strong> <span th:text="${pedido.telefoneEntrega}"></span></p>
+  <p><strong>Endereço:</strong> <span th:text="${pedido.enderecoEntrega}"></span></p>
+  <p><strong>Data e Hora:</strong> <span th:text="${pedido.dataHoraFormatada}"></span></p>
 
   <h3>Itens do Pedido</h3>
   <ul>
