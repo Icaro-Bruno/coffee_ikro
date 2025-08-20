@@ -355,7 +355,12 @@ h1 {
   vertical-align: top;
 }
 
-  /* Header / Footer (mantidos) */
+.perfil-lateral {
+   width: 360px;
+   padding: 40px 50px 20px 50px;
+ }
+
+  /* Header / Footer*/
    .header {
      padding: 17px 60px;
      display: flex;
