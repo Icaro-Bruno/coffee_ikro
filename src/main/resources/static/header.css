@@ -133,3 +133,48 @@ header {
         padding-top: 50px;
     }
 }
+
+/* Media Query para Desktops */
+@media (min-width: 1024px) {
+    header {
+        width: 100%;
+        margin: 0 auto;
+        padding: 35px 50px;
+    }
+
+    #menu-toggle {
+        font-size: 1.4em;
+    }
+
+     #menu {
+            width: 300px;
+            height: 100vh; /* Usa 100% da altura da viewport */
+            padding: 40px 50px 20px 50px;
+            overflow-y: hidden;
+     }
+
+     #menu ul li a {
+             font-size: 0.95rem;
+     }
+
+    #carrinho img {
+        width: 35px;
+        right: 0;
+    }
+
+    #carrinho-count {
+        font-size: 0.2em;
+        width: 17px;
+        height: 17px;
+        top: 20px;
+        right: 25px;
+    }
+
+    #menu {
+        width: 300px;
+    }
+
+    #menu ul li a {
+        font-size: 0.95rem;
+    }
+}
