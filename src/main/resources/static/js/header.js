@@ -49,11 +49,21 @@ window.addAoCarrinho = function(produto) {
     const carrinho = window.obterCarrinho();
     const existente = carrinho.find(item => item.id === produto.id);
 
+    // Armazena a quantidade que o usuário quer adicionar
+    const quantidadeAdicionar = produto.quantidade;
+
     if (existente) {
-        existente.quantidade += 1;
+        // Se o produto já está no carrinho:
+        // SOMA A QUANTIDADE EXISTENTE COM A QUANTIDADE QUE FOI ADICIONADA
+        existente.quantidade += quantidadeAdicionar;
     } else {
-        produto.quantidade = 1;
+        // Se o produto é novo:
+        // USA A QUANTIDADE PASSADA PELO INPUT (que já está em produto.quantidade)
         carrinho.push(produto);
+
+        // **OPCIONAL:** Se você ainda tinha a linha "produto.quantidade = 1;"
+        // na versão antiga para produtos novos, pode removê-la se ela não for necessária.
+        // O objeto `produto` já vem com a quantidade correta da página do produto.
     }
 
     window.salvarCarrinho(carrinho);
