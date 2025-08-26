@@ -482,6 +482,12 @@ h1 {
        align-items: start;
      }
 
+     #lista-carrinho > *:only-child {
+        grid-column: 1/-1;
+        justify-self: center;
+        max-width: 500px;
+     }
+
      #lista-carrinho > * {
        width: 100%;
      }
