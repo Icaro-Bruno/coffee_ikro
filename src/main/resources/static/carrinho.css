@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:wght@100..500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:wght@10..500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Merienda&display=swap');
 
 * {
@@ -383,7 +383,7 @@ h1 {
   text-align: center;
 }
 
-@media (max-width: 390px) {
+@media (max-width: 480px) {
       h1 {
         font-size: 1.4rem;
       }
@@ -429,7 +429,7 @@ h1 {
       .botao-finalizar {
         padding: 16px 0;
         font-size: 0.83rem;
-        font-weight: 300;
+        font-weight: 50;
       }
 
       #form-cliente-popup h2 {
@@ -444,6 +444,7 @@ h1 {
       #btn-enviar {
         font-size: 1rem;
         padding: 0.7rem;
+        font-weight: 100;
       }
     }
 
@@ -549,7 +550,7 @@ h1 {
   .botao-finalizar {
     font-size: 0.8rem;
     padding: 17px 0;
-    font-weight: 100;
+    font-weight: 11;
     letter-spacing: 0.2em;
   }
 
@@ -571,7 +572,7 @@ h1 {
 
   #btn-enviar {
     font-size: 0.9rem;
-    font-weight: 100;
+    font-weight: 11;
     letter-spacing: 0.2rem
   }
 

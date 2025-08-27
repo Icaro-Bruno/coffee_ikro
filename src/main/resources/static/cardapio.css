@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:wght@100..500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:wght@10..500&display=swap');
 
 * {
   -webkit-tap-highlight-color: rgba(0,0,0,0.1);
@@ -160,7 +160,7 @@ h1 {
     margin-top: auto;
 }
 
-@media (min-width: 390px) and (max-width: 480px) {
+@media (max-width: 480px) {
     .cardapio-container {
         grid-template-columns: repeat(2, 1fr);
         gap: 8px;
@@ -180,6 +180,7 @@ h1 {
     .botao {
         font-size: 0.95rem;
         height: 45px;
+        font-weight: 300;
     }
 
     h1 {
@@ -204,7 +205,7 @@ h1 {
     .topobody {
         max-width: 1200px;
         margin: 0 auto;
-        padding: 0 200px; /* Aumenta o padding lateral para mais espaçamento */
+        padding: 0 200px;
     }
 
     h1 {
