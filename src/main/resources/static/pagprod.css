@@ -281,7 +281,7 @@ html, body {
         padding: 20px 12px;
         font-size: 0.8rem;
         margin-bottom: 5px;
-        font-weight:200;
+        font-weight:300;
     }
 
     .controle-quantidade button {
@@ -308,7 +308,7 @@ html, body {
     .btn-carrinho,
     .btn-continuar {
         font-size: 0.87rem;
-        font-weight:200;
+        font-weight:300;
     }
 }
 
