@@ -429,7 +429,7 @@ h1 {
       .botao-finalizar {
         padding: 16px 0;
         font-size: 0.83rem;
-        font-weight: 50;
+        font-weight: 200;
       }
 
       #form-cliente-popup h2 {
@@ -444,7 +444,7 @@ h1 {
       #btn-enviar {
         font-size: 1rem;
         padding: 0.7rem;
-        font-weight: 100;
+        font-weight: 200;
       }
     }
 
