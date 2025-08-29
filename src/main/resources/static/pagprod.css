@@ -35,7 +35,7 @@ html, body {
     font-family: 'Merienda', cursive;
     font-size: 1.4rem;
     font-weight: bold;
-    color: #4a2e1e;
+    color: rgba(85, 55, 35, 0.9);
     margin-bottom: -6px;
 }
 

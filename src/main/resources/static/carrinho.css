@@ -44,7 +44,7 @@ h1 {
     font-size: 1.5rem;
     text-align: center;
     margin: 25px 0;
-    color: #4a2e1e;
+    color: rgba(85, 55, 35, 0.9);
 }
 
 .item-carrinho {
@@ -92,7 +92,7 @@ h1 {
     text-align:center;
     font-size: 0.90rem;
     font-weight: 560;
-    color: #4a2e1e;
+    color: #242424;
 }
 
 .item-infos span {
