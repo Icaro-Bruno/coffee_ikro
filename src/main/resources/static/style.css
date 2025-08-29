@@ -132,7 +132,7 @@ h1 {
     margin-bottom: 20px;
     font-family: 'Merienda', cursive;
     text-align: center;
-    color: #4a2e1e;
+    color: rgba(85, 55, 35, 0.9);
 }
 
 .container {
@@ -162,7 +162,7 @@ h1 {
     padding: 14px 0;
     background-color: #4a2e1e;
     color: white;
-    font-size: 1rem;
+    font-size: 0.95rem;
     font-weight: 200;
     letter-spacing: 0.100rem;
     border: none;

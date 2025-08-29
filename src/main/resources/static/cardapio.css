@@ -57,7 +57,7 @@ h1 {
     padding: 6px 14px;
     border-radius: 999px;
     font-size: 0.75rem;
-    font-weight: 500;
+    font-weight: 300;
     cursor: pointer;
     white-space: nowrap;
 }
@@ -174,15 +174,15 @@ h1 {
     .item-header h3,
     #preco {
         font-size: 0.78rem;
-        font-weight:300;
-        color: #5C3A1E;
+        font-weight:400;
+        color: #242424;
     }
 
     .botao {
         font-family: 'Nunito', sans-serif;
         font-size: 0.88rem;
         height: 42px;
-        font-weight: 200;
+        font-weight: 350;
         letter-spacing: 1.5px;
     }
 
