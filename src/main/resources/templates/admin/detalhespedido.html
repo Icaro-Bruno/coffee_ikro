@@ -4,157 +4,64 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detalhes do Pedido</title>
+    <link rel="stylesheet" th:href="@{/admin/pedidos.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f9f9f9;
-            margin: 0;
-            padding: 0;
-            color: #333;
-        }
+        /* Mobile - transforma tabela em cards */
+        @media (max-width: 768px) {
+          .tabela-pedidos {
+            border: 0;
+            width: 100%;
+          }
 
-        header {
-            background: #4b2e2b;
-            color: #fff;
-            padding: 15px;
+          .tabela-pedidos thead {
+            display: none; /* Esconde cabeçalho */
+          }
+
+          .tabela-pedidos tr {
+            display: block;
+            margin-bottom: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 8px;
+            background: #fff;
+          }
+
+          .tabela-pedidos td {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-        }
+            padding: 6px 10px;
+            font-size: 14px;
+          }
 
-        header h1 {
-            margin: 0;
-            font-size: 1.3rem;
-        }
-
-        header nav a {
-            color: #fff;
-            margin-left: 15px;
-            text-decoration: none;
-            font-size: 0.9rem;
-        }
-
-        header nav a:hover {
-            text-decoration: underline;
-        }
-
-        main.container {
-            padding: 20px;
-            max-width: 900px;
-            margin: auto;
-        }
-
-        h2, h3 {
-            color: #4b2e2b;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
-            background: #fff;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-        }
-
-        th, td {
-            padding: 10px;
-            text-align: left;
-            font-size: 0.95rem;
-        }
-
-        th {
-            background: #f4f4f4;
+          .tabela-pedidos td::before {
+            content: attr(data-label); /* Pega o nome da coluna */
+            font-weight: bold;
             color: #333;
-        }
-
-        tr:nth-child(even) {
-            background: #fafafa;
-        }
-
-        .btn {
-            display: inline-block;
-            background: #4b2e2b;
-            color: #fff;
-            padding: 8px 15px;
-            border-radius: 6px;
-            text-decoration: none;
-            font-size: 0.9rem;
-            border: none;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        .btn:hover {
-            background: #3a2321;
-        }
-
-        select {
-            padding: 8px;
-            border-radius: 6px;
-            border: 1px solid #ccc;
-            font-size: 0.9rem;
-        }
-
-        form {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        @media (max-width: 600px) {
-            table, thead, tbody, th, td, tr {
-                display: block;
-                width: 100%;
-            }
-            thead {
-                display: none;
-            }
-            tr {
-                margin-bottom: 10px;
-                border-bottom: 1px solid #ddd;
-                background: #fff;
-                border-radius: 6px;
-                padding: 8px;
-            }
-            td {
-                display: flex;
-                justify-content: space-between;
-                padding: 8px;
-            }
-            td::before {
-                content: attr(data-label);
-                font-weight: bold;
-                color: #555;
-            }
+          }
         }
     </style>
 </head>
 <body>
 
-<header>
-    <h1>Detalhes do Pedido</h1>
-    <nav>
-        <a th:href="@{/admin/dashboard}">Dashboard</a>
-        <a th:href="@{/admin/pedidos}">⬅ Voltar</a>
-    </nav>
+<header class="header-simples">
+    <div class="header-simples-content">
+        <h1 th:text="'Pedido #' + ${pedido.id}">Pedido #999</h1>
+        <nav>
+            <a th:href="@{/admin/dashboard}"><i class="fa fa-home"></i> Início</a>
+            <a th:href="@{/admin/pedidos}">⬅ Voltar</a>
+        </nav>
+    </div>
 </header>
 
 <main class="container">
-    <h2 th:text="'Pedido #' + ${pedido.id}">Pedido #0</h2>
 
-    <table>
+    <table class="tabela-pedidos">
         <tr>
             <th>Cliente</th>
             <td th:text="${pedido.nomeEntrega}">Nome do Cliente</td>
         </tr>
-        <!--<tr>
-            <th>Endereço</th>
-            <td th:text="${pedido.enderecoEntrega}">Endereço</td>
-        </tr>
-        <tr>-->
+        <tr>
             <th>Telefone</th>
             <td th:text="${pedido.telefoneEntrega}">Telefone</td>
         </tr>
@@ -169,9 +76,9 @@
         <tr>
             <th>Status</th>
             <td>
-                <form th:action="@{/admin/pedido/atualizarStatus}" method="post">
+                <form th:action="@{/admin/pedido/atualizarStatus}" method="post" class="form-busca">
                     <input type="hidden" name="pedidoId" th:value="${pedido.id}" />
-                    <select name="novoStatus">
+                    <select name="novoStatus" class="dropdown-toggle" style="width:auto;">
                         <option th:each="status : ${statusList}"
                                 th:value="${status}"
                                 th:text="${status}"
@@ -184,9 +91,8 @@
         </tr>
     </table>
 
-    <h3>Produtos do Pedido</h3>
-
-    <table>
+    <h3 style="display:flex; justify-content:center; margin-top:30px;">Itens</h3>
+    <table class="tabela-pedidos">
         <thead>
         <tr>
             <th>Produto</th>
@@ -204,10 +110,6 @@
         </tr>
         </tbody>
     </table>
-
-    <div style="margin-top: 1.5rem;">
-        <a th:href="@{/admin/pedidos}" class="btn">Voltar para lista</a>
-    </div>
 </main>
 
 </body>
