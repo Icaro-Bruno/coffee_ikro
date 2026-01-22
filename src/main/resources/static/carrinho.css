@@ -399,6 +399,7 @@ h1 {
 
       .item-infos h2 {
         font-size: 0.80rem;
+        color: rgba(51, 13, 0, 0.55);
       }
 
        .item-infos span {
