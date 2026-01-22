@@ -188,7 +188,7 @@ h1 {
     }
 
     .banner {
-            aspect-ratio: 1 / 1; /* mobile mais quadrado */
+            aspect-ratio: 4 / 3; /* mobile mais quadrado */
         }
 
     h1 {
