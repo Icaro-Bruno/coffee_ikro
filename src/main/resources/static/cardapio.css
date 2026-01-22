@@ -81,7 +81,7 @@ h1 {
 
 .item {
     background-color: var(--cor-fundo-itens);
-    border: 0.3px solid #e2cfc8;
+    border: 1px solid rgba(226, 207, 200, 0.25);
     border-radius: 10px;
     box-shadow: 0 3px 5px rgba(0, 0, 0, 0.010);
     transition: box-shadow 0.3s ease, transform 0.2s ease;
@@ -92,7 +92,7 @@ h1 {
     align-items: center;
     box-sizing: border-box;
     width: 100%;
-    min-height: 180px;
+    min-height: 170px;
     overflow: hidden;
     position: relative;
 }
