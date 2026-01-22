@@ -28,7 +28,7 @@ body {
 
 h1 {
     text-align: center;
-    padding: 10px 13px;
+    padding: 14px 17px;
     color: #4a2e1e;
     font-size: 1.4rem;
     font-family: 'Merienda', cursive;
@@ -39,7 +39,7 @@ h1 {
     display: flex;
     gap: 10px;
     padding: 8px 16px;
-    margin: 12px auto 20px auto;
+    margin: 12px auto 25px auto;
     overflow-x: auto;
     justify-content: center;
     -webkit-overflow-scrolling: touch;
@@ -163,7 +163,9 @@ h1 {
 @media (max-width: 480px) {
     .cardapio-container {
         grid-template-columns: repeat(2, 1fr);
-        gap: 8px;
+        row-gap: 22px;
+        column-gap: 8px;
+        margin-bottom:60px;
     }
 
     .categoria-botao {
@@ -173,9 +175,9 @@ h1 {
 
     .item-header h3,
     #preco {
-        font-size: 0.78rem;
+        font-size: 0.74rem;
         font-weight:400;
-        color: #242424;
+        color: rgba(51, 13, 0, 0.55);
     }
 
     .botao {
@@ -189,6 +191,7 @@ h1 {
     h1 {
         font-size: 1.4rem;
         color: rgba(85, 55, 35, 0.9);
+        margin: 40px 0 30px 0;
     }
 }
 
