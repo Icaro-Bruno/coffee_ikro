@@ -120,6 +120,8 @@ public class PedidoService {
                 .nomeEntrega(pedidoModel.getNomeEntrega())
                 .telefoneEntrega(pedidoModel.getTelefoneEntrega())
                 .enderecoEntrega(pedidoModel.getEnderecoEntrega())
+                .canalPedido(pedidoModel.getCanalPedido())
+                .statusPagamento(pedidoModel.getStatusPagamento())
                 .build();
         return response;
     }
@@ -192,6 +194,8 @@ public class PedidoService {
         PedidoModel pedido = new PedidoModel();
         pedido.setCliente(cliente);
         pedido.setStatus(StatusPedido.A_CAMINHO);
+        pedido.setCanalPedido(request.getCanalPedido());
+        pedido.setStatusPagamento(StatusPagamento.PENDENTE);
         pedido.setDataHora(LocalDateTime.now());
         pedido.setItens(new ArrayList<>());
 
@@ -247,5 +251,13 @@ public class PedidoService {
 
     public long contarPorStatus(String status) {
         return repository.countByStatus(StatusPedido.valueOf(status));
+    }
+
+    public List<PedidoResponse> listarComFiltros(CanalPedido canal, StatusPedido status) {
+        return repository.findAll().stream()
+                .filter(p -> canal == null || p.getCanalPedido() == canal)
+                .filter(p -> status == null || p.getStatus() == status)
+                .map(this::converterPraResponse)
+                .collect(Collectors.toList());
     }
 }

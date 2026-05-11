@@ -1,57 +1,79 @@
 package com.restaurante.restaurante.controller;
 
-import com.restaurante.restaurante.dto.AtualizarPedidoRequest;
-import com.restaurante.restaurante.dto.PedidoRequest;
-import com.restaurante.restaurante.dto.PedidoResponse;
-import com.restaurante.restaurante.model.PedidoModel;
-import com.restaurante.restaurante.repository.PedidoRepository;
+import com.restaurante.restaurante.dto.*;
+import com.restaurante.restaurante.model.*;
 import com.restaurante.restaurante.service.PedidoService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.oauth2.core.user.OAuth2User;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
+import java.util.Map;
 
 @RestController
-@RequestMapping("/pedido")
+@RequestMapping("/api/pedidos")
 public class PedidoController {
-    @Autowired
-    private PedidoService service;
+
+    private final PedidoService service;
+
+    public PedidoController(PedidoService service) {
+        this.service = service;
+    }
+
+    @PostMapping
+    public ResponseEntity<?> fazerPedido(@RequestBody PedidoRequest request, Authentication auth) {
+        if (request.getCanalPedido() == null) {
+            return ResponseEntity.status(422).body(Map.of(
+                    "error", "CAMPO_OBRIGATORIO",
+                    "message", "canalPedido é obrigatório",
+                    "path", "/api/pedidos"
+            ));
+        }
+        PedidoResponse response = service.criarPedido(request, auth.getName());
+        return ResponseEntity.status(201).body(response);
+    }
 
     @GetMapping("/{id}")
-    public PedidoResponse buscarPorId(@PathVariable Long id){
-        return service.buscarPorId(id);
+    public ResponseEntity<?> buscarPorId(@PathVariable Long id) {
+        try {
+            return ResponseEntity.ok(service.buscarPorId(id));
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(404).body(Map.of(
+                    "error", "PEDIDO_NAO_ENCONTRADO",
+                    "message", e.getMessage(),
+                    "path", "/api/pedidos/" + id
+            ));
+        }
     }
 
-    @GetMapping("/todos")
-    public List<PedidoResponse> listarTodos(){
-        return service.listarTodos();
+    @GetMapping
+    public ResponseEntity<List<PedidoResponse>> listarTodos(
+            @RequestParam(required = false) CanalPedido canalPedido,
+            @RequestParam(required = false) StatusPedido status) {
+        return ResponseEntity.ok(service.listarComFiltros(canalPedido, status));
     }
 
-    @GetMapping("/antigos")
-    public List<PedidoResponse> listarPedAntigos(){
-        return service.listarAntigos();
+    @PatchMapping("/{id}/status")
+    public ResponseEntity<?> atualizarStatus(@PathVariable Long id,
+                                             @RequestBody Map<String, String> body) {
+        try {
+            StatusPedido novoStatus = StatusPedido.valueOf(body.get("status"));
+            service.atualizarStatus(id, novoStatus);
+            return ResponseEntity.ok(Map.of("message", "Status atualizado com sucesso"));
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(404).body(Map.of(
+                    "error", "PEDIDO_NAO_ENCONTRADO",
+                    "message", e.getMessage()
+            ));
+        }
     }
 
-    @GetMapping("/recentes")
-    public List<PedidoResponse> listarPedRecentes(){
-        return service.listarRecentes();
-    }
-
-    @PostMapping("/fazer")
-    public PedidoResponse fazerPedido(@RequestBody PedidoRequest request, @AuthenticationPrincipal OAuth2User user){
-        String email = user.getAttribute("email");
-        return service.criarPedido(request,email);
-    }
-
-    @PutMapping("/{id}")
-    public PedidoResponse atualizarPedido(@PathVariable Long id, AtualizarPedidoRequest request){
-        return service.atualizarPedido(id,request);
-    }
-
-    @DeleteMapping("{id}")
-    public void deletarPedido(@PathVariable Long id){
-        service.excluirPedido(id);
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> cancelarPedido(@PathVariable Long id) {
+        try {
+            service.atualizarStatus(id, StatusPedido.CANCELADO);
+            return ResponseEntity.ok(Map.of("message", "Pedido cancelado"));
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(404).body(Map.of("error", "PEDIDO_NAO_ENCONTRADO", "message", e.getMessage()));
+        }
     }
 }

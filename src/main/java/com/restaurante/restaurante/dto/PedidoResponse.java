@@ -2,10 +2,7 @@ package com.restaurante.restaurante.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.restaurante.restaurante.model.ClienteModel;
-import com.restaurante.restaurante.model.ItemDoPedidoModel;
-import com.restaurante.restaurante.model.PedidoModel;
-import com.restaurante.restaurante.model.StatusPedido;
+import com.restaurante.restaurante.model.*;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -30,11 +27,15 @@ public class PedidoResponse { //SAIDA
     private LocalDateTime dataHora;
     private String dataHoraFormatada;
 
+    private CanalPedido canalPedido;
+    private StatusPagamento statusPagamento;
     private String nomeEntrega;
     private String telefoneEntrega;
     private String enderecoEntrega;
 
     public PedidoResponse(PedidoModel pedido) {
+        this.canalPedido = pedido.getCanalPedido();
+        this.statusPagamento = pedido.getStatusPagamento();
         this.id = pedido.getId();
         this.itens = pedido.getItens().stream()
                 .map(ItemDoPedidoResponse::new).collect(Collectors.toList());

@@ -18,6 +18,10 @@ public class ClienteModel {
     private String telefone;
     private String endereco;
 
+    private String senha;
+
+    @Enumerated(EnumType.STRING)
+    private RoleUsuario role = RoleUsuario.CLIENTE;
     @Column(nullable = false)
     private Boolean ativo = true;
 

@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -13,17 +12,16 @@ import java.util.List;
 
 @Entity
 @Table(name = "pedido_model")
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@Getter @Setter @AllArgsConstructor @NoArgsConstructor
 public class PedidoModel {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL,orphanRemoval = true)
+    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ItemDoPedidoModel> itens = new ArrayList<>();
+
     private BigDecimal total;
 
     @ManyToOne
@@ -32,9 +30,17 @@ public class PedidoModel {
 
     @Enumerated(EnumType.STRING)
     private StatusPedido status;
-    private LocalDateTime dataHora;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "canal_pedido", nullable = false)
+    private CanalPedido canalPedido;
+
+    private LocalDateTime dataHora;
     private String nomeEntrega;
     private String telefoneEntrega;
     private String enderecoEntrega;
+
+    // campo para registrar resultado do pagamento mock
+    @Enumerated(EnumType.STRING)
+    private StatusPagamento statusPagamento;
 }
